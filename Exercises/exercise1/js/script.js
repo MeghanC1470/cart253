@@ -15,6 +15,10 @@ let squareX;
 let squareY;
 let squareSize = 100;
 
+//The current position and size of the triangle
+let triangleX;
+let triangleY;
+let triangleSize;
 
 // preload()
 //
@@ -42,6 +46,10 @@ function setup() {
   // We divide the size by two because we're drawing from the center
   squareX = width + squareSize/2;
   squareY = height + squareSize/2;
+
+  // Start the triangle off screen to the middle left
+  triangleX = width + triangleSize/2;
+  triangleY = height + triangleSize/2
 
   // We'll draw rectangles from the center
   rectMode(CENTER);
@@ -72,5 +80,12 @@ function draw() {
   // Make the square transparent blue
   fill(0,0,255,10);
   // Display the square
-  rect(squareX,squareY,squareSize,squareSize);
+rect(squareX,squareY,squareSize,squareSize);
+
+  //Move triangle left to right across the middle
+  triangleX -=1;
+  triangleY -=1;
+
+  fill(0,255,0,10);
+  triangle(triangleX,triangleY,triangleSize);
 }

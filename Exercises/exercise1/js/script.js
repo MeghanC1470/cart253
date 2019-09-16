@@ -73,7 +73,7 @@ function draw() {
 
   //Set up the circle that will be attached to the mouse
   fill(255,255,0);
-ellipse(mouseX,mouseY,25,25);
+  ellipse(mouseX,mouseY,25,25);
   // Move circle up and to the right
   circleX += 1;
   circleY -= 1;

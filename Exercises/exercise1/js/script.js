@@ -18,7 +18,16 @@ let squareSize = 100;
 //The current position and size of the triangle
 let triangleX;
 let triangleY;
-let triangleSize;
+let triangleSize = 100;
+
+//The current position and size of the Purple rectangle
+let rectangleX;
+let rectangleY;
+let rectangleSize = 100;
+
+//The current position and size of the Text
+let Color = "What a Colorful World!";
+
 
 
 
@@ -51,10 +60,15 @@ function setup() {
   squareX = width + squareSize/2;
   squareY = height + squareSize/2;
 
-  // Start the triangle off screen to the middle left
+  // Start the triangle off screen to the middle left to the right
   triangleX = -100;
   triangleY = height/2;
   triangleSize = 100;
+
+  //Purple Rectangle Moving up from the bottom of the screen to the top
+  rectangleX = width + -rectangleSize/1
+  rectangleY = height + rectangleSize/1;
+
 
   // We'll draw rectangles from the center
   rectMode(CENTER);
@@ -74,6 +88,7 @@ function draw() {
   //Set up the circle that will be attached to the mouse
   fill(255,255,0);
   ellipse(mouseX,mouseY,25,25);
+
   // Move circle up and to the right
   circleX += 1;
   circleY -= 1;
@@ -97,4 +112,16 @@ rect(squareX,squareY,squareSize,squareSize);
   //Display the triangle
   triangle(triangleX,triangleY,triangleX+triangleSize,triangleY,triangleX+triangleSize/2,triangleY-triangleSize);
 
+  //Purple Square Moving up
+  rectangleY -= 1;
+  rectangleX -= 1;
+  //Make the rectangle purple
+  fill(138,0,184,10);
+  //Display the rectangle
+  rect(rectangleX,rectangleY,rectangleSize,rectangleSize);
+
+  //Text
+  fill(0);
+  textSize(30);
+  text(Color, width/2.5, height /2.5);
 }

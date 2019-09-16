@@ -15,17 +15,18 @@ let squareX;
 let squareY;
 let squareSize = 100;
 
+//Meghan's Additions
 //The current position and size of the triangle
 let triangleX;
 let triangleY;
 let triangleSize = 100;
 
-//The current position and size of the Purple rectangle
+//The current position and size of the rectangle
 let rectangleX;
 let rectangleY;
 let rectangleSize = 100;
 
-//The current position and size of the Text
+//The Text
 let Color = "What a Colorful World!";
 
 
@@ -60,13 +61,14 @@ function setup() {
   squareX = width + squareSize/2;
   squareY = height + squareSize/2;
 
+//Meghan's Additions
   // Start the triangle off screen to the middle left to the right
   triangleX = -100;
   triangleY = height/2;
   triangleSize = 100;
 
-  //Purple Rectangle Moving up from the bottom of the screen to the top
-  rectangleX = width + -rectangleSize/1
+  //Start the Rectangle off screen from the bottom to the top of the screen
+  rectangleX = width + -rectangleSize/1;
   rectangleY = height + rectangleSize/1;
 
 
@@ -85,8 +87,9 @@ function setup() {
 function draw() {
   // We don't fill the background so we get a drawing effect
 
-  //Set up the circle that will be attached to the mouse
+  //Make a yellow circle
   fill(255,255,0);
+  //Attach the yellow circle to the mouse's position
   ellipse(mouseX,mouseY,25,25);
 
   // Move circle up and to the right
@@ -105,22 +108,22 @@ function draw() {
   // Display the square
 rect(squareX,squareY,squareSize,squareSize);
 
-  //Move triangle left to right across the middle
+//Meghan's Additions
+  //Move triangle left to right across the middle of the screen
   triangleX +=1;
   //Make the triangle transparent green
   fill(0,255,0,10);
   //Display the triangle
   triangle(triangleX,triangleY,triangleX+triangleSize,triangleY,triangleX+triangleSize/2,triangleY-triangleSize);
 
-  //Purple Square Moving up
+  //Move the Rectangle from the bottom to the top of the screen
   rectangleY -= 1;
-  rectangleX -= 1;
-  //Make the rectangle purple
+  //Make the rectangle transparent purple
   fill(138,0,184,10);
   //Display the rectangle
   rect(rectangleX,rectangleY,rectangleSize,rectangleSize);
 
-  //Text
+  //Display the Text on screen
   fill(0);
   textSize(30);
   text(Color, width/2.5, height /2.5);

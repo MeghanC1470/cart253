@@ -20,6 +20,8 @@ let triangleX;
 let triangleY;
 let triangleSize;
 
+
+
 // preload()
 //
 // Nothing here
@@ -36,6 +38,8 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
+  fill(255,0,0);
+  stroke(100,0,0);
 
   // Start the circle off screen to the bottom left
   // We divide the size by two because we're drawing from the center
@@ -48,7 +52,7 @@ function setup() {
   squareY = height + squareSize/2;
 
   // Start the triangle off screen to the middle left
-  triangleX = 0;
+  triangleX = -100;
   triangleY = height/2;
   triangleSize = 100;
 
@@ -67,6 +71,9 @@ function setup() {
 function draw() {
   // We don't fill the background so we get a drawing effect
 
+  //Set up the circle that will be attached to the mouse
+  fill(255,255,0);
+ellipse(mouseX,mouseY,25,25);
   // Move circle up and to the right
   circleX += 1;
   circleY -= 1;
@@ -85,8 +92,9 @@ rect(squareX,squareY,squareSize,squareSize);
 
   //Move triangle left to right across the middle
   triangleX +=1;
-
-
-  fill(0,255,0);
+  //Make the triangle transparent green
+  fill(0,255,0,10);
+  //Display the triangle
   triangle(triangleX,triangleY,triangleX+triangleSize,triangleY,triangleX+triangleSize/2,triangleY-triangleSize);
+
 }

@@ -92,8 +92,8 @@ function draw() {
   avatarVX = 0;
   avatarVY = 0;
 
-// Speed increase of enemy
-enemySpeed = (enemySpeed + 1);
+
+
   // Check which keys are down and set the avatar's velocity based on its
   // speed appropriately
 
@@ -132,6 +132,7 @@ enemySpeed = (enemySpeed + 1);
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = 50;
+    enemyVX = 5;
     // Reset the avatar's position
     avatarX = width/2;
     avatarY = height/2;
@@ -146,6 +147,7 @@ enemySpeed = (enemySpeed + 1);
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = 50;
+    enemyVX = 5;
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
@@ -158,9 +160,14 @@ enemySpeed = (enemySpeed + 1);
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
+    enemyVX = (enemyVX + 1);
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = enemySize + 5;
+    //Increase size each time it hits the wall
+
+
+
 
 
     //try to turn the night into Day

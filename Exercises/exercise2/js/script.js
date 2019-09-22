@@ -21,10 +21,9 @@ let avatarVX = 0;
 let avatarVY = 0;
 
 // The position and size of the enemy circle
-
 let enemyX;
 let enemyY;
-let enemySize = 5;
+let enemySize = 50;
 
 // The speed and velocity of our enemy circle
 let enemySpeed = 10;
@@ -45,7 +44,6 @@ function preload() {
 function setup() {
   // Create our playing area
   createCanvas(500,500);
-enemyVX = random(1 + enemySpeed);
 
 
 
@@ -67,7 +65,7 @@ enemyVX = random(1 + enemySpeed);
 // game over situations.
 function draw() {
   // A night sky background - all ellipses are stars unless mentioned otherwise
-  background (4,10,74);
+  background (46,80,201);
   fill(255);
   ellipse (120,250,3,3);
   ellipse (50,50,3,3);
@@ -76,7 +74,7 @@ function draw() {
   ellipse (60,450,3,3);
   ellipse (300,400,3,3);
   ellipse (450,350,3,3);
-  fill (4,10,74);
+  fill (46,80,201);
   ellipse (430,100,90,90);
 
 //Place the image of the bug and the bird
@@ -94,6 +92,8 @@ function draw() {
   avatarVX = 0;
   avatarVY = 0;
 
+// Speed increase of enemy
+enemySpeed = (enemySpeed + 1);
   // Check which keys are down and set the avatar's velocity based on its
   // speed appropriately
 
@@ -131,8 +131,7 @@ function draw() {
     // Reset the enemy's position
     enemyX = 0;
     enemyY = random(0,height);
-    enemyVX = random(enemySpeed/2,enemySpeed*2);
-    enemySize = 5;
+    enemySize = 50;
     // Reset the avatar's position
     avatarX = width/2;
     avatarY = height/2;
@@ -146,7 +145,7 @@ function draw() {
     console.log("YOU LOSE!");
     enemyX = 0;
     enemyY = random(0,height);
-    enemySize = 5;
+    enemySize = 50;
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
@@ -162,6 +161,15 @@ function draw() {
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = enemySize + 5;
+
+
+    //try to turn the night into Day
+    if (dodges > 10) {
+      background (255);
+      //Tell them of the Blinking lights
+      console.log("It's crazy in here!!!")
+    }
+
   }
 
   // Display the number of successful dodges in the console

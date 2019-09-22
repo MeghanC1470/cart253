@@ -9,10 +9,11 @@ A simple dodging game with keyboard controls
 
 // The position and size of our avatar circle
 let testbird;
+let testbug;
 
 let avatarX;
 let avatarY;
-let avatarSize = 50;
+let avatarSize = 10;
 
 // The speed and velocity of our avatar circle
 let avatarSpeed = 10;
@@ -20,12 +21,13 @@ let avatarVX = 0;
 let avatarVY = 0;
 
 // The position and size of the enemy circle
+
 let enemyX;
 let enemyY;
-let enemySize = 0;
+let enemySize = 5;
 
 // The speed and velocity of our enemy circle
-let enemySpeed = 7;
+let enemySpeed = 10;
 let enemyVX = 5;
 
 
@@ -34,6 +36,7 @@ let dodges = 0;
 
 function preload() {
   testbird = loadImage("assets/images/kTKnrA6pc.png");
+  testbug = loadImage("assets/images/Testbug.png");
 }
 
 // setup()
@@ -42,7 +45,9 @@ function preload() {
 function setup() {
   // Create our playing area
   createCanvas(500,500);
-enemyVX = random(0,enemySpeed);
+enemyVX = random(1 + enemySpeed);
+
+
 
   // Put the avatar in the centre
   avatarX = width/2;
@@ -74,7 +79,9 @@ function draw() {
   fill (4,10,74);
   ellipse (430,100,90,90);
 
+//Place the image of the bug and the bird
   image(testbird,enemyX,enemyY,50,50);
+  image(testbug,avatarX,avatarY,50,50);
 
   // Display the number of successful dodges (the score)
   textAlign(RIGHT,TOP);
@@ -125,6 +132,7 @@ function draw() {
     enemyX = 0;
     enemyY = random(0,height);
     enemyVX = random(enemySpeed/2,enemySpeed*2);
+    enemySize = 5;
     // Reset the avatar's position
     avatarX = width/2;
     avatarY = height/2;
@@ -138,6 +146,7 @@ function draw() {
     console.log("YOU LOSE!");
     enemyX = 0;
     enemyY = random(0,height);
+    enemySize = 5;
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
@@ -152,6 +161,7 @@ function draw() {
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
+    enemySize = enemySize + 5;
   }
 
   // Display the number of successful dodges in the console
@@ -160,11 +170,11 @@ function draw() {
   // The player is black
   fill(0);
   // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+  (avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is red
   fill(255,0,0);
   // Draw the enemy as a circle
-  ellipse(enemyX,enemyY,enemySize,enemySize);
+  (enemyX,enemyY,enemySize,enemySize);
 
 }

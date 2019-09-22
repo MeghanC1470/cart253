@@ -7,10 +7,11 @@ A simple dodging game with keyboard controls
 
 ******************************************************/
 
-// The position and size of our avatar circle
+// Our brave hero and our evil villian
 let testbird;
 let testbug;
 
+// The position and size of our avatar
 let avatarX;
 let avatarY;
 let avatarSize = 10;
@@ -34,6 +35,7 @@ let enemyVX = 5;
 let dodges = 0;
 
 function preload() {
+  //Load in the images of the bird and the bug
   testbird = loadImage("assets/images/kTKnrA6pc.png");
   testbug = loadImage("assets/images/Testbug.png");
 }
@@ -44,8 +46,6 @@ function preload() {
 function setup() {
   // Create our playing area
   createCanvas(500,500);
-
-
 
   // Put the avatar in the centre
   avatarX = width/2;
@@ -69,7 +69,8 @@ function draw() {
   fill(255);
   ellipse (120,250,3,3);
   ellipse (50,50,3,3);
-  ellipse (400,100,100,100); //Moon
+  //One special ellipse is our moon
+  ellipse (400,100,100,100);
   ellipse (300,50,3,3);
   ellipse (60,450,3,3);
   ellipse (300,400,3,3);
@@ -77,9 +78,10 @@ function draw() {
   fill (46,80,201);
   ellipse (430,100,90,90);
 
-//Place the image of the bug and the bird
-  image(testbird,enemyX,enemyY,50,50);
+//Place the image of the bug onto the avatar
   image(testbug,avatarX,avatarY,50,50);
+//Place the image of the bird onto the enemy: it will follow its increasing size later
+  image(testbird,enemyX,enemyY,enemySize,enemySize);
 
   // Display the number of successful dodges (the score)
   textAlign(RIGHT,TOP);
@@ -122,6 +124,11 @@ function draw() {
   // Update the enemy's position based on its velocity
   enemyX = enemyX + enemyVX;
 
+  //Add a semi-transparent red background if the player reaches a score over 10
+  if (dodges > 10) {
+    background (255, 81, 71, 100);
+  }
+
   // Check if the enemy and avatar overlap - if they do the player loses
   // We do this by checking if the distance between the centre of the enemy
   // and the centre of the avatar is less that their combined radii
@@ -132,6 +139,7 @@ function draw() {
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = 50;
+    //Reset the velocity after each hit to the bug
     enemyVX = 5;
     // Reset the avatar's position
     avatarX = width/2;
@@ -144,10 +152,13 @@ function draw() {
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
     // If they went off the screen they lose in the same way as above.
     console.log("YOU LOSE!");
+    //Reset the enemy's position and size
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = 50;
+    //Reset the velocity
     enemyVX = 5;
+    //Reset the player's position and dodge counter
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
@@ -159,37 +170,15 @@ function draw() {
     dodges = dodges + 1;
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
-    // Reset the enemy's position to the left at a random height
+    //Reset the enemy's velocity so that it increases after each pass
     enemyVX = (enemyVX + 1);
+    // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
+    //Reset the enemy's size so that it increases after each pass
     enemySize = enemySize + 5;
-    //Increase size each time it hits the wall
-
-
-
-
-
-    //try to turn the night into Day
-    if (dodges > 10) {
-      background (255);
-      //Tell them of the Blinking lights
-      console.log("It's crazy in here!!!")
-    }
-
   }
 
   // Display the number of successful dodges in the console
   console.log(dodges);
-
-  // The player is black
-  fill(0);
-  // Draw the player as a circle
-  (avatarX,avatarY,avatarSize,avatarSize);
-
-  // The enemy is red
-  fill(255,0,0);
-  // Draw the enemy as a circle
-  (enemyX,enemyY,enemySize,enemySize);
-
 }

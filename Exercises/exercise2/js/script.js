@@ -7,7 +7,7 @@ A simple dodging game with keyboard controls
 
 ******************************************************/
 
-// Our brave hero and our evil villian
+// Our brave hero Bug and our evil enemy Bird
 let testbird;
 let testbug;
 
@@ -35,6 +35,7 @@ let enemyVX = 5;
 let dodges = 0;
 
 function preload() {
+
   //Load in the images of the bird and the bug
   testbird = loadImage("assets/images/kTKnrA6pc.png");
   testbug = loadImage("assets/images/Testbug.png");
@@ -64,17 +65,20 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
+
   // A night sky background - all ellipses are stars unless mentioned otherwise
   background (46,80,201);
   fill(255);
   ellipse (120,250,3,3);
   ellipse (50,50,3,3);
-  //One special ellipse is our moon
-  ellipse (400,100,100,100);
   ellipse (300,50,3,3);
   ellipse (60,450,3,3);
   ellipse (300,400,3,3);
   ellipse (450,350,3,3);
+
+  //One special ellipse is our moon
+  ellipse (400,100,100,100);
+  // To create a crescent moon, add a smaller circle, put it over the Moon, then make it the same color as the sky
   fill (46,80,201);
   ellipse (430,100,90,90);
 

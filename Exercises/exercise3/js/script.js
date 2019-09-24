@@ -164,6 +164,7 @@ function draw() {
     targetX = targetX + targetVX
     targetY = targetY + targetVY
     image(targetImage,targetX,targetY);
+    
   }
 }
 

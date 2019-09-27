@@ -81,34 +81,34 @@ function setup() {
     // We'll talk more about this nice quality of random soon enough.
     // But basically each "if" and "else if" has a 10% chance of being true
     if (r < 0.1) {
-      image(decoyImage1,x,y);
+      image(decoyImage1,x,y,200,200);
     }
     else if (r < 0.2) {
-      image(decoyImage2,x,y);
+      image(decoyImage2,x,y,100,100);
     }
     else if (r < 0.3) {
-      image(decoyImage3,x,y);
+      image(decoyImage3,x,y,50,50);
     }
     else if (r < 0.4) {
-      image(decoyImage4,x,y);
+      image(decoyImage4,x,y,250,250);
     }
     else if (r < 0.5) {
-      image(decoyImage5,x,y);
+      image(decoyImage5,x,y,200,200);
     }
     else if (r < 0.6) {
       image(decoyImage6,x,y);
     }
     else if (r < 0.7) {
-      image(decoyImage7,x,y);
+      image(decoyImage7,x,y,150,150);
     }
     else if (r < 0.8) {
       image(decoyImage8,x,y);
     }
     else if (r < 0.9) {
-      image(decoyImage9,x,y);
+      image(decoyImage9,x,y,300,300);
     }
     else if (r < 1.0) {
-      image(decoyImage10,x,y);
+      image(decoyImage10,x,y,400,400);
     }
   }
 
@@ -132,7 +132,7 @@ function setup() {
   fill(0);
   text(".:|LOST DOG|:.",1370,30);
 
-  //Add a picture of the dog the players are looking for
+  //Add the picture of the dog the players are looking for
   image(targetImage,1370,100);
 }
 
@@ -152,6 +152,8 @@ function draw() {
 
     // Tell them they won!
     text("YOU WIN!",width/2,height/2);
+    //Tell them how they can play again!
+    text("RELOAD TO PLAY AGAIN!",width/2,height/1.5);
 
     // Draw a circle around the sausage dog to show where it is (even though
     // they already know because they found it!)
@@ -160,11 +162,11 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
 
-    //Velocity part
+    //Set a velocity so the dog moves once he's found!
     targetX = targetX + targetVX
     targetY = targetY + targetVY
     image(targetImage,targetX,targetY);
-    
+
   }
 }
 

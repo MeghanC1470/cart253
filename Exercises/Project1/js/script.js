@@ -46,6 +46,10 @@ let preyMaxHealth = 100;
 // Prey fill color
 let preyFill = 200;
 
+//TestNoise
+let preyXNoise = 0.0;
+let preyYNoise = 0.0;
+
 // Amount of health obtained per frame of "eating" (overlapping) the prey
 let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
@@ -62,6 +66,7 @@ function setup() {
   // We're using simple functions to separate code out
   setupPrey();
   setupPlayer();
+  preyYNoise = random()*100;
 }
 
 // setupPrey()
@@ -239,9 +244,12 @@ function movePrey() {
     //
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    preyVX = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preyVY = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    preyVX = map(noise(preyXNoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    preyVY = map(noise(preyYNoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
   }
+
+preyXNoise+= 0.1;
+preyYNoise+= 0.1;
 
   // Update prey position based on velocity
   preyX = preyX + preyVX;

@@ -144,6 +144,11 @@ function handleInput() {
   else {
     playerCurrentSpeed = playerNormalSpeed;
   }
+
+  //However, if the Player Sprints, they lose Health faster
+  if (keyIsDown(SHIFT)){
+    playerMaxHealth = playerMaxHealth - 2;
+  }
 }
 
 // movePlayer()

@@ -80,6 +80,7 @@ function setup() {
     // images, each with a 10% chance of being shown
     // We'll talk more about this nice quality of random soon enough.
     // But basically each "if" and "else if" has a 10% chance of being true
+    //Set some of the decoy images at random sizes to increase the difficulty
     if (r < 0.1) {
       image(decoyImage1,x,y,200,200);
     }
@@ -185,7 +186,6 @@ function mousePressed() {
       gameOver = true;
       targetVX = random(-5,5);
       targetVY = random(-5,5);
-
     }
   }
 }

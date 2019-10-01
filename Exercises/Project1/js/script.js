@@ -24,7 +24,9 @@ let playerY;
 let playerRadius = 25;
 let playerVX = 0;
 let playerVY = 0;
-let playerMaxSpeed = 2;
+let playerNormalSpeed = 2;
+let playerSprintSpeed = 4;
+let playerCurrentSpeed = playerNormalSpeed;
 // Player health
 let playerHealth;
 let playerMaxHealth = 255;
@@ -115,10 +117,10 @@ function draw() {
 function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
-    playerVX = -playerMaxSpeed;
+    playerVX = -playerCurrentSpeed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    playerVX = playerMaxSpeed;
+    playerVX = playerCurrentSpeed;
   }
   else {
     playerVX = 0;
@@ -126,13 +128,21 @@ function handleInput() {
 
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
-    playerVY = -playerMaxSpeed;
+    playerVY = -playerCurrentSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
-    playerVY = playerMaxSpeed;
+    playerVY = playerCurrentSpeed;
   }
   else {
     playerVY = 0;
+  }
+
+  //Allow the Player to sprint faster
+  if (keyIsDown(SHIFT)) {
+    playerCurrentSpeed = playerSprintSpeed;
+  }
+  else {
+    playerCurrentSpeed = playerNormalSpeed;
   }
 }
 

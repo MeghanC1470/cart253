@@ -39,14 +39,14 @@ let preyY;
 let preyRadius = 25;
 let preyVX;
 let preyVY;
-let preyMaxSpeed = 4;
+let preyMaxSpeed = 5;
 // Prey health
 let preyHealth;
 let preyMaxHealth = 100;
 // Prey fill color
 let preyFill = 200;
 
-//TestNoise
+//Noise for the prey's spontanious movement
 let preyXNoise = 0.0;
 let preyYNoise = 0.0;
 
@@ -218,6 +218,16 @@ function checkEating() {
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
 
+
+//Make the Player bigger after eating each prey
+  if (preyHealth === 0) {
+    playerRadius = playerRadius + 5;
+    playerNormalSpeed = playerNormalSpeed - 0.1;
+  }
+
+
+
+
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
       // Move the "new" prey to a random position
@@ -239,17 +249,17 @@ function movePrey() {
   // random() will be < 0.05 5% of the time, so the prey
   // will change direction on 5% of frames
   if (random() < 0.05) {
-    // Set velocity based on random values to get a new direction
+    // Set velocity based on noise values to get a new direction
     // and speed of movement
     //
-    // Use map() to convert from the 0-1 range of the random() function
+    // Use map() to convert from the 0-1 range of the noise() function
     // to the appropriate range of velocities for the prey
     preyVX = map(noise(preyXNoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
     preyVY = map(noise(preyYNoise), 0, 1, -preyMaxSpeed, preyMaxSpeed);
   }
-
-preyXNoise+= 0.1;
-preyYNoise+= 0.1;
+  // Set noise to random speeds and velocities
+  preyXNoise+= 0.1;
+  preyYNoise+= 0.1;
 
   // Update prey position based on velocity
   preyX = preyX + preyVX;

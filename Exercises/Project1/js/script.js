@@ -218,14 +218,10 @@ function checkEating() {
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
 
-
 //Make the Player bigger after eating each prey
   if (preyHealth === 0) {
     playerRadius = playerRadius + 5;
     playerNormalSpeed = playerNormalSpeed - 0.1;
-  }
-
-
 
 
     // Check if the prey died (health 0)
@@ -237,6 +233,9 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+      //Make the prey faster after each one is eaten
+      preyMaxSpeed = preyMaxSpeed + 2;
+      }
     }
   }
 }

@@ -55,8 +55,9 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
-let testRat;
+let preyRat;
 let testCat;
+let woodfloor;
 
 
 //preload()
@@ -66,7 +67,7 @@ let testCat;
 
 function preload() {
   woodfloor = loadImage("assets/images/Woodfloor.png");
-  testRat = loadImage("assets/images/clown.png");
+  preyRat = loadImage("assets/images/Rat.png");
   testCat = loadImage("assets/images/Dragon.png");
 }
 
@@ -93,7 +94,6 @@ function setupPrey() {
   preyVX = -preyMaxSpeed;
   preyVY = preyMaxSpeed;
   preyHealth = preyMaxHealth;
-  image(testRat, preyX, preyY, preyRadius, preyRadius);
 }
 
 // setupPlayer()
@@ -113,7 +113,8 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100, 100, 200);
+  //Set the background as a wood floor
+  background(woodfloor);
 
   if (!gameOver) {
     handleInput();
@@ -177,9 +178,6 @@ function handleInput() {
 // Updates player position based on velocity,
 // wraps around the edges.
 function movePlayer() {
-
-  //make Player into a cat
-
 
   // Update position
   playerX = playerX + playerVX;
@@ -302,18 +300,18 @@ function movePrey() {
 
 // drawPrey()
 //
-// Draw the prey as an ellipse with alpha based on health
+// Draw the prey as a rat with alpha based on health
 function drawPrey() {
   fill(preyFill, preyHealth);
-  ellipse(preyX, preyY, preyRadius * 2);
+  image(preyRat,preyX, preyY, preyRadius * 3, preyRadius * 1.5);
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
+  image(testCat,playerX, playerY, playerRadius * 2);
   fill(playerFill, playerHealth);
-  ellipse(playerX, playerY, playerRadius * 2);
 }
 
 // showGameOver()

@@ -56,7 +56,7 @@ let eatHealth = 10;
 let preyEaten = 0;
 
 let preyRat;
-let testCat;
+let playerCat;
 let woodfloor;
 
 
@@ -68,7 +68,7 @@ let woodfloor;
 function preload() {
   woodfloor = loadImage("assets/images/Woodfloor.png");
   preyRat = loadImage("assets/images/Rat.png");
-  testCat = loadImage("assets/images/Dragon.png");
+  playerCat = loadImage("assets/images/Cat.png");
 }
 
 // setup()
@@ -310,8 +310,8 @@ function drawPrey() {
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
-  image(testCat,playerX, playerY, playerRadius * 2);
-  fill(playerFill, playerHealth);
+  image(playerCat,playerX, playerY, playerRadius * 3, playerRadius * 3);
+  fill(playerFill , playerHealth);
 }
 
 // showGameOver()

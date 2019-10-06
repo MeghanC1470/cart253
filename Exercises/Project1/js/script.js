@@ -55,11 +55,26 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+let testRat;
+let testCat;
+
+
+//preload()
+//
+//Sets up the images that will serve as the background to the game
+//Additionally, sets up the images that will serve as the Player and Prey
+
+function preload() {
+  woodfloor = loadImage("assets/images/Woodfloor.png");
+  testRat = loadImage("assets/images/clown.png");
+  testCat = loadImage("assets/images/Dragon.png");
+}
+
 // setup()
 //
 // Sets up the basic elements of the game
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(500,500);
 
   noStroke();
 
@@ -78,6 +93,7 @@ function setupPrey() {
   preyVX = -preyMaxSpeed;
   preyVY = preyMaxSpeed;
   preyHealth = preyMaxHealth;
+  image(testRat, preyX, preyY, preyRadius, preyRadius);
 }
 
 // setupPlayer()
@@ -161,6 +177,10 @@ function handleInput() {
 // Updates player position based on velocity,
 // wraps around the edges.
 function movePlayer() {
+
+  //make Player into a cat
+
+
   // Update position
   playerX = playerX + playerVX;
   playerY = playerY + playerVY;

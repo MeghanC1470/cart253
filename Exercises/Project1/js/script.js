@@ -55,8 +55,10 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+//The two main character in the game
 let preyRat;
 let playerCat;
+//The wooden floor background
 let woodfloor;
 
 
@@ -64,7 +66,6 @@ let woodfloor;
 //
 //Sets up the images that will serve as the background to the game
 //Additionally, sets up the images that will serve as the Player and Prey
-
 function preload() {
   woodfloor = loadImage("assets/images/Woodfloor.png");
   preyRat = loadImage("assets/images/Rat.png");
@@ -76,7 +77,6 @@ function preload() {
 // Sets up the basic elements of the game
 function setup() {
   createCanvas(500,500);
-
   noStroke();
 
   // We're using simple functions to separate code out
@@ -113,7 +113,7 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  //Set the background as a wood floor
+  //Set the background as a wooden floor
   background(woodfloor);
 
   if (!gameOver) {
@@ -236,7 +236,7 @@ function checkEating() {
     // Constrain to the possible range
     preyHealth = constrain(preyHealth, 0, preyMaxHealth);
 
-//Make the Player bigger after eating each prey
+//Make the Player bigger and slower after eating too much prey
   if (preyHealth === 0) {
     playerRadius = playerRadius + 5;
     playerNormalSpeed = playerNormalSpeed - 0.1;
@@ -251,7 +251,7 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
-      //Make the prey faster after each one is eaten
+      //Make the prey faster after each previous one is eaten
       preyMaxSpeed = preyMaxSpeed + 2;
       }
     }
@@ -308,10 +308,10 @@ function drawPrey() {
 
 // drawPlayer()
 //
-// Draw the player as an ellipse with alpha value based on health
+// Draw the player as a cat with alpha value based on health
 function drawPlayer() {
   image(playerCat,playerX, playerY, playerRadius * 3, playerRadius * 3);
-  fill(playerFill , playerHealth);
+  fill(playerFill, playerHealth);
 }
 
 // showGameOver()
@@ -319,13 +319,14 @@ function drawPlayer() {
 // Display text about the game being over!
 function showGameOver() {
   // Set up the font
-  textSize(32);
+  textSize(30);
   textAlign(CENTER, CENTER);
-  fill(0);
+  fill(255);
   // Set up the text to display
   let gameOverText = "GAME OVER\n"; // \n means "new line"
   gameOverText = gameOverText + "You ate " + preyEaten + " prey\n";
-  gameOverText = gameOverText + "before you died."
+  gameOverText = gameOverText + "before you died.\n";
+  gameOverText = gameOverText + "Restart to Play Again";
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
 }

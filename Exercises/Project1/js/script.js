@@ -323,8 +323,11 @@ function drawPrey() {
 //
 // Draw the player as a cat with alpha value based on health
 function drawPlayer() {
+  push();
+  tint(255,255,255,playerHealth);
   image(playerCat,playerX, playerY, playerRadius * 3, playerRadius * 3);
-  tint(255,128,playerFill,playerHealth);
+  pop();
+
 
 }
 
@@ -333,11 +336,12 @@ function drawPlayer() {
 // Display text about the game being over!
 function showGameOver() {
   // Set up the font
+  textFont('Georgia');
   textSize(30);
   textAlign(CENTER, CENTER);
   fill(255);
   // Set up the text to display
-  let gameOverText = "GAME OVER\n"; // \n means "new line"
+  let gameOverText = ".:|GAME OVER|:.\n"; // \n means "new line"
   gameOverText = gameOverText + "You ate " + preyEaten + " prey\n";
   gameOverText = gameOverText + "before you died.\n";
   gameOverText = gameOverText + "Restart to Play Again";

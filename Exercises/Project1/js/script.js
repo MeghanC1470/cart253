@@ -61,15 +61,22 @@ let playerCat;
 //The wooden floor background
 let woodfloor;
 
+//The cat sound effect that will play when the Player eats the prey
+let meow;
+
 
 //preload()
 //
-//Sets up the images that will serve as the background to the game
-//Additionally, sets up the images that will serve as the Player and Prey
+//Sets up the images that will serve as the background and characters to the game
+//Additionally, sets up the sounds that will play in the game
 function preload() {
+  //Images
   woodfloor = loadImage("assets/images/Woodfloor.png");
   preyRat = loadImage("assets/images/Rat.png");
   playerCat = loadImage("assets/images/Cat.png");
+
+  //Cat meowing
+  meow = loadSound("assets/sounds/cat_meow2.wav");
 }
 
 // setup()
@@ -103,7 +110,7 @@ function setupPlayer() {
   playerX = 4 * width / 5;
   playerY = height / 2;
   playerHealth = playerMaxHealth;
-  tint(255,playerCat, playerHealth);
+
 }
 
 // draw()
@@ -242,6 +249,11 @@ function checkEating() {
     playerRadius = playerRadius + 5;
     playerNormalSpeed = playerNormalSpeed - 0.1;
 
+//Make the player meow once they eat the prey
+  if (preyHealth === 0) {
+    meow.play();
+  }
+
 
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
@@ -311,8 +323,9 @@ function drawPrey() {
 //
 // Draw the player as a cat with alpha value based on health
 function drawPlayer() {
-  tint(255,126,playerCat, playerHealth);
   image(playerCat,playerX, playerY, playerRadius * 3, playerRadius * 3);
+  tint(255,128,playerFill,playerHealth);
+
 }
 
 // showGameOver()

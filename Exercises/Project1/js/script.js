@@ -103,6 +103,7 @@ function setupPlayer() {
   playerX = 4 * width / 5;
   playerY = height / 2;
   playerHealth = playerMaxHealth;
+  tint(255,playerCat, playerHealth);
 }
 
 // draw()
@@ -302,16 +303,16 @@ function movePrey() {
 //
 // Draw the prey as a rat with alpha based on health
 function drawPrey() {
-  fill(preyFill, preyHealth);
   image(preyRat,preyX, preyY, preyRadius * 3, preyRadius * 1.5);
+  fill(preyFill, preyHealth);
 }
 
 // drawPlayer()
 //
 // Draw the player as a cat with alpha value based on health
 function drawPlayer() {
+  tint(255,126,playerCat, playerHealth);
   image(playerCat,playerX, playerY, playerRadius * 3, playerRadius * 3);
-  fill(playerFill, playerHealth);
 }
 
 // showGameOver()

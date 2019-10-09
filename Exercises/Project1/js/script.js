@@ -18,7 +18,8 @@ random movement, screen wrap.
 // Track whether the game is over
 let gameOver = false;
 
-// Player position, size, velocity
+// Player image, position, size, velocity
+let playerCat;
 let playerX;
 let playerY;
 let playerRadius = 25;
@@ -33,7 +34,8 @@ let playerMaxHealth = 255;
 // Player fill color
 let playerFill = 50;
 
-// Prey position, size, velocity
+// Prey image, position, size, velocity
+let preyRat;
 let preyX;
 let preyY;
 let preyRadius = 25;
@@ -45,7 +47,6 @@ let preyHealth;
 let preyMaxHealth = 100;
 // Prey fill color
 let preyFill = 200;
-
 //Noise for the prey's spontanious movement
 let preyXNoise = 0.0;
 let preyYNoise = 0.0;
@@ -55,16 +56,12 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
-//The two main character in the game
-let preyRat;
-let playerCat;
-//The wooden floor background
+//The background
 let woodfloor;
 
-//The cat sound effect that will play when the Player eats the prey
+//The Player sound effect
 let meow;
-
-//Finally, music!
+//Background music!
 let pixelMusic;
 
 
@@ -78,7 +75,7 @@ function preload() {
   preyRat = loadImage("assets/images/Rat.png");
   playerCat = loadImage("assets/images/Cat.png");
 
-  //Cat meowing
+  //Cat meowing sound effect
   meow = loadSound("assets/sounds/cat_meow2.wav");
 
   //Music
@@ -92,7 +89,7 @@ function setup() {
   createCanvas(500,500);
   noStroke();
 
-  //Set up the music that will play throughout the game
+  //Set up the music
   pixelMusic.loop();
 
   // We're using simple functions to separate code out
@@ -258,11 +255,10 @@ function checkEating() {
     playerRadius = playerRadius + 5;
     playerNormalSpeed = playerNormalSpeed - 0.1;
 
-//Make the player meow once they eat the prey
+//Make the Player meow once they eat the prey
   if (preyHealth === 0) {
     meow.play();
   }
-
 
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
@@ -322,7 +318,7 @@ function movePrey() {
 
 // drawPrey()
 //
-// Draw the prey as a rat with alpha based on health
+// Draw the Prey as a rat with alpha based on health
 function drawPrey() {
   image(preyRat,preyX, preyY, preyRadius * 3, preyRadius * 1.5);
   fill(preyFill, preyHealth);
@@ -330,7 +326,8 @@ function drawPrey() {
 
 // drawPlayer()
 //
-// Draw the player as a cat with alpha value based on health
+// Draw the Player as a cat with alpha value based on health
+// Set up the tint that while fade out the Player as they lose health
 function drawPlayer() {
   push();
   tint(255,255,255,playerHealth);

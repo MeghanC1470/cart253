@@ -64,6 +64,9 @@ let woodfloor;
 //The cat sound effect that will play when the Player eats the prey
 let meow;
 
+//Finally, music!
+let pixelMusic;
+
 
 //preload()
 //
@@ -77,6 +80,9 @@ function preload() {
 
   //Cat meowing
   meow = loadSound("assets/sounds/cat_meow2.wav");
+
+  //Music
+  pixelMusic = loadSound("assets/sounds/Pixel Music - Loop Royalty Free Stock Music.mp3");
 }
 
 // setup()
@@ -85,6 +91,9 @@ function preload() {
 function setup() {
   createCanvas(500,500);
   noStroke();
+
+  //Set up the music that will play throughout the game
+  pixelMusic.loop();
 
   // We're using simple functions to separate code out
   setupPrey();

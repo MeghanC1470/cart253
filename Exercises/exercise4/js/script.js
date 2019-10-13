@@ -12,10 +12,6 @@
 // Whether the game has started
 let playing = false;
 
-// Game colors (using hexadecimal)
-let bgColor = 0;
-let fgColor = 255;
-
 // BALL
 
 // A ball object with the properties of
@@ -36,8 +32,8 @@ let ball = {
 let leftPaddle = {
   x: 0,
   y: 0,
-  w: 20,
-  h: 70,
+  w: 40,
+  h: 40,
   vy: 0,
   speed: 5,
   upKey: 87,
@@ -51,8 +47,8 @@ let leftPaddle = {
 let rightPaddle = {
   x: 0,
   y: 0,
-  w: 20,
-  h: 70,
+  w: 40,
+  h: 40,
   vy: 0,
   speed: 5,
   upKey: 38,
@@ -66,11 +62,20 @@ let beepSFX;
 let leftPaddleScore = 0
 let rightPaddleScore = 0
 
+//Our air hockey background
+let backgroundHockey;
+let rightRedPaddle
+
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
+//As well as the images being used
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+
+  // Background and paddle images
+  backgroundHockey = loadImage("assets/images/hockeyBackground.png")
+  rightRedPaddle = loadImage("assets/images/rightPaletteRed.png")
 }
 
 // setup()
@@ -83,7 +88,6 @@ function setup() {
   createCanvas(640, 480);
   rectMode(CENTER);
   noStroke();
-  fill(fgColor);
 
   setupPaddles();
   resetBall();
@@ -108,7 +112,7 @@ function setupPaddles() {
 // See how tidy it looks?!
 function draw() {
   // Fill the background
-  background(bgColor);
+  background(backgroundHockey);
 
   if (playing) {
     // If the game is in play, we handle input and move the elements around
@@ -263,7 +267,10 @@ function checkBallPaddleCollision(paddle) {
 // Draws the specified paddle
 function displayPaddle(paddle) {
   // Draw the paddles
-  rect(paddle.x, paddle.y, paddle.w, paddle.h);
+  fill(0,0,255);
+  ellipse(rightPaddle.x, rightPaddle.y, rightPaddle.w, rightPaddle.h);
+  fill(171,15,0);
+  ellipse(leftPaddle.x, leftPaddle.y, leftPaddle.w, leftPaddle.h);
 }
 
 // displayBall()
@@ -271,7 +278,10 @@ function displayPaddle(paddle) {
 // Draws the ball on screen as a square
 function displayBall() {
   // Draw the ball
-  rect(ball.x, ball.y, ball.size, ball.size);
+  push();
+  fill(0,255,0);
+  ellipse(ball.x, ball.y, ball.size, ball.size);
+  pop();
 }
 
 // resetBall()
@@ -290,7 +300,8 @@ function resetBall() {
 // Shows a message about how to start the game
 function displayStartMessage() {
   push();
-  textAlign(CENTER, CENTER);
+  textAlign(CENTER, TOP);
+  fill(0,0,255);
   textSize(32);
   text("CLICK TO START", width / 2, height / 2);
   pop();

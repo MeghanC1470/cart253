@@ -131,7 +131,6 @@ function draw() {
       // This is where we would likely count points, depending on which side
       // the ball went off...
       if (ballIsOutOfBounds()) {
-
       }
     }
   }
@@ -191,11 +190,20 @@ function updateBall() {
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
   // Check for ball going off the sides
-  if (ball.x < 0 || ball.x > width) {
+  if (ball.x > width) {
+    console.log("Leftpoint");
     return true;
   }
   else {
     return false;
+
+  if (ball.x < 0) {
+    console.log("Rightpoint");
+    return true;
+  }
+  else {
+    return false;
+    }
   }
 }
 

@@ -56,7 +56,9 @@ let rightPaddle = {
 }
 
 // A variable to hold the beep sound we will play on bouncing
+//And background music
 let beepSFX;
+let hockeyMusic;
 
 //The point counter for each side
 let leftPaddleScore = 0
@@ -64,7 +66,7 @@ let rightPaddleScore = 0
 
 //Our air hockey background
 let backgroundHockey;
-let rightRedPaddle
+
 
 // preload()
 //
@@ -72,10 +74,10 @@ let rightRedPaddle
 //As well as the images being used
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+  hockeyMusic = new Audio("assets/sounds/HockeyThemeMusic.mp3");
 
-  // Background and paddle images
+  // Background image
   backgroundHockey = loadImage("assets/images/hockeyBackground.png")
-  rightRedPaddle = loadImage("assets/images/rightPaletteRed.png")
 }
 
 // setup()
@@ -91,6 +93,9 @@ function setup() {
 
   setupPaddles();
   resetBall();
+
+  //Set up the music
+  hockeyMusic.play();
 }
 
 // setupPaddles()
@@ -135,6 +140,8 @@ function draw() {
       // This is where we would likely count points, depending on which side
       // the ball went off...
       if (ballIsOutOfBounds()) {
+        leftPaddleScore();
+        rightPaddleScore();
       }
     }
   }
@@ -196,20 +203,22 @@ function ballIsOutOfBounds() {
   // Check for ball going off the sides (LEFT)
   if (ball.x > width) {
     console.log("Leftpoint");
-    leftPaddleScore = +1;
-    background(0,0,255);
+    leftPaddleScore += 1;
+    background(255,0,0);
     return true;
   }
-  else {  if (ball.x < 0) {
+  else {
+    if (ball.x < 0) {
       console.log("Rightpoint");
-      rightPaddleScore = +1;
-      background(255,0,0);
+      rightPaddleScore += 1;
+      background(0,0,255);
+      fill(0);
+      ellipse(leftPaddle.x, leftPaddle.y, leftPaddle.w, leftPaddle.h);
       return true;
     }
     else {
     return false;
 // Check for ball going off the sides (RIGHT) FIX LATER
-
     }
   }
 }
@@ -293,6 +302,10 @@ function resetBall() {
   ball.y = height / 2;
   ball.vx = ball.speed;
   ball.vy = ball.speed;
+
+  if (ball.x > width) {
+    ball.x = leftPaddle.x;
+  }
 }
 
 // displayStartMessage()

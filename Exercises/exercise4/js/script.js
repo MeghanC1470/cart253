@@ -196,20 +196,20 @@ function ballIsOutOfBounds() {
   // Check for ball going off the sides (LEFT)
   if (ball.x > width) {
     console.log("Leftpoint");
-    leftPaddleScore = +1
-    background(255,0,0);
+    leftPaddleScore = +1;
+    background(0,0,255);
     return true;
   }
-  else {
+  else {  if (ball.x < 0) {
+      console.log("Rightpoint");
+      rightPaddleScore = +1;
+      background(255,0,0);
+      return true;
+    }
+    else {
     return false;
 // Check for ball going off the sides (RIGHT) FIX LATER
-  if (ball.x < 0) {
-    console.log("Rightpoint");
-    rightPaddleScore = +1;
-    return true;
-  }
-  else {
-    return false;
+
     }
   }
 }

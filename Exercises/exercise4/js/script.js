@@ -344,6 +344,9 @@ function displayStartMessage() {
   pop();
 }
 
+//displayGameOver
+//
+//Shows a message that stops the game and shows which side won
 function displayGameOver (){
 if (leftPaddleScore === 2) {
 push();
@@ -352,16 +355,16 @@ fill(255,0,0);
 textSize(32);
 text("GAME OVER: RED WINS", width / 2, height / 2);
 pop();
-  }
+}
 
-  if (rightPaddleScore === 2) {
-  push();
-  textAlign(CENTER, TOP);
-  fill(0,0,255);
-  textSize(32);
-  text("GAME OVER: BLUE WINS", width / 2, height / 2);
-  pop();
-    }
+if (rightPaddleScore === 2) {
+push();
+textAlign(CENTER, TOP);
+fill(0,0,255);
+textSize(32);
+text("GAME OVER: BLUE WINS", width / 2, height / 2);
+pop();
+  }
 }
 // mousePressed()
 //

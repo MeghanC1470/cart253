@@ -320,12 +320,19 @@ function totalScore() {
 //Paddle Scores
 if (ball.x > width) {
   leftPaddleScore += 1;
-  console.log("LeftPaddlePoint")
+  console.log("LeftPaddlePoint");
+  fill (0,255,0);
+  ellipse (40,40,40,40);
 }
 if (ball.x < 0) {
   rightPaddleScore += 1;
   console.log("RightPaddlePoint")
     }
+
+  if (leftPaddleScore == 1) {
+    fill (0,255,0);
+    ellipse (40,40,40,40);
+  }
 if (leftPaddleScore === 2 || rightPaddleScore === 2) {
   playing = false
   gameOver = true

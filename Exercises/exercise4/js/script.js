@@ -78,7 +78,6 @@ function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   hockeyMusic = new Audio("assets/sounds/HockeyThemeMusic.mp3");
 
-  // Background image
   backgroundHockey = loadImage("assets/images/hockeyBackground.png")
 }
 
@@ -324,7 +323,7 @@ if (ball.x > width) {
 }
 if (ball.x < 0) {
   rightPaddleScore += 1;
-  console.log("Blue won a Point")
+  console.log("Blue won a Point!")
     }
 
 if (leftPaddleScore === 5 || rightPaddleScore === 5) {

@@ -11,6 +11,7 @@
 
 // Whether the game has started
 let playing = false;
+let gameOver = false;
 
 // BALL
 
@@ -131,6 +132,8 @@ function draw() {
     checkBallPaddleCollision(leftPaddle);
     checkBallPaddleCollision(rightPaddle);
 
+    totalScore();
+
     // Check if the ball went out of bounds and respond if so
     // (Note how we can use a function that returns a truth value
     // inside a conditional!)
@@ -146,8 +149,14 @@ function draw() {
     }
   }
   else {
-    // Otherwise we display the message to start the game
-    displayStartMessage();
+    // Once the game is over, display a Game Over Message
+  if (gameOver == true) {
+     displayGameOver();
+   }
+     // Otherwise we display the message to start the game
+   else {
+     displayStartMessage();
+   }
   }
 
   // We always display the paddles and ball so it looks like Pong!
@@ -202,15 +211,11 @@ function updateBall() {
 function ballIsOutOfBounds() {
   // Check for ball going off the sides (LEFT)
   if (ball.x > width) {
-    console.log("Leftpoint");
-    leftPaddleScore += 1;
     background(255,0,0);
     return true;
   }
   else {
     if (ball.x < 0) {
-      console.log("Rightpoint");
-      rightPaddleScore += 1;
       background(0,0,255);
       fill(0);
       ellipse(leftPaddle.x, leftPaddle.y, leftPaddle.w, leftPaddle.h);
@@ -300,18 +305,32 @@ function resetBall() {
   // Initialise the ball's position and velocity
 
   if (ball.x > width) {
-    console.log(ball);
     ball.x = leftPaddle.x + 30;
     ball.vx = ball.speed;
   }
   else {
-    console.log(ball);
     ball.x = rightPaddle.x + -30;
     ball.vx = -ball.speed;
   }
   ball.y = height / 2;
   ball.vy = ball.speed;
 }
+
+function totalScore() {
+//Paddle Scores
+if (ball.x > width) {
+  leftPaddleScore += 1;
+  console.log("LeftPaddlePoint")
+}
+if (ball.x < 0) {
+  rightPaddleScore += 1;
+  console.log("RightPaddlePoint")
+    }
+if (leftPaddleScore === 2 || rightPaddleScore === 2) {
+  playing = false
+  gameOver = true
+}
+  }
 
 // displayStartMessage()
 //
@@ -325,10 +344,30 @@ function displayStartMessage() {
   pop();
 }
 
+function displayGameOver (){
+if (leftPaddleScore === 2) {
+push();
+textAlign(CENTER, TOP);
+fill(255,0,0);
+textSize(32);
+text("GAME OVER: RED WINS", width / 2, height / 2);
+pop();
+  }
+
+  if (rightPaddleScore === 2) {
+  push();
+  textAlign(CENTER, TOP);
+  fill(0,0,255);
+  textSize(32);
+  text("GAME OVER: BLUE WINS", width / 2, height / 2);
+  pop();
+    }
+}
 // mousePressed()
 //
 // Here to require a click to start playing the game
 // Which will help us be allowed to play audio in the browser
 function mousePressed() {
   playing = true;
+  gameOver = false;
 }

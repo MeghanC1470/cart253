@@ -351,9 +351,9 @@ function displayGameOver (){
 if (leftPaddleScore === 2) {
 push();
 textAlign(CENTER, TOP);
-fill(255,0,0);
+fill(171,15,0);
 textSize(32);
-text("GAME OVER: RED WINS", width / 2, height / 2);
+text("GAME OVER: RED WINS\n Restart to Play Again", width / 2, height / 2);
 pop();
 }
 
@@ -362,7 +362,7 @@ push();
 textAlign(CENTER, TOP);
 fill(0,0,255);
 textSize(32);
-text("GAME OVER: BLUE WINS", width / 2, height / 2);
+text("GAME OVER: BLUE WINS\n Restart to Play Again", width / 2, height / 2);
 pop();
   }
 }

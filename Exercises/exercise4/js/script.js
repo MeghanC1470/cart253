@@ -298,14 +298,19 @@ function displayBall() {
 // Sets the starting position and velocity of the ball
 function resetBall() {
   // Initialise the ball's position and velocity
-  ball.x = width / 2;
-  ball.y = height / 2;
-  ball.vx = ball.speed;
-  ball.vy = ball.speed;
 
   if (ball.x > width) {
-    ball.x = leftPaddle.x;
+    console.log(ball);
+    ball.x = leftPaddle.x + 30;
+    ball.vx = ball.speed;
   }
+  else {
+    console.log(ball);
+    ball.x = rightPaddle.x + -30;
+    ball.vx = -ball.speed;
+  }
+  ball.y = height / 2;
+  ball.vy = ball.speed;
 }
 
 // displayStartMessage()

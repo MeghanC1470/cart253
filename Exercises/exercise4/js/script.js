@@ -11,6 +11,7 @@
 
 // Whether the game has started
 let playing = false;
+// Whether the game has ended
 let gameOver = false;
 
 // BALL
@@ -71,7 +72,7 @@ let backgroundHockey;
 
 // preload()
 //
-// Loads the beep audio for the sound of bouncing
+// Loads the beep audio for the sound of bouncing, as well as the background music
 //As well as the images being used
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
@@ -132,6 +133,7 @@ function draw() {
     checkBallPaddleCollision(leftPaddle);
     checkBallPaddleCollision(rightPaddle);
 
+    //The score board
     totalScore();
 
     // Check if the ball went out of bounds and respond if so
@@ -159,7 +161,7 @@ function draw() {
    }
   }
 
-  // We always display the paddles and ball so it looks like Pong!
+  // We always display the paddles and ball so it looks like Pong! (Or in this case, air hockey)
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
@@ -209,21 +211,19 @@ function updateBall() {
 // Checks if the ball has gone off the left or right
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
-  // Check for ball going off the sides (LEFT)
+  // Check for ball going off the sides (Left)
   if (ball.x > width) {
     background(255,0,0);
     return true;
   }
+  // Check for ball going off the sides (Right)
   else {
     if (ball.x < 0) {
       background(0,0,255);
-      fill(0);
-      ellipse(leftPaddle.x, leftPaddle.y, leftPaddle.w, leftPaddle.h);
       return true;
     }
     else {
     return false;
-// Check for ball going off the sides (RIGHT) FIX LATER
     }
   }
 }
@@ -302,8 +302,7 @@ function displayBall() {
 //
 // Sets the starting position and velocity of the ball
 function resetBall() {
-  // Initialise the ball's position and velocity
-
+  // Initialise the ball's position and velocity based on who wins the round
   if (ball.x > width) {
     ball.x = leftPaddle.x + 30;
     ball.vx = ball.speed;
@@ -315,25 +314,20 @@ function resetBall() {
   ball.y = height / 2;
   ball.vy = ball.speed;
 }
-
+//totalScore()
+//
+//Keeps the Score and tells who is winning via console.log
 function totalScore() {
-//Paddle Scores
 if (ball.x > width) {
   leftPaddleScore += 1;
-  console.log("LeftPaddlePoint");
-  fill (0,255,0);
-  ellipse (40,40,40,40);
+  console.log("Red won a Point!");
 }
 if (ball.x < 0) {
   rightPaddleScore += 1;
-  console.log("RightPaddlePoint")
+  console.log("Blue won a Point")
     }
 
-  if (leftPaddleScore == 1) {
-    fill (0,255,0);
-    ellipse (40,40,40,40);
-  }
-if (leftPaddleScore === 2 || rightPaddleScore === 2) {
+if (leftPaddleScore === 5 || rightPaddleScore === 5) {
   playing = false
   gameOver = true
 }
@@ -344,10 +338,10 @@ if (leftPaddleScore === 2 || rightPaddleScore === 2) {
 // Shows a message about how to start the game
 function displayStartMessage() {
   push();
-  textAlign(CENTER, TOP);
+  textAlign(CENTER, CENTER);
   fill(0,0,255);
   textSize(32);
-  text("CLICK TO START", width / 2, height / 2);
+  text("WELCOME TO AIR HOCKEY \n First to 5 Points Wins! \n CLICK TO START", width / 2, height / 2);
   pop();
 }
 
@@ -355,7 +349,7 @@ function displayStartMessage() {
 //
 //Shows a message that stops the game and shows which side won
 function displayGameOver (){
-if (leftPaddleScore === 2) {
+if (leftPaddleScore === 5) {
 push();
 textAlign(CENTER, TOP);
 fill(171,15,0);
@@ -364,7 +358,7 @@ text("GAME OVER: RED WINS\n Restart to Play Again", width / 2, height / 2);
 pop();
 }
 
-if (rightPaddleScore === 2) {
+if (rightPaddleScore === 5) {
 push();
 textAlign(CENTER, TOP);
 fill(0,0,255);

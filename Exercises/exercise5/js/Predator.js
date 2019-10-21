@@ -17,7 +17,9 @@ class Predator {
     // Velocity and speed
     this.vx = 0;
     this.vy = 0;
-    this.speed = speed;
+    this.normalSpeed = speed;
+    this.sprintSpeed = speed + 2;
+    this.currentSpeed = this.normalSpeed;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -40,20 +42,20 @@ class Predator {
   handleInput() {
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
-      this.vx = -this.speed;
+      this.vx = -this.normalSpeed;
     }
     else if (keyIsDown(this.rightKey)) {
-      this.vx = this.speed;
+      this.vx = this.normalSpeed;
     }
     else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
-      this.vy = -this.speed;
+      this.vy = -this.normalSpeed;
     }
     else if (keyIsDown(this.downKey)) {
-      this.vy = this.speed;
+      this.vy = this.normalSpeed;
     }
     else {
       this.vy = 0;
@@ -120,6 +122,16 @@ class Predator {
     }
   }
 
+  //Sprint
+  //
+  sprint() {
+    if (keyIsDown(SHIFT)) {
+      this.currentSpeed = this.sprintSpeed;
+    }
+    else {
+      this.currentSpeed = this.normalSpeed;
+    }
+  }
   // display
   //
   // Draw the predator as an ellipse on the canvas

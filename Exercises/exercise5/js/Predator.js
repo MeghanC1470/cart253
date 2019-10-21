@@ -18,8 +18,8 @@ class Predator {
     this.vx = 0;
     this.vy = 0;
     this.normalSpeed = speed;
-    this.sprintSpeed = speed + 2;
     this.currentSpeed = this.normalSpeed;
+    this.sprintSpeed = speed + 2;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth

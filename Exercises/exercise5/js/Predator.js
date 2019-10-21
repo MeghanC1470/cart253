@@ -60,6 +60,7 @@ class Predator {
     }
   }
 
+
   // move
   //
   // Updates the position according to velocity

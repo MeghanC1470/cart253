@@ -11,12 +11,15 @@ class PredatorB {
     // Velocity and speed
     this.vx = 0;
     this.vy = 0;
-    this.speed = speed;
+    this.normalSpeed = speed;
+    this.sprintSpeed = speed + 5;
+    this.currentSpeed = this.normalSpeed;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
+    this.preyEaten = 0;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -32,25 +35,31 @@ class PredatorB {
   // Checks if an arrow key is pressed and sets the predator's
   // velocity appropriately.
   handleInput() {
-    // Vertical movement
-    if (keyIsDown(this.upKey)) {
-      this.vy = -this.speed;
-    }
-    else if (keyIsDown(this.downKey)) {
-      this.vy = this.speed;
+    if (keyIsDown(SHIFT)) {
+      this.currentSpeed = this.sprintSpeed;
     }
     else {
-      this.vy = 0;
-    }
+      this.currentSpeed = this.normalSpeed;
+  }
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
-      this.vx = -this.speed;
+      this.vx = -this.currentSpeed;
     }
     else if (keyIsDown(this.rightKey)) {
-      this.vx = this.speed;
+      this.vx = this.currentSpeed;
     }
     else {
       this.vx = 0;
+    }
+    // Vertical movement
+    if (keyIsDown(this.upKey)) {
+      this.vy = -this.currentSpeed;
+    }
+    else if (keyIsDown(this.downKey)) {
+      this.vy = this.currentSpeed;
+    }
+    else {
+      this.vy = 0;
     }
   }
 
@@ -100,6 +109,8 @@ class PredatorB {
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
+    //let it count the number of prey Eaten
+    let eaten = prey.health;
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -107,8 +118,12 @@ class PredatorB {
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease prey health by the same amount
       prey.health -= this.healthGainPerEat;
+
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        //Check Eaten (FIX)
+        this.preyEaten = this.preyEaten + 1
+        //reset
         prey.reset();
       }
     }
@@ -125,5 +140,11 @@ class PredatorB {
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
     pop();
+    //text
+    textAlign(RIGHT,TOP);
+    textSize(70);
+    textFont('Georgia');
+    fill(255,0,0);
+    text(this.preyEaten,70,20);
   }
 }

@@ -21,7 +21,7 @@ let bee;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, color(200, 200, 0), 40);
-  lion = new PredatorB(100, 100, 10, color(255,0,0), 30);
+  lion = new PredatorB(100, 200, 5, color(255,0,0), 40);
   antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
   zebra = new Prey(100, 100, 8, color(255, 255, 255), 60);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
@@ -44,9 +44,6 @@ function draw() {
   antelope.move();
   zebra.move();
   bee.move();
-
-  //Sprint test
-  tiger.sprint();
 
 
   // Handle the tiger eating any of the prey

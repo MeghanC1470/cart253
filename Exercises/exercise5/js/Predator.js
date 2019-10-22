@@ -25,6 +25,7 @@ class Predator {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
+    this.preyEaten = 0;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -40,22 +41,28 @@ class Predator {
   // Checks if an arrow key is pressed and sets the predator's
   // velocity appropriately.
   handleInput() {
+    if (keyIsDown(SHIFT)) {
+      this.currentSpeed = this.sprintSpeed;
+    }
+    else {
+      this.currentSpeed = this.normalSpeed;
+  }
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
-      this.vx = -this.normalSpeed;
+      this.vx = -this.currentSpeed;
     }
     else if (keyIsDown(this.rightKey)) {
-      this.vx = this.normalSpeed;
+      this.vx = this.currentSpeed;
     }
     else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
-      this.vy = -this.normalSpeed;
+      this.vy = -this.currentSpeed;
     }
     else if (keyIsDown(this.downKey)) {
-      this.vy = this.normalSpeed;
+      this.vy = this.currentSpeed;
     }
     else {
       this.vy = 0;
@@ -121,12 +128,7 @@ class Predator {
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         //Check Eaten (FIX)
-        console.log("Yum!")
-        textAlign(LEFT,TOP);
-        textSize(70);
-        textFont('Georgia');
-        fill(255,0,0);
-        text(eaten,width,0);
+        this.preyEaten = this.preyEaten + 1
         //reset
         prey.reset();
       }
@@ -135,14 +137,7 @@ class Predator {
 
   //Sprint (FIX)
   //
-  sprint() {
-    if (keyIsDown(SHIFT)) {
-      this.normalSpeed = this.sprintSpeed;
-    }
-    else {
-      this.sprintSpeed = this.normalSpeed;
-    }
-  }
+
 
   // display
   //
@@ -155,5 +150,11 @@ class Predator {
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
     pop();
+    //text
+    textAlign(RIGHT,TOP);
+    textSize(70);
+    textFont('Georgia');
+    fill(200, 200, 0);
+    text(this.preyEaten,70,100);
   }
 }

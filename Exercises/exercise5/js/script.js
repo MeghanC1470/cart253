@@ -1,11 +1,11 @@
 // Predator-Prey Simulation
-// by Pippin Barr
+// by Meghan Cullen
 //
-// Creates a predator and three prey (of different sizes and speeds)
-// The predator chases the prey using the arrow keys and consumes them.
-// The predator loses health over time, so must keep eating to survive.
+// Creates two predators and three prey (of different sizes and speeds)
+// The predators chase the prey using the arrow and WASD keys and consumes them.
+// The predators lose health over time, so they must keep eating to survive.
 
-// Our predator
+// Our predators
 let tiger;
 let lion;
 
@@ -17,7 +17,7 @@ let bee;
 // setup()
 //
 // Sets up a canvas
-// Creates objects for the predator and three prey
+// Creates objects for the two predators and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, color(200, 200, 0), 40);
@@ -34,7 +34,7 @@ function draw() {
   // Clear the background to black
   background(0);
 
-  // Handle input for the tiger
+  // Handle input for the tiger and lion
   tiger.handleInput();
   lion.handleInput();
 
@@ -50,7 +50,7 @@ function draw() {
   tiger.handleEating(antelope);
   tiger.handleEating(zebra);
   tiger.handleEating(bee);
-  //
+  // Handle the lion eating any of the prey
   lion.handleEating(antelope);
   lion.handleEating(zebra);
   lion.handleEating(bee);

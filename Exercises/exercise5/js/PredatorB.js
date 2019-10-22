@@ -8,7 +8,7 @@ class PredatorB {
     // Position
     this.x = x;
     this.y = y;
-    // Velocity and speed
+    // Velocity, speed, and sprint
     this.vx = 0;
     this.vy = 0;
     this.normalSpeed = speed;
@@ -19,6 +19,7 @@ class PredatorB {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
+    // The Prey Counter
     this.preyEaten = 0;
     // Display properties
     this.fillColor = fillColor;
@@ -30,38 +31,40 @@ class PredatorB {
     this.rightKey = 68;
   }
 
-  // handleInput
-  //
-  // Checks if an arrow key is pressed and sets the predator's
-  // velocity appropriately.
-  handleInput() {
-    if (keyIsDown(SHIFT)) {
-      this.currentSpeed = this.sprintSpeed;
+
+    // handleInput
+    //
+    // Checks if an arrow key is pressed and sets the predator's
+    // velocity appropriately.
+    // Additionally sets the shift key to make the Predator sprint
+    handleInput() {
+      if (keyIsDown(SHIFT)) {
+        this.currentSpeed = this.sprintSpeed;
+      }
+      else {
+        this.currentSpeed = this.normalSpeed;
     }
-    else {
-      this.currentSpeed = this.normalSpeed;
-  }
-    // Horizontal movement
-    if (keyIsDown(this.leftKey)) {
-      this.vx = -this.currentSpeed;
+      // Horizontal movement
+      if (keyIsDown(this.leftKey)) {
+        this.vx = -this.currentSpeed;
+      }
+      else if (keyIsDown(this.rightKey)) {
+        this.vx = this.currentSpeed;
+      }
+      else {
+        this.vx = 0;
+      }
+      // Vertical movement
+      if (keyIsDown(this.upKey)) {
+        this.vy = -this.currentSpeed;
+      }
+      else if (keyIsDown(this.downKey)) {
+        this.vy = this.currentSpeed;
+      }
+      else {
+        this.vy = 0;
+      }
     }
-    else if (keyIsDown(this.rightKey)) {
-      this.vx = this.currentSpeed;
-    }
-    else {
-      this.vx = 0;
-    }
-    // Vertical movement
-    if (keyIsDown(this.upKey)) {
-      this.vy = -this.currentSpeed;
-    }
-    else if (keyIsDown(this.downKey)) {
-      this.vy = this.currentSpeed;
-    }
-    else {
-      this.vy = 0;
-    }
-  }
 
 
   // move
@@ -109,8 +112,6 @@ class PredatorB {
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
-    //let it count the number of prey Eaten
-    let eaten = prey.health;
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -118,10 +119,8 @@ class PredatorB {
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease prey health by the same amount
       prey.health -= this.healthGainPerEat;
-
-      // Check if the prey died and reset it if so
+      // Check if the prey died, let the counter count that death and reset it if so
       if (prey.health < 0) {
-        //Check Eaten (FIX)
         this.preyEaten = this.preyEaten + 1
         //reset
         prey.reset();
@@ -135,16 +134,21 @@ class PredatorB {
   // with a radius the same size as its current health.
   display() {
     push();
-    noStroke();
     fill(this.fillColor);
+    strokeWeight(this.preyEaten);
+    stroke(0,0,255);
+    //Make the square
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
-    pop();
-    //text
+    rectMode(CENTER);
+    rect(this.x, this.y, this.radius * 2, this.radius * 2)
+
+    //Display the text to show how much prey has been eaten
+    noStroke();
     textAlign(RIGHT,TOP);
     textSize(70);
     textFont('Georgia');
-    fill(255,0,0);
-    text(this.preyEaten,70,20);
+    fill(255, 0, 0);
+    text(this.preyEaten,70,100);
+    pop();
   }
 }

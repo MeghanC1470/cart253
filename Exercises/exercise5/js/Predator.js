@@ -145,16 +145,22 @@ class Predator {
   // with a radius the same size as its current health.
   display() {
     push();
-    noStroke();
     fill(this.fillColor);
+    strokeWeight(this.preyEaten);
+    stroke(255,0,0)
+    fill(this.preyEaten * 20, 255, 0);
+
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
-    pop();
+    rectMode(CENTER);
+    rect(this.x, this.y, this.radius * 2, this.radius * 2)
+
     //text
+    noStroke();
     textAlign(RIGHT,TOP);
     textSize(70);
     textFont('Georgia');
     fill(200, 200, 0);
     text(this.preyEaten,70,100);
+    pop();
   }
 }

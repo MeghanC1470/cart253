@@ -25,8 +25,6 @@ class PredatorB {
     this.downKey = 83;
     this.leftKey = 65;
     this.rightKey = 68;
-
-
   }
 
   // handleInput

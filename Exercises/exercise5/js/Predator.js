@@ -18,8 +18,8 @@ class Predator {
     this.vx = 0;
     this.vy = 0;
     this.normalSpeed = speed;
+    this.sprintSpeed = speed + 5;
     this.currentSpeed = this.normalSpeed;
-    this.sprintSpeed = speed + 2;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -108,6 +108,8 @@ class Predator {
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
+    //let it count the number of prey Eaten
+    let eaten = prey.health;
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -115,23 +117,33 @@ class Predator {
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease prey health by the same amount
       prey.health -= this.healthGainPerEat;
+
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        //Check Eaten (FIX)
+        console.log("Yum!")
+        textAlign(LEFT,TOP);
+        textSize(70);
+        textFont('Georgia');
+        fill(255,0,0);
+        text(eaten,width,0);
+        //reset
         prey.reset();
       }
     }
   }
 
-  //Sprint
+  //Sprint (FIX)
   //
   sprint() {
     if (keyIsDown(SHIFT)) {
-      this.currentSpeed = this.sprintSpeed;
+      this.normalSpeed = this.sprintSpeed;
     }
     else {
-      this.currentSpeed = this.normalSpeed;
+      this.sprintSpeed = this.normalSpeed;
     }
   }
+
   // display
   //
   // Draw the predator as an ellipse on the canvas

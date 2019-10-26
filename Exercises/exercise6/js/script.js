@@ -8,7 +8,7 @@
 // The predator loses health over time, so must keep eating to survive.
 
 ////////////////////
-// 3 ERRORS IN HERE
+// 2 ERRORS IN HERE
 ////////////////////
 
 // Our predator
@@ -54,7 +54,7 @@ function draw() {
 
   // Display all the "animals"
   tiger.display();
-  antelop.display();
+  antelope.display();
   zebra.disploy();
   b.display();
 }

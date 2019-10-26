@@ -8,7 +8,7 @@
 // The predator loses health over time, so must keep eating to survive.
 
 ////////////////////
-// 10 ERRORS IN HERE
+// 9 ERRORS IN HERE
 ////////////////////
 
 // Our predator
@@ -36,7 +36,7 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  backgroun(0);
+  background(0);
 
   // Handle input for the tiger
 

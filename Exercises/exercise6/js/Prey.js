@@ -5,7 +5,7 @@
 // the screen and be consumed by Predator objects.
 
 /////////////////////////
-// 4 ERRORS IN HERE
+// 3 ERRORS IN HERE
 /////////////////////////
 
 //////////////// FIXED
@@ -87,7 +87,7 @@ class Prey {
       noStroke();
       fill(this.fillColor);
       this.radius = this.health;
-      ellipse(this.x, this.y, this.radius * "two");
+      ellipse(this.x, this.y, this.radius * 2);
       pop();
     }
 

@@ -5,7 +5,7 @@
 // the screen and be consumed by Predator objects.
 
 /////////////////////////
-// 6 ERRORS IN HERE
+// 4 ERRORS IN HERE
 /////////////////////////
 
 //////////////// FIXED
@@ -53,7 +53,8 @@ class Prey {
     // Handle wrapping
     //////////////// FIXED
     this.handleWrapping();
-
+    //////////////// FIXED
+  }
 
     // handleWrapping
     //
@@ -72,7 +73,8 @@ class Prey {
         this.y += height;
       }
       else if (this.y > height) {
-        this.y -= hight;
+        //////////////// FIXED
+        this.y -= height;
       }
     }
 

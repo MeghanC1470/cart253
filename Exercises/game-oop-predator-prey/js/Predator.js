@@ -14,15 +14,19 @@ class Predator {
     // Position
     this.x = x;
     this.y = y;
-    // Velocity and speed
+    // Velocity, speed and Sprint Speed
     this.vx = 0;
     this.vy = 0;
-    this.speed = speed;
+    this.normalSpeed = speed;
+    this.sprintSpeed = speed + 5;
+    this.currentSpeed = this.normalSpeed;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
+    //The Prey Counter
+    this.preyEaten = 0;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -37,28 +41,36 @@ class Predator {
   //
   // Checks if an arrow key is pressed and sets the predator's
   // velocity appropriately.
+  // Additionally sets the shift key to make the Predator sprint
   handleInput() {
+    if (keyIsDown(SHIFT)) {
+      this.currentSpeed = this.sprintSpeed;
+    }
+    else {
+      this.currentSpeed = this.normalSpeed;
+  }
     // Horizontal movement
     if (keyIsDown(this.leftKey)) {
-      this.vx = -this.speed;
+      this.vx = -this.currentSpeed;
     }
     else if (keyIsDown(this.rightKey)) {
-      this.vx = this.speed;
+      this.vx = this.currentSpeed;
     }
     else {
       this.vx = 0;
     }
     // Vertical movement
     if (keyIsDown(this.upKey)) {
-      this.vy = -this.speed;
+      this.vy = -this.currentSpeed;
     }
     else if (keyIsDown(this.downKey)) {
-      this.vy = this.speed;
+      this.vy = this.currentSpeed;
     }
     else {
       this.vy = 0;
     }
   }
+
 
   // move
   //

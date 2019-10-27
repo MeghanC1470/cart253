@@ -16,12 +16,16 @@ let bee;
 //background
 let safariBackground
 
+//characters
+let tigerFace;
+
 //preload
 //
 //Sets up the images that will serve as the background and characters to the game
 //Additionally, sets up the sounds that will play in the game
 function preload() {
   safariBackground = loadImage("assets/images/Safari.jpg");
+  tigerFace = loadImage("assets/images/Safari.jpg");
 }
 
 // setup()

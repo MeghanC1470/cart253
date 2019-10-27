@@ -13,6 +13,17 @@ let antelope;
 let zebra;
 let bee;
 
+//background
+let safariBackground
+
+//preload
+//
+//Sets up the images that will serve as the background and characters to the game
+//Additionally, sets up the sounds that will play in the game
+function preload() {
+  safariBackground = loadImage("assets/images/Safari.jpg");
+}
+
 // setup()
 //
 // Sets up a canvas
@@ -30,7 +41,7 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  background(0);
+  background(safariBackground);
 
   // Handle input for the tiger
   tiger.handleInput();

@@ -3,6 +3,8 @@
 // A class that represents a simple predator
 // controlled by the arrow keys. It can move around
 // the screen and consume Prey objects to maintain its health.
+let tigerImage;
+
 
 class Predator {
 
@@ -10,7 +12,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, image, radius) {
     // Position
     this.x = x;
     this.y = y;
@@ -28,7 +30,7 @@ class Predator {
     //The Prey Counter
     this.preyEaten = 0;
     // Display properties
-    this.fillColor = fillColor;
+    this.image = image;
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
     this.upKey = UP_ARROW;
@@ -138,9 +140,9 @@ class Predator {
   display() {
     push();
     noStroke();
-    fill(this.fillColor);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+    imageMode(CENTER);
+    image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 }

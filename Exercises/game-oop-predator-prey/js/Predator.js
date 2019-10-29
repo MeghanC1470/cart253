@@ -142,7 +142,7 @@ class Predator {
     noStroke();
     this.radius = this.health;
     imageMode(CENTER);
-    image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
+    image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
     pop();
   }
 }

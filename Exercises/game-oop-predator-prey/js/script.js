@@ -5,6 +5,9 @@
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so must keep eating to survive.
 
+let playing = false;
+
+
 // Our predator
 let tiger;
 
@@ -18,6 +21,11 @@ let safariBackground
 
 //characters
 let tigerFace;
+let antelopeFace;
+let zebraFace;
+let beeFace;
+
+
 
 //preload
 //
@@ -46,6 +54,9 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(safariBackground);
+  displayStartMessage();
+
+  if (playing == true) {
 
   // Handle input for the tiger
   tiger.handleInput();
@@ -66,4 +77,22 @@ function draw() {
   antelope.display();
   zebra.display();
   bee.display();
+
+ }
 }
+
+///////////////////////////////
+
+function displayStartMessage() {
+  push();
+  textAlign(CENTER, CENTER);
+  fill(128, 17, 0);
+  textSize(49);
+  text("WELCOME TO SAVANNAH HUNT! \n Keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
+  pop();
+  }
+
+  function mousePressed() {
+    playing = true;
+    gameOver = false;
+  }

@@ -3,10 +3,10 @@
 // A class that represents a simple predator
 // controlled by the arrow keys. It can move around
 // the screen and consume Prey objects to maintain its health.
-let tigerImage;
+let lionImage;
 
 
-class Predator {
+class Enemy {
 
   // constructor
   //
@@ -19,9 +19,9 @@ class Predator {
     // Velocity, speed and Sprint Speed
     this.vx = 0;
     this.vy = 0;
-    this.normalSpeed = speed;
-    this.sprintSpeed = speed + 5;
-    this.currentSpeed = this.normalSpeed;
+    this.speed = speed;
+    this.tx = random(0, 1000); // To make x and y noise different
+    this.ty = random(0, 1000); // we use random starting values
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -32,60 +32,22 @@ class Predator {
     // Display properties
     this.image = image;
     this.radius = this.health; // Radius is defined in terms of health
-    // Input properties
-    this.upKey = UP_ARROW;
-    this.downKey = DOWN_ARROW;
-    this.leftKey = LEFT_ARROW;
-    this.rightKey = RIGHT_ARROW;
   }
-
-  // handleInput
-  //
-  // Checks if an arrow key is pressed and sets the predator's
-  // velocity appropriately.
-  // Additionally sets the shift key to make the Predator sprint
-  handleInput() {
-    if (keyIsDown(SHIFT)) {
-      this.currentSpeed = this.sprintSpeed;
-    }
-    else {
-      this.currentSpeed = this.normalSpeed;
-  }
-    // Horizontal movement
-    if (keyIsDown(this.leftKey)) {
-      this.vx = -this.currentSpeed;
-    }
-    else if (keyIsDown(this.rightKey)) {
-      this.vx = this.currentSpeed;
-    }
-    else {
-      this.vx = 0;
-    }
-    // Vertical movement
-    if (keyIsDown(this.upKey)) {
-      this.vy = -this.currentSpeed;
-    }
-    else if (keyIsDown(this.downKey)) {
-      this.vy = this.currentSpeed;
-    }
-    else {
-      this.vy = 0;
-    }
-  }
-
 
   // move
   //
-  // Updates the position according to velocity
-  // Lowers health (as a cost of living)
-  // Handles wrapping
+  // Sets velocity based on the noise() function and the Prey's speed
+  // Moves based on the resulting velocity and handles wrapping
   move() {
+    // Set velocity via noise()
+    this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
+    this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
     // Update position
     this.x += this.vx;
     this.y += this.vy;
-    // Update health
-    this.health = this.health - this.healthLossPerMove;
-    this.health = constrain(this.health, 0, this.maxHealth);
+    // Update time properties
+    this.tx += 0.01;
+    this.ty += 0.01;
     // Handle wrapping
     this.handleWrapping();
   }
@@ -130,13 +92,6 @@ class Predator {
       if (prey.health < 0) {
         prey.reset();
       }
-    }
-  }
-
-  handleHurting(enemy) {
-    let d = dist(this.x, this.y, enemy.x, enemy.y);
-    if (d < this.radius + enemy.radius) {
-      this.health -= 3;
     }
   }
 

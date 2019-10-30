@@ -16,14 +16,19 @@ let antelope;
 let zebra;
 let bee;
 
+// The Enemy
+let lion;
+
 //background
 let safariBackground
 
 //characters
 let tigerFace;
+let lionFace;
 let antelopeFace;
 let zebraFace;
 let beeFace;
+
 
 //
 let safariMusic;
@@ -37,6 +42,7 @@ let safariMusic;
 function preload() {
   safariBackground = loadImage("assets/images/Safari.jpg");
   tigerFace = loadImage("assets/images/Tiger.png");
+  lionFace = loadImage("assets/images/Lion.png");
   antelopeFace = loadImage("assets/images/Antelope.png")
   zebraFace = loadImage("assets/images/Zebra.png")
   beeFace = loadImage("assets/images/Bee.png")
@@ -51,9 +57,10 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);
-  antelope = new Prey(100, 100, 10, antelopeFace, 50);
-  zebra = new Prey(100, 100, 8, zebraFace, 60);
-  bee = new Prey(100, 100, 20, beeFace, 10);
+  lion = new Enemy(100, 1000, 10, lionFace, 40);
+  antelope = new Prey(1000, 100, 10, antelopeFace, 50);
+  zebra = new Prey(1000, 100, 8, zebraFace, 60);
+  bee = new Prey(1000, 100, 20, beeFace, 15);
 
   safariMusic.loop();
 }
@@ -76,18 +83,27 @@ function draw() {
   antelope.move();
   zebra.move();
   bee.move();
+  lion.move();
 
   // Handle the tiger eating any of the prey
   tiger.handleEating(antelope);
   tiger.handleEating(zebra);
   tiger.handleEating(bee);
+  //
+  lion.handleEating(antelope);
+  lion.handleEating(zebra);
+  lion.handleEating(bee);
+
+
+//
+tiger.handleHurting(lion);
 
   // Display all the "animals"
   tiger.display();
   antelope.display();
   zebra.display();
   bee.display();
-
+  lion.display();
  }
 }
 
@@ -98,10 +114,11 @@ function displayStartMessage() {
   textAlign(CENTER, CENTER);
   fill(128, 17, 0);
   textSize(49);
-  text("WELCOME TO SAVANNAH HUNT! \n Keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
+  text("WELCOME TO TIGER HUNT! \n Hold SHIFT to run and keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
   pop();
   }
 
+/////
   function mousePressed() {
     playing = true;
     gameOver = false;

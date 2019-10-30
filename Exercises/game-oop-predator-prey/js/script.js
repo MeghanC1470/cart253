@@ -54,7 +54,7 @@ function preload() {
 // setup()
 //
 // Sets up a canvas
-// Creates objects for the predator and three prey
+// Creates objects for the predator, enemy and three prey
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);

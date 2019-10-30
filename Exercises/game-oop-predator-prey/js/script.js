@@ -58,7 +58,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);
-  lion = new Enemy(100, 1000, 10, lionFace, 40);
+  lion = new Enemy(100, 1000, 15, lionFace, 50);
   antelope = new Prey(1000, 100, 10, antelopeFace, 50);
   zebra = new Prey(1000, 100, 8, zebraFace, 60);
   bee = new Prey(1000, 100, 20, beeFace, 15);

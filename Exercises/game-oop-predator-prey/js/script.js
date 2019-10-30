@@ -25,6 +25,9 @@ let antelopeFace;
 let zebraFace;
 let beeFace;
 
+//
+let safariMusic;
+
 
 
 //preload
@@ -37,6 +40,8 @@ function preload() {
   antelopeFace = loadImage("assets/images/Antelope.png")
   zebraFace = loadImage("assets/images/Zebra.png")
   beeFace = loadImage("assets/images/Bee.png")
+
+  safariMusic = loadSound("assets/sounds/SafariTimeMusic.mp3")
 }
 
 // setup()
@@ -49,6 +54,8 @@ function setup() {
   antelope = new Prey(100, 100, 10, antelopeFace, 50);
   zebra = new Prey(100, 100, 8, zebraFace, 60);
   bee = new Prey(100, 100, 20, beeFace, 10);
+
+  safariMusic.loop();
 }
 
 // draw()

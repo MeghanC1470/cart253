@@ -34,6 +34,9 @@ let beeFace;
 function preload() {
   safariBackground = loadImage("assets/images/Safari.jpg");
   tigerFace = loadImage("assets/images/Tiger.png");
+  antelopeFace = loadImage("assets/images/Antelope.png")
+  zebraFace = loadImage("assets/images/Zebra.png")
+  beeFace = loadImage("assets/images/Bee.png")
 }
 
 // setup()
@@ -43,9 +46,9 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);
-  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
-  zebra = new Prey(100, 100, 8, color(255, 255, 255), 60);
-  bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
+  antelope = new Prey(100, 100, 10, antelopeFace, 50);
+  zebra = new Prey(100, 100, 8, zebraFace, 60);
+  bee = new Prey(100, 100, 20, beeFace, 10);
 }
 
 // draw()

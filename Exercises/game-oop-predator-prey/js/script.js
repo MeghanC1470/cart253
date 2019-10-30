@@ -1,9 +1,11 @@
 // Predator-Prey Simulation
-// by Pippin Barr
+// by Meghan Cullen
 //
-// Creates a predator and three prey (of different sizes and speeds)
+// Creates a predator, an enemy and three prey (of different sizes and speeds)
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so must keep eating to survive.
+// The enemy will not only eat prey, but will damage the predator if they get too close
+
 
 let playing = false;
 
@@ -11,28 +13,26 @@ let playing = false;
 // Our predator
 let tiger;
 
+// The Enemy
+let lion;
+
 // The three prey
 let antelope;
 let zebra;
 let bee;
 
-// The Enemy
-let lion;
-
-//background
+//The background
 let safariBackground
 
-//characters
+//The Images of the characters
 let tigerFace;
 let lionFace;
 let antelopeFace;
 let zebraFace;
 let beeFace;
 
-
-//
+// The Music
 let safariMusic;
-
 
 
 //preload
@@ -50,6 +50,7 @@ function preload() {
   safariMusic = loadSound("assets/sounds/SafariTimeMusic.mp3")
 }
 
+
 // setup()
 //
 // Sets up a canvas
@@ -62,15 +63,18 @@ function setup() {
   zebra = new Prey(1000, 100, 8, zebraFace, 60);
   bee = new Prey(1000, 100, 20, beeFace, 15);
 
+// Set the music
   safariMusic.loop();
 }
+
 
 // draw()
 //
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
-  // Clear the background to black
+  // Set the background to a safari scene
   background(safariBackground);
+  // Set the Title Message
   displayStartMessage();
 
   if (playing == true) {
@@ -80,22 +84,21 @@ function draw() {
 
   // Move all the "animals"
   tiger.move();
+  lion.move();
   antelope.move();
   zebra.move();
   bee.move();
-  lion.move();
 
-  // Handle the tiger eating any of the prey
+  // Handle the tiger and lion eating any of the prey
   tiger.handleEating(antelope);
   tiger.handleEating(zebra);
   tiger.handleEating(bee);
-  //
+
   lion.handleEating(antelope);
   lion.handleEating(zebra);
   lion.handleEating(bee);
 
-
-//
+  // Hand the tiger taking damage from the enemy lion
 tiger.handleHurting(lion);
 
   // Display all the "animals"

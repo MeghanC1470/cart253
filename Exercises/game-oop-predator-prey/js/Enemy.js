@@ -1,8 +1,8 @@
-// Predator
+// Enemy
 //
-// A class that represents a simple predator
-// controlled by the arrow keys. It can move around
-// the screen and consume Prey objects to maintain its health.
+// A class that represents an enemy that moves freely.
+// While it can consume prey, it can also deplete the
+// predator's health if they get too close.
 let lionImage;
 
 
@@ -54,7 +54,7 @@ class Enemy {
 
   // handleWrapping
   //
-  // Checks if the predator has gone off the canvas and
+  // Checks if the enemy has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
@@ -75,11 +75,12 @@ class Enemy {
 
   // handleEating
   //
-  // Takes a Prey object as an argument and checks if the predator
-  // overlaps it. If so, reduces the prey's health and increases
-  // the predator's. If the prey dies, it gets reset.
+  // Takes a Prey object as an argument and checks if the enemy
+  // overlaps it. If so, reduces the prey's health. The Enemy
+  // will not recieve/lose health and thus will continue to be
+  // a constant threat to the predator. If the prey dies, it gets reset.
   handleEating(prey) {
-    // Calculate distance from this predator to the prey
+    // Calculate distance from this enemy to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
@@ -97,7 +98,7 @@ class Enemy {
 
   // display
   //
-  // Draw the predator as an ellipse on the canvas
+  // Draw the enemy as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

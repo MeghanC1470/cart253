@@ -6,8 +6,9 @@
 // The predator loses health over time, so must keep eating to survive.
 // The enemy will not only eat prey, but will damage the predator if they get too close
 
-
+//Whether the game started
 let playing = false;
+//Whether the game ended
 let gameOver = false;
 
 
@@ -22,6 +23,9 @@ let antelope;
 let zebra;
 let bee;
 
+// The distraction
+let bird;
+
 //The background
 let safariBackground
 
@@ -31,6 +35,7 @@ let lionFace;
 let antelopeFace;
 let zebraFace;
 let beeFace;
+let birdFace;
 
 // The Music
 let safariMusic;
@@ -47,6 +52,7 @@ function preload() {
   antelopeFace = loadImage("assets/images/Antelope.png")
   zebraFace = loadImage("assets/images/Zebra.png")
   beeFace = loadImage("assets/images/Bee.png")
+  birdFace = loadImage("assets/images/Dud.png")
 
   safariMusic = loadSound("assets/sounds/SafariTimeMusic.mp3")
 }
@@ -55,7 +61,7 @@ function preload() {
 // setup()
 //
 // Sets up a canvas
-// Creates objects for the predator, enemy and three prey
+// Creates objects for the predator, enemy, three prey and distraction
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);
@@ -63,6 +69,7 @@ function setup() {
   antelope = new Prey(1000, 100, 10, antelopeFace, 50);
   zebra = new Prey(1000, 100, 8, zebraFace, 60);
   bee = new Prey(1000, 100, 20, beeFace, 15);
+  bird = new Dud(1000, 100, 10, birdFace, 30);
 
 // Set the music
   safariMusic.loop();
@@ -88,6 +95,7 @@ function draw() {
   antelope.move();
   zebra.move();
   bee.move();
+  bird.move();
 
   // Handle the tiger and lion eating any of the prey
   tiger.handleEating(antelope);
@@ -107,6 +115,7 @@ tiger.handleHurting(lion);
   zebra.display();
   bee.display();
   lion.display();
+  bird.display();
  }
  else {
    // Once the game is over, display a Game Over Message

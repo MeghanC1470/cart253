@@ -8,6 +8,7 @@
 
 
 let playing = false;
+let gameOver = false;
 
 
 // Our predator
@@ -75,7 +76,6 @@ function draw() {
   // Set the background to a safari scene
   background(safariBackground);
   // Set the Title Message
-  displayStartMessage();
 
   if (playing == true) {
 
@@ -108,6 +108,16 @@ tiger.handleHurting(lion);
   bee.display();
   lion.display();
  }
+ else {
+   // Once the game is over, display a Game Over Message
+ if (gameOver == true) {
+    displayGameOver();
+  }
+    // Otherwise we display the message to start the game
+  else {
+    displayStartMessage();
+  }
+ }
 }
 
 ///////////////////////////////
@@ -120,6 +130,18 @@ function displayStartMessage() {
   text("WELCOME TO TIGER HUNT! \n Hold SHIFT to run and keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
   pop();
   }
+
+  function displayGameOver() {
+    if (tiger.display = 0) {
+      push();
+      textAlign(CENTER, CENTER);
+      fill(128, 17, 0);
+      textSize(49);
+      text("You DIED", width / 2, height / 2);
+      pop();
+      }
+    }
+
 
 /////
   function mousePressed() {

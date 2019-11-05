@@ -24,7 +24,7 @@ let antelope;
 let zebra;
 let bee;
 
-let numPrey = 100; // How many Prey to simulate
+let numPrey = 3; // How many Prey to simulate
 let prey = []; // An empty array to store them in (we'll create them in setup())
 
 // The distraction
@@ -77,7 +77,15 @@ function setup() {
 
 /////////
 
-
+for (let i = 0; i < numPrey; i++) {
+  let preyX = random(0, width);
+  let preyY = random(0, height);
+  let preySpeed = random(2, 20);
+  let preyRadius = random(3, 60);
+  prey.push(new Prey(preyX, preyY, preySpeed, zebraFace, preyRadius));
+  prey.push(new Prey(preyX, preyY, preySpeed, antelopeFace, preyRadius));
+  prey.push(new Prey(preyX, preyY, preySpeed, beeFace, preyRadius));
+}
 
 // Set the music
   safariMusic.loop();
@@ -128,6 +136,12 @@ tiger.handleDeath();
   bee.display();
   lion.display();
   bird.display();
+
+  for (let i = 0; i < prey.length; i++) {
+  prey[i].move();
+  prey[i].display();
+  tiger.handleEating(prey[i]);
+}
  }
  else {
    // Once the game is over, display a Game Over Message
@@ -164,7 +178,7 @@ function checkGameOver() {
       textAlign(CENTER, CENTER);
       fill(128, 17, 0);
       textSize(49);
-      text("You DIED", width / 2, height / 2);
+      text("GAME OVER \n You died! \n Reload to Try Again", width / 2, height / 2);
       pop();
     }
 

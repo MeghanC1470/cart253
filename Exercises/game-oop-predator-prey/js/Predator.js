@@ -3,7 +3,6 @@
 // A class that represents a simple predator
 // controlled by the arrow keys. It can move around
 // the screen and consume Prey objects to maintain its health.
-let tigerImage;
 
 
 class Predator {
@@ -32,11 +31,14 @@ class Predator {
     // Display properties
     this.image = image;
     this.radius = this.health; // Radius is defined in terms of health
+    this.death = false;
     // Input properties
     this.upKey = UP_ARROW;
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+
+    this.gameOver;
   }
 
   // handleInput
@@ -140,6 +142,12 @@ class Predator {
     }
   }
 
+  handleDeath() {
+    if (this.health <= 0) {
+    this.death = true;
+    }
+  }
+
   // display
   //
   // Draw the predator as an ellipse on the canvas
@@ -152,7 +160,16 @@ class Predator {
     if(this.radius > 1) {
       image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
     }
-
     pop();
   }
+
+  gameOver() {
+    if (this.death = true);
+      push();
+      textAlign(CENTER, CENTER);
+      fill(128, 17, 0);
+      textSize(49);
+      text("You DIED", width / 2, height / 2);
+      pop();
+    }
 }

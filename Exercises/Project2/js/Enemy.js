@@ -10,7 +10,7 @@ class Enemy {
 
   // constructor
   //
-  // Sets the initial values for the Predator's properties
+  // Sets the initial values for the Enemy's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, radius) {
     // Position
@@ -36,7 +36,7 @@ class Enemy {
 
   // move
   //
-  // Sets velocity based on the noise() function and the Prey's speed
+  // Sets velocity based on the noise() function and the Enemy's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
@@ -84,9 +84,6 @@ class Enemy {
     let d = dist(this.x, this.y, prey.x, prey.y);
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
-      // Increase predator health and constrain it to its possible range
-      this.health += this.healthGainPerEat;
-      this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease prey health by the same amount
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
@@ -98,7 +95,7 @@ class Enemy {
 
   // display
   //
-  // Draw the enemy as an ellipse on the canvas
+  // Draw the enemy as a lion on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

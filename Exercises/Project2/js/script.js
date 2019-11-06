@@ -24,9 +24,6 @@ let antelope;
 let zebra;
 let bee;
 
-let numPrey = 3; // How many Prey to simulate
-let prey = []; // An empty array to store them in (we'll create them in setup())
-
 // The distraction
 let bird;
 
@@ -45,12 +42,21 @@ let birdFace;
 let safariMusic;
 
 
+//The arrays
+// One for the number of prey and one for the distraction bird
+let numPrey = 2; // How many Prey to simulate
+let prey = []; // An empty array to store them in
+
+let numDud = 2;
+let dud = [];
+
 //preload
 //
 //Sets up the images that will serve as the background and characters to the game
 //Additionally, sets up the sounds that will play in the game
 function preload() {
   safariBackground = loadImage("assets/images/Safari.jpg");
+
   tigerFace = loadImage("assets/images/Tiger.png");
   lionFace = loadImage("assets/images/Lion.png");
   antelopeFace = loadImage("assets/images/Antelope.png")
@@ -69,14 +75,16 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 5, tigerFace, 40);
-  lion = new Enemy(100, 1000, 15, lionFace, 50);
+  lion = new Enemy(100, 2000, 15, lionFace, 50);
   antelope = new Prey(1000, 100, 10, antelopeFace, 50);
   zebra = new Prey(1000, 100, 8, zebraFace, 60);
   bee = new Prey(1000, 100, 20, beeFace, 15);
   bird = new Dud(1000, 100, 20, birdFace, 30);
 
-/////////
 
+//the Prey Array
+// Run a for loop numPrey times to generate each Prey and put it in the array
+// with random values for each prey
 for (let i = 0; i < numPrey; i++) {
   let preyX = random(0, width);
   let preyY = random(0, height);
@@ -85,6 +93,16 @@ for (let i = 0; i < numPrey; i++) {
   prey.push(new Prey(preyX, preyY, preySpeed, zebraFace, preyRadius));
   prey.push(new Prey(preyX, preyY, preySpeed, antelopeFace, preyRadius));
   prey.push(new Prey(preyX, preyY, preySpeed, beeFace, preyRadius));
+}
+
+// the Dud Array
+// Just like the Prey array, will generate different duds to throw off the player
+for (let i = 0; i < numPrey; i++) {
+  let dudX = random(0, width);
+  let dudY = random(0, height);
+  let dudSpeed = random(2, 20);
+  let dudRadius = random(3, 60);
+  dud.push(new Dud(dudX, dudY, dudSpeed, birdFace, dudRadius));
 }
 
 // Set the music
@@ -98,8 +116,7 @@ for (let i = 0; i < numPrey; i++) {
 function draw() {
   // Set the background to a safari scene
   background(safariBackground);
-  // Set the Title Message
-
+  // Check if the game is in play
   if (playing == true) {
 
   // Handle input for the tiger
@@ -122,14 +139,16 @@ function draw() {
   lion.handleEating(zebra);
   lion.handleEating(bee);
 
-  // Hand the tiger taking damage from the enemy lion
-tiger.handleHurting(lion);
+// Handle the tiger taking damage from the enemy lion
+  tiger.handleHurting(lion);
 
-tiger.handleDeath();
+// Handle the tragic death of the tiger
+  tiger.handleDeath();
 
+// Check to see when the game is over
   checkGameOver();
 
-  // Display all the "animals"
+// Display all the "animals"
   tiger.display();
   antelope.display();
   zebra.display();
@@ -137,12 +156,21 @@ tiger.handleDeath();
   lion.display();
   bird.display();
 
+// Display and making sure the tiger can eat the copies of the prey
   for (let i = 0; i < prey.length; i++) {
   prey[i].move();
   prey[i].display();
   tiger.handleEating(prey[i]);
+  lion.handleEating(prey[i]);
+}
+
+// Display the copies of the bird
+for (let i = 0; i < dud.length; i++) {
+   dud[i].move();
+   dud[i].display();
 }
  }
+
  else {
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
@@ -155,17 +183,21 @@ tiger.handleDeath();
  }
 }
 
-///////////////////////////////
-
+//displayStartMessage
+//
+//Display's the start message, including instructions, at the beginning of the game
 function displayStartMessage() {
   push();
   textAlign(CENTER, CENTER);
   fill(128, 17, 0);
   textSize(49);
-  text("WELCOME TO TIGER HUNT! \n Hold SHIFT to run and keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
+  text("WELCOME TO TIGER HUNT! \n Use the arrow keys to move! \n Hold SHIFT to run and keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
   pop();
   }
 
+//checkGameOver
+//
+//See if the tiger died and end the game
 function checkGameOver() {
   if (tiger.death === true) {
     gameOver = true;
@@ -173,6 +205,9 @@ function checkGameOver() {
   }
 }
 
+//displayGameOver
+//
+//Display the Game Over message
   function displayGameOver() {
       push();
       textAlign(CENTER, CENTER);
@@ -182,8 +217,9 @@ function checkGameOver() {
       pop();
     }
 
-
-/////
+//mousePressed
+//
+//Starts the game when the mouse is clicked
   function mousePressed() {
     playing = true;
     gameOver = false;

@@ -70,7 +70,7 @@ class Prey {
 
   // display
   //
-  // Draw the prey as an ellipse on the canvas
+  // Draw the prey as either an antelope, a zebra or a bee on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
@@ -80,7 +80,6 @@ class Prey {
     if (this.radius > 1) {
     image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
   }
-
     pop();
   }
 

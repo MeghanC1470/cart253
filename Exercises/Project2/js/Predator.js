@@ -135,6 +135,11 @@ class Predator {
     }
   }
 
+//handleHurting
+//
+// When the tiger comes too close to the lion, it gets attacked and takes damage!
+// Takes a Enemy object as an argument and checks if the predator overlaps it
+// If it does, its health depletes
   handleHurting(enemy) {
     let d = dist(this.x, this.y, enemy.x, enemy.y);
     if (d < this.radius + enemy.radius) {
@@ -142,6 +147,11 @@ class Predator {
     }
   }
 
+//handleDeath
+//
+// Checks to see if the predator's health has reached zero
+// If so, the predator is dead, this will be essential to making the Game Over
+// function in the Script
   handleDeath() {
     if (this.health <= 0) {
     this.death = true;
@@ -150,7 +160,7 @@ class Predator {
 
   // display
   //
-  // Draw the predator as an ellipse on the canvas
+  // Draw the predator as a tiger on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
@@ -162,14 +172,4 @@ class Predator {
     }
     pop();
   }
-
-  gameOver() {
-    if (this.death = true);
-      push();
-      textAlign(CENTER, CENTER);
-      fill(128, 17, 0);
-      textSize(49);
-      text("You DIED", width / 2, height / 2);
-      pop();
-    }
 }

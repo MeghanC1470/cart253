@@ -71,7 +71,7 @@ class Dud {
 
   // display
   //
-  // Draw the prey as an ellipse on the canvas
+  // Draw the dud as a bird on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
@@ -80,19 +80,5 @@ class Dud {
     imageMode(CENTER);
     image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
     pop();
-  }
-
-  // reset
-  //
-  // Set the position to a random location and reset health
-  // and radius back to default
-  reset() {
-    // Random position
-    this.x = random(0, width);
-    this.y = random(0, height);
-    // Default health
-    this.health = this.maxHealth;
-    // Default radius
-    this.radius = this.health;
   }
 }

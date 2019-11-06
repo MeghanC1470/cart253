@@ -3,7 +3,6 @@
 // A class that represents an enemy that moves freely.
 // While it can consume prey, it can also deplete the
 // predator's health if they get too close.
-let lionImage;
 
 
 class Enemy {

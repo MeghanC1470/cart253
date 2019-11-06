@@ -12,7 +12,6 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 
-
 // Our predator
 let tiger;
 
@@ -41,7 +40,6 @@ let birdFace;
 // The Music
 let safariMusic;
 
-
 //The arrays
 // One for the number of prey and one for the distraction bird
 let numPrey = 2; // How many Prey to simulate
@@ -67,7 +65,6 @@ function preload() {
   safariMusic = loadSound("assets/sounds/SafariTimeMusic.mp3")
 }
 
-
 // setup()
 //
 // Sets up a canvas
@@ -80,7 +77,6 @@ function setup() {
   zebra = new Prey(1000, 100, 8, zebraFace, 60);
   bee = new Prey(1000, 100, 20, beeFace, 15);
   bird = new Dud(1000, 100, 20, birdFace, 30);
-
 
 //the Prey Array
 // Run a for loop numPrey times to generate each Prey and put it in the array
@@ -109,20 +105,19 @@ for (let i = 0; i < numPrey; i++) {
   safariMusic.loop();
 }
 
-
 // draw()
 //
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
-  // Set the background to a safari scene
+// Set the background to a safari scene
   background(safariBackground);
-  // Check if the game is in play
+// Check if the game is in play
   if (playing == true) {
 
-  // Handle input for the tiger
+// Handle input for the tiger
   tiger.handleInput();
 
-  // Move all the "animals"
+// Move all the "animals"
   tiger.move();
   lion.move();
   antelope.move();
@@ -130,7 +125,7 @@ function draw() {
   bee.move();
   bird.move();
 
-  // Handle the tiger and lion eating any of the prey
+// Handle the tiger and lion eating any of the prey
   tiger.handleEating(antelope);
   tiger.handleEating(zebra);
   tiger.handleEating(bee);

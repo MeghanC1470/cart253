@@ -38,7 +38,7 @@ function preload() {
 
   //Load in the images of the bird and the bug
   laser = loadImage("assets/images/laser.png");
-  ufo = loadImage("assets/images/ufo.png");
+  ufo = loadImage("assets/images/Ufo.png");
 }
 
 // setup()

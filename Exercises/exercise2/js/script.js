@@ -83,8 +83,10 @@ function draw() {
   ellipse (430,100,90,90);
 
 //Place the image of the bug onto the avatar
+  imageMode(CENTER);
   image(testbug,avatarX,avatarY,50,50);
 //Place the image of the bird onto the enemy: it will follow its increasing size later
+  imageMode(CENTER);
   image(testbird,enemyX,enemyY,enemySize,enemySize);
 
   // Display the number of successful dodges (the score)

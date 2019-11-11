@@ -8,8 +8,8 @@ A simple dodging game with keyboard controls
 ******************************************************/
 
 // Our brave hero Bug and our evil enemy Bird
-let testbird;
-let testbug;
+let laser;
+let ufo;
 
 // The position and size of our avatar
 let avatarX;
@@ -24,7 +24,7 @@ let avatarVY = 0;
 // The position and size of the enemy circle
 let enemyX;
 let enemyY;
-let enemySize = 50;
+let enemySize = 70;
 
 // The speed and velocity of our enemy circle
 let enemySpeed = 10;
@@ -37,8 +37,8 @@ let dodges = 0;
 function preload() {
 
   //Load in the images of the bird and the bug
-  testbird = loadImage("assets/images/kTKnrA6pc.png");
-  testbug = loadImage("assets/images/Testbug.png");
+  laser = loadImage("assets/images/laser.png");
+  ufo = loadImage("assets/images/ufo.png");
 }
 
 // setup()
@@ -67,8 +67,8 @@ function setup() {
 function draw() {
 
   // A night sky background - all ellipses are stars unless mentioned otherwise
-  background (46,80,201);
-  fill(255);
+  background (20);
+  fill(98, 255, 0);
   ellipse (120,250,3,3);
   ellipse (50,50,3,3);
   ellipse (300,50,3,3);
@@ -79,15 +79,15 @@ function draw() {
   //One special ellipse is our moon
   ellipse (400,100,100,100);
   // To create a crescent moon, add a smaller circle, put it over the Moon, then make it the same color as the sky
-  fill (46,80,201);
+  fill (20);
   ellipse (430,100,90,90);
 
 //Place the image of the bug onto the avatar
   imageMode(CENTER);
-  image(testbug,avatarX,avatarY,50,50);
+  image(ufo,avatarX,avatarY,100,50);
 //Place the image of the bird onto the enemy: it will follow its increasing size later
   imageMode(CENTER);
-  image(testbird,enemyX,enemyY,enemySize,enemySize);
+  image(laser,enemyX,enemyY,200,50);
 
   // Display the number of successful dodges (the score)
   textAlign(RIGHT,TOP);
@@ -132,7 +132,7 @@ function draw() {
 
   //Add a semi-transparent red background if the player reaches a score over 10
   if (dodges > 10) {
-    background (255, 81, 71, 100);
+    background (98, 255, 0, 50);
   }
 
   // Check if the enemy and avatar overlap - if they do the player loses

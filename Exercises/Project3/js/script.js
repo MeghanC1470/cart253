@@ -132,9 +132,9 @@ function draw() {
 function displayStartMessage() {
   push();
   textAlign(CENTER, CENTER);
-  fill(128, 17, 0);
+  fill(0, 0, 255);
   textSize(49);
-  text("WELCOME TO TIGER HUNT! \n Use the arrow keys to move! \n Hold SHIFT to run and keep Eating to Stay Alive! \n Watch out! Some things shouldn't be eaten... \n CLICK TO START", width / 2, height / 2);
+  text("WELCOME TO SPACE DODGERS! \n Use the arrow keys to move! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
   pop();
   }
 

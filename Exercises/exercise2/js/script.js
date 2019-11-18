@@ -17,7 +17,7 @@ let avatarY;
 let avatarSize = 10;
 
 // The speed and velocity of our avatar circle
-let avatarSpeed = 10;
+let avatarSpeed = 5;
 let avatarVX = 0;
 let avatarVY = 0;
 
@@ -37,8 +37,8 @@ let dodges = 0;
 function preload() {
 
   //Load in the images of the bird and the bug
-  laser = loadImage("assets/images/laser.png");
-  ufo = loadImage("assets/images/Ufo.png");
+  laser = loadImage("assets/images/laser2.png");
+  ufo = loadImage("assets/images/TinyTim.gif");
 }
 
 // setup()
@@ -67,7 +67,7 @@ function setup() {
 function draw() {
 
   // A night sky background - all ellipses are stars unless mentioned otherwise
-  background (20);
+  background (60);
   fill(98, 255, 0);
   ellipse (120,250,3,3);
   ellipse (50,50,3,3);
@@ -76,18 +76,13 @@ function draw() {
   ellipse (300,400,3,3);
   ellipse (450,350,3,3);
 
-  //One special ellipse is our moon
-  ellipse (400,100,100,100);
-  // To create a crescent moon, add a smaller circle, put it over the Moon, then make it the same color as the sky
-  fill (20);
-  ellipse (430,100,90,90);
 
 //Place the image of the bug onto the avatar
   imageMode(CENTER);
-  image(ufo,avatarX,avatarY,100,50);
+  image(ufo,avatarX,avatarY,50,50);
 //Place the image of the bird onto the enemy: it will follow its increasing size later
   imageMode(CENTER);
-  image(laser,enemyX,enemyY,200,50);
+  image(laser,enemyX,enemyY,50,50);
 
   // Display the number of successful dodges (the score)
   textAlign(RIGHT,TOP);

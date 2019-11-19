@@ -13,8 +13,8 @@ class Enemy {
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, radius) {
     // Position
-    this.x = 0;
-    this.y = 0;
+    this.x = x;
+    this.y = y;
     // Velocity, speed and Sprint Speed
     this.vx = 0;
     this.vy = 0;
@@ -39,14 +39,11 @@ class Enemy {
   // Moves based on the resulting velocity and handles wrapping
   move() {
     // Set velocity via noise()
-    this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
-    this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
+    this.vx = -5, -this.speed, this.speed;
     // Update position
     this.x += this.vx;
-    this.y += this.vy;
     // Update time properties
     this.tx += 0.01;
-    this.ty += 0.01;
     // Handle wrapping
     this.handleWrapping();
   }

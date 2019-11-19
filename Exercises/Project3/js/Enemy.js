@@ -24,10 +24,6 @@ class Enemy {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.1;
-    this.healthGainPerEat = 1;
-    //The Prey Counter
-    this.preyEaten = 0;
     // Display properties
     this.image = image;
     this.radius = this.health; // Radius is defined in terms of health
@@ -42,8 +38,6 @@ class Enemy {
     this.vx = -5, -this.speed, this.speed;
     // Update position
     this.x += this.vx;
-    // Update time properties
-    this.tx += 0.01;
     // Handle wrapping
     this.handleWrapping();
   }
@@ -56,6 +50,7 @@ class Enemy {
     // Off the left or right
     if (this.x < 0) {
       this.x += width;
+      this.y = random(0,height);
     }
     else if (this.x > width) {
       this.x -= width;
@@ -66,26 +61,6 @@ class Enemy {
     }
     else if (this.y > height) {
       this.y -= height;
-    }
-  }
-
-  // handleEating
-  //
-  // Takes a Prey object as an argument and checks if the enemy
-  // overlaps it. If so, reduces the prey's health. The Enemy
-  // will not recieve/lose health and thus will continue to be
-  // a constant threat to the predator. If the prey dies, it gets reset.
-  handleEating(prey) {
-    // Calculate distance from this enemy to the prey
-    let d = dist(this.x, this.y, prey.x, prey.y);
-    // Check if the distance is less than their two radii (an overlap)
-    if (d < this.radius + prey.radius) {
-      // Decrease prey health by the same amount
-      prey.health -= this.healthGainPerEat;
-      // Check if the prey died and reset it if so
-      if (prey.health < 0) {
-        prey.reset();
-      }
     }
   }
 

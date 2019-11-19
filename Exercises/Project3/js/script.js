@@ -32,9 +32,6 @@ let meteorBronzeImage;
 
 //The arrays
 // One for the number of prey and one for the distraction bird
-let numPrey = 2; // How many meteors to simulate
-let prey = []; // An empty array to store them in
-
 let numEnemy = 2;
 let enemy = [];
 
@@ -43,11 +40,11 @@ let enemy = [];
 //Sets up the images that will serve as the background and characters to the game
 //Additionally, sets up the sounds that will play in the game
 function preload() {
-  skyBackground = loadImage("assets/images/sky.jpg");
+  skyBackground = loadImage("assets/images/nightsky.png");
 
   spaceshipImage = loadImage("assets/images/Ufo.png");
   healthstarImage = loadImage("assets/images/star.png");
-  meteorBronzeImage = loadImage("assets/images/meteor.png")
+  meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
 }
 
 // setup()
@@ -61,17 +58,9 @@ function setup() {
   healthstar = new Prey(1000, 100, 10, healthstarImage, 50);
 
 
-//the Prey Array
+//the Meteor Array
 // Run a for loop numPrey times to generate each Prey and put it in the array
 // with random values for each prey
-for (let i = 0; i < numPrey; i++) {
-  let preyX = random(0, width);
-  let preyY = random(0, height);
-  let preySpeed = random(2, 20);
-  let preyRadius = random(3, 60);
-  prey.push(new Prey(preyX, preyY, preySpeed, healthstarImage, preyRadius));
-}
-
 for (let i = 0; i < numEnemy; i++) {
   let enemyX = random(0, width);
   let enemyY = random(0, height);
@@ -117,12 +106,6 @@ function draw() {
   healthstar.display();
 
 // Display and making sure the tiger can eat the copies of the prey
-  for (let i = 0; i < prey.length; i++) {
-  prey[i].move();
-  prey[i].display();
-  spaceship.handleEating(prey[i]);
-}
-
 for (let i = 0; i < enemy.length; i++) {
 enemy[i].move();
 enemy[i].display();

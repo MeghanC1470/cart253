@@ -24,13 +24,14 @@ class Predator {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.1;
+    this.radius = radius;
     this.healthGainPerEat = 1;
     //The Prey Counter
     this.preyEaten = 0;
+    //The Dodge Counter
+    this.dodges = 0;
     // Display properties
     this.image = image;
-    this.radius = this.health; // Radius is defined in terms of health
     this.death = false;
     // Input properties
     this.upKey = UP_ARROW;
@@ -86,7 +87,6 @@ class Predator {
     this.x += this.vx;
     this.y += this.vy;
     // Update health
-    this.health = this.health - this.healthLossPerMove;
     this.health = constrain(this.health, 0, this.maxHealth);
     // Handle wrapping
     this.handleWrapping();
@@ -143,7 +143,7 @@ class Predator {
   handleHurting(enemy) {
     let d = dist(this.x, this.y, enemy.x, enemy.y);
     if (d < this.radius + enemy.radius) {
-      this.health -= 3;
+      this.health -= 1;
     }
   }
 
@@ -167,9 +167,9 @@ class Predator {
     noStroke();
     this.radius = this.health;
     imageMode(CENTER);
-    if(this.radius > 1) {
-      image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
-    }
+    if (this.radius > 1) {
+    image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
+  }
     pop();
   }
 }

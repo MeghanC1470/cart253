@@ -13,8 +13,8 @@ class Enemy {
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, radius) {
     // Position
-    this.x = x;
-    this.y = y;
+    this.x = 0;
+    this.y = 0;
     // Velocity, speed and Sprint Speed
     this.vx = 0;
     this.vy = 0;

@@ -35,6 +35,9 @@ let meteorBronzeImage;
 let numPrey = 2; // How many meteors to simulate
 let prey = []; // An empty array to store them in
 
+let numEnemy = 2;
+let enemy = [];
+
 //preload
 //
 //Sets up the images that will serve as the background and characters to the game
@@ -66,7 +69,15 @@ for (let i = 0; i < numPrey; i++) {
   let preyY = random(0, height);
   let preySpeed = random(2, 20);
   let preyRadius = random(3, 60);
-  prey.push(new Prey(preyX, preyY, preySpeed, meteorBronzeImage, preyRadius));
+  prey.push(new Prey(preyX, preyY, preySpeed, healthstarImage, preyRadius));
+}
+
+for (let i = 0; i < numEnemy; i++) {
+  let enemyX = random(0, width);
+  let enemyY = random(0, height);
+  let enemySpeed = random(2, 20);
+  let enemyRadius = random(3, 60);
+  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorBronzeImage, enemyRadius));
 }
 }
 
@@ -110,7 +121,12 @@ function draw() {
   prey[i].move();
   prey[i].display();
   spaceship.handleEating(prey[i]);
-  meteorBronze.handleEating(prey[i]);
+}
+
+for (let i = 0; i < enemy.length; i++) {
+enemy[i].move();
+enemy[i].display();
+spaceship.handleHurting(enemy[i]);
 }
  }
 

@@ -20,6 +20,8 @@ let healthstar
 
 // The three types of meteors
 let meteorBronze;
+let meteorSilver;
+let meteorGold;
 
 //The background
 let skyBackground
@@ -28,6 +30,8 @@ let skyBackground
 let spaceshipImage;
 let healthstarImage;
 let meteorBronzeImage;
+let meteorSilverImage;
+let meteorGoldImage;
 
 
 //The arrays
@@ -41,10 +45,12 @@ let enemy = [];
 //Additionally, sets up the sounds that will play in the game
 function preload() {
   skyBackground = loadImage("assets/images/nightsky.png");
-
+//objects
   spaceshipImage = loadImage("assets/images/Ufo.png");
   healthstarImage = loadImage("assets/images/star.png");
   meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
+  meteorSilverImage = loadImage("assets/images/MeteorSilver.png")
+  meteorGoldImage = loadImage("assets/images/MeteorGold.png")
 }
 
 // setup()
@@ -55,6 +61,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Predator(100, 100, 5, spaceshipImage, 40);
   meteorBronze = new Enemy(100, 2000, 15, meteorBronzeImage, 50);
+  meteorSilver = new Enemy(100, 2000, 50, meteorSilverImage, 70);
+  meteorGold = new Enemy(100, 2000, 85, meteorGoldImage, 70);
   healthstar = new Prey(1000, 100, 10, healthstarImage, 50);
 
 
@@ -67,6 +75,8 @@ for (let i = 0; i < numEnemy; i++) {
   let enemySpeed = random(2, 20);
   let enemyRadius = random(3, 60);
   enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorBronzeImage, enemyRadius));
+  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorSilverImage, enemyRadius));
+  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorGoldImage, enemyRadius));
 }
 }
 
@@ -86,6 +96,8 @@ function draw() {
   spaceship.move();
   healthstar.move();
   meteorBronze.move();
+  meteorSilver.move();
+  meteorGold.move();
 
 
 // Handle the tiger and lion eating any of the prey
@@ -93,6 +105,8 @@ function draw() {
 
 // Handle the tiger taking damage from the enemy lion
   spaceship.handleHurting(meteorBronze);
+  spaceship.handleHurting(meteorSilver);
+  spaceship.handleHurting(meteorGold);
 
 // Handle the tragic death of the tiger
   spaceship.handleDeath();
@@ -103,6 +117,8 @@ function draw() {
 // Display all the "animals"
   spaceship.display();
   meteorBronze.display();
+  meteorSilver.display();
+  meteorGold.display();
   healthstar.display();
 
 // Display and making sure the tiger can eat the copies of the prey

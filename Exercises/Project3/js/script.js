@@ -36,7 +36,7 @@ let meteorGoldImage;
 
 //The array
 // One for the number of meteor meteors
-let numMeteor = 2;
+let numMeteor = 3;
 let meteor = [];
 
 //preload

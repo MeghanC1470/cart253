@@ -1,4 +1,4 @@
-// Space Dodgers
+
 // by Meghan Cullen
 //
 // Creates a spaceship, meteors and health-stars
@@ -15,7 +15,7 @@ let gameOver = false;
 // Our Spaceship
 let spaceship;
 
-// The Health-Stars
+// The Health-Star
 let healthstar
 
 // The three types of meteors
@@ -34,10 +34,10 @@ let meteorSilverImage;
 let meteorGoldImage;
 
 
-//The arrays
-// One for the number of prey and one for the distraction bird
-let numEnemy = 2;
-let enemy = [];
+//The array
+// One for the number of meteor meteors
+let numMeteor = 2;
+let meteor = [];
 
 //preload
 //
@@ -45,7 +45,7 @@ let enemy = [];
 //Additionally, sets up the sounds that will play in the game
 function preload() {
   skyBackground = loadImage("assets/images/nightsky.png");
-//objects
+
   spaceshipImage = loadImage("assets/images/Ufo.png");
   healthstarImage = loadImage("assets/images/star.png");
   meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
@@ -56,27 +56,27 @@ function preload() {
 // setup()
 //
 // Sets up a canvas
-// Creates objects for the predator, enemy, three prey and distraction
+// Creates objects for the spaceship, stars, and meteors
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  spaceship = new Predator(100, 100, 5, spaceshipImage, 40);
-  meteorBronze = new Enemy(100, 2000, 15, meteorBronzeImage, 50);
-  meteorSilver = new Enemy(100, 2000, 50, meteorSilverImage, 70);
-  meteorGold = new Enemy(100, 2000, 85, meteorGoldImage, 70);
-  healthstar = new Prey(1000, 100, 10, healthstarImage, 50);
+  spaceship = new Spaceship(100, 100, 5, spaceshipImage, 40);
+  meteorBronze = new Meteor(100, 2000, 15, meteorBronzeImage, 50);
+  meteorSilver = new Meteor(100, 2000, 50, meteorSilverImage, 70);
+  meteorGold = new Meteor(100, 2000, 85, meteorGoldImage, 70);
+  healthstar = new Star(1000, 100, 10, healthstarImage, 50);
 
 
 //the Meteor Array
-// Run a for loop numPrey times to generate each Prey and put it in the array
-// with random values for each prey
-for (let i = 0; i < numEnemy; i++) {
-  let enemyX = random(0, width);
-  let enemyY = random(0, height);
-  let enemySpeed = random(2, 20);
-  let enemyRadius = random(3, 60);
-  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorBronzeImage, enemyRadius));
-  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorSilverImage, enemyRadius));
-  enemy.push(new Enemy(enemyX, enemyY, enemySpeed, meteorGoldImage, enemyRadius));
+// Run a for loop numstar times to generate each star and put it in the array
+// with random values for each star
+for (let i = 0; i < numMeteor; i++) {
+  let meteorX = random(0, width);
+  let meteorY = random(0, height);
+  let meteorSpeed = random(2, 20);
+  let meteorRadius = random(3, 60);
+  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
+  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
+  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
 }
 }
 
@@ -100,10 +100,10 @@ function draw() {
   meteorGold.move();
 
 
-// Handle the tiger and lion eating any of the prey
+// Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthstar);
 
-// Handle the tiger taking damage from the enemy lion
+// Handle the tiger taking damage from the meteor lion
   spaceship.handleHurting(meteorBronze);
   spaceship.handleHurting(meteorSilver);
   spaceship.handleHurting(meteorGold);
@@ -121,11 +121,11 @@ function draw() {
   meteorGold.display();
   healthstar.display();
 
-// Display and making sure the tiger can eat the copies of the prey
-for (let i = 0; i < enemy.length; i++) {
-enemy[i].move();
-enemy[i].display();
-spaceship.handleHurting(enemy[i]);
+// Display and making sure the tiger can eat the copies of the star
+for (let i = 0; i < meteor.length; i++) {
+meteor[i].move();
+meteor[i].display();
+spaceship.handleHurting(meteor[i]);
 }
  }
 

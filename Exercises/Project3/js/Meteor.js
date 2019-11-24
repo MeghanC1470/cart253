@@ -5,7 +5,7 @@
 // spaceship's health if they get too close.
 
 
-class meteor {
+class Meteor {
 
   // constructor
   //

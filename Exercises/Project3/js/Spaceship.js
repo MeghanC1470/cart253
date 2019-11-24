@@ -1,15 +1,16 @@
-// Predator
+// spaceship
 //
-// A class that represents a simple predator
+// A class that represents a simple spaceship
 // controlled by the arrow keys. It can move around
-// the screen and consume Prey objects to maintain its health.
+// the screen and consume star objects to maintain its health.
+// For simplicity, it will be known as a spaceship
 
 
-class Predator {
+class Spaceship {
 
   // constructor
   //
-  // Sets the initial values for the Predator's properties
+  // Sets the initial values for the spaceship's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, radius) {
     // Position
@@ -26,8 +27,8 @@ class Predator {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.radius = radius;
     this.healthGainPerEat = 1;
-    //The Prey Counter
-    this.preyEaten = 0;
+    //The star Counter
+    this.starEaten = 0;
     //The Dodge Counter
     this.dodges = 0;
     // Display properties
@@ -44,9 +45,9 @@ class Predator {
 
   // handleInput
   //
-  // Checks if an arrow key is pressed and sets the predator's
+  // Checks if an arrow key is pressed and sets the spaceship's
   // velocity appropriately.
-  // Additionally sets the shift key to make the Predator sprint
+  // Additionally sets the shift key to make the spaceship sprint
   handleInput() {
     if (keyIsDown(SHIFT)) {
       this.currentSpeed = this.sprintSpeed;
@@ -94,7 +95,7 @@ class Predator {
 
   // handleWrapping
   //
-  // Checks if the predator has gone off the canvas and
+  // Checks if the spaceship has gone off the canvas and
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
@@ -115,22 +116,22 @@ class Predator {
 
   // handleEating
   //
-  // Takes a Prey object as an argument and checks if the predator
-  // overlaps it. If so, reduces the prey's health and increases
-  // the predator's. If the prey dies, it gets reset.
-  handleEating(prey) {
-    // Calculate distance from this predator to the prey
-    let d = dist(this.x, this.y, prey.x, prey.y);
+  // Takes a star object as an argument and checks if the spaceship
+  // overlaps it. If so, reduces the star's health and increases
+  // the spaceship's. If the star dies, it gets reset.
+  handleEating(star) {
+    // Calculate distance from this spaceship to the star
+    let d = dist(this.x, this.y, star.x, star.y);
     // Check if the distance is less than their two radii (an overlap)
-    if (d < this.radius + prey.radius) {
-      // Increase predator health and constrain it to its possible range
+    if (d < this.radius + star.radius) {
+      // Increase spaceship health and constrain it to its possible range
       this.health += this.healthGainPerEat;
       this.health = constrain(this.health, 0, this.maxHealth);
-      // Decrease prey health by the same amount
-      prey.health -= this.healthGainPerEat;
-      // Check if the prey died and reset it if so
-      if (prey.health < 0) {
-        prey.reset();
+      // Decrease star health by the same amount
+      star.health -= this.healthGainPerEat;
+      // Check if the star died and reset it if so
+      if (star.health < 0) {
+        star.reset();
       }
     }
   }
@@ -138,19 +139,19 @@ class Predator {
 //handleHurting
 //
 // When the tiger comes too close to the lion, it gets attacked and takes damage!
-// Takes a Enemy object as an argument and checks if the predator overlaps it
+// Takes a meteor object as an argument and checks if the spaceship overlaps it
 // If it does, its health depletes
-  handleHurting(enemy) {
-    let d = dist(this.x, this.y, enemy.x, enemy.y);
-    if (d < this.radius + enemy.radius) {
+  handleHurting(meteor) {
+    let d = dist(this.x, this.y, meteor.x, meteor.y);
+    if (d < this.radius + meteor.radius) {
       this.health -= 1;
     }
   }
 
 //handleDeath
 //
-// Checks to see if the predator's health has reached zero
-// If so, the predator is dead, this will be essential to making the Game Over
+// Checks to see if the spaceship's health has reached zero
+// If so, the spaceship is dead, this will be essential to making the Game Over
 // function in the Script
   handleDeath() {
     if (this.health <= 0) {
@@ -160,7 +161,7 @@ class Predator {
 
   // display
   //
-  // Draw the predator as a tiger on the canvas
+  // Draw the spaceship as a tiger on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

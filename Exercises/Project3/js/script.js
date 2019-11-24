@@ -16,7 +16,7 @@ let gameOver = false;
 let spaceship;
 
 // The Health-Star
-let healthstar
+let healthStar
 
 // The three types of meteors
 let meteorBronze;
@@ -28,7 +28,7 @@ let skyBackground
 
 //The Images of the characters
 let spaceshipImage;
-let healthstarImage;
+let healthStarImage;
 let meteorBronzeImage;
 let meteorSilverImage;
 let meteorGoldImage;
@@ -47,7 +47,7 @@ function preload() {
   skyBackground = loadImage("assets/images/nightsky.png");
 
   spaceshipImage = loadImage("assets/images/Ufo.png");
-  healthstarImage = loadImage("assets/images/star.png");
+  healthStarImage = loadImage("assets/images/star.png");
   meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
   meteorSilverImage = loadImage("assets/images/MeteorSilver.png")
   meteorGoldImage = loadImage("assets/images/MeteorGold.png")
@@ -63,7 +63,7 @@ function setup() {
   meteorBronze = new Meteor(100, 2000, 15, meteorBronzeImage, 50);
   meteorSilver = new Meteor(100, 2000, 50, meteorSilverImage, 70);
   meteorGold = new Meteor(100, 2000, 85, meteorGoldImage, 70);
-  healthstar = new Star(1000, 100, 10, healthstarImage, 50);
+  healthStar = new Star(1000, 100, 10, healthStarImage, 50);
 
 
 //the Meteor Array
@@ -94,14 +94,14 @@ function draw() {
 
 // Move all the "animals"
   spaceship.move();
-  healthstar.move();
+  healthStar.move();
   meteorBronze.move();
   meteorSilver.move();
   meteorGold.move();
 
 
 // Handle the tiger and lion eating any of the star
-  spaceship.handleEating(healthstar);
+  spaceship.handleEating(healthStar);
 
 // Handle the tiger taking damage from the meteor lion
   spaceship.handleHurting(meteorBronze);
@@ -119,7 +119,7 @@ function draw() {
   meteorBronze.display();
   meteorSilver.display();
   meteorGold.display();
-  healthstar.display();
+  healthStar.display();
 
 // Display and making sure the tiger can eat the copies of the star
 for (let i = 0; i < meteor.length; i++) {

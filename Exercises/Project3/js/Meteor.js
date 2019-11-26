@@ -48,7 +48,7 @@ class Meteor {
   // wraps it to the other side if so
   handleWrapping() {
     // Off the left or right
-    if (this.x < 0) {
+    if (this.x < -100) {
       this.x += width;
       this.y = random(0,height);
     }

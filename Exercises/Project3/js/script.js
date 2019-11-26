@@ -60,9 +60,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, 40);
-  meteorBronze = new Meteor(100, 2000, 15, meteorBronzeImage, 50);
-  meteorSilver = new Meteor(100, 2000, 50, meteorSilverImage, 70);
-  meteorGold = new Meteor(100, 2000, 85, meteorGoldImage, 70);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
 
 
@@ -95,18 +92,12 @@ function draw() {
 // Move all the "animals"
   spaceship.move();
   healthStar.move();
-  meteorBronze.move();
-  meteorSilver.move();
-  meteorGold.move();
+
 
 
 // Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthStar);
 
-// Handle the tiger taking damage from the meteor lion
-  spaceship.handleHurting(meteorBronze);
-  spaceship.handleHurting(meteorSilver);
-  spaceship.handleHurting(meteorGold);
 
 // Handle the tragic death of the tiger
   spaceship.handleDeath();
@@ -116,9 +107,6 @@ function draw() {
 
 // Display all the "animals"
   spaceship.display();
-  meteorBronze.display();
-  meteorSilver.display();
-  meteorGold.display();
   healthStar.display();
 
 // Display and making sure the tiger can eat the copies of the star
@@ -126,6 +114,7 @@ for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
 spaceship.handleHurting(meteor[i]);
+spaceship.handleDodging(meteor[i]);
 }
  }
 

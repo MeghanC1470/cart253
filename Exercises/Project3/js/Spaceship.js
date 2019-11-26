@@ -148,20 +148,18 @@ class Spaceship {
     }
   }
 
-  handleDodging(){
+  handleDodging(meteor){
     // Check if the enemy has moved all the way across the screen
-    if (meteor.X > width) {
+    if (meteor.x < 0) {
       // This means the player dodged so update its dodge statistic
-      dodges = dodges + 1;
+      this.dodges = this.dodges + 1;
       // Tell them how many dodges they have made
-      console.log(dodges + " DODGES!");
+      console.log(this.dodges + " DODGES!");
       //Reset the enemy's velocity so that it increases after each pass
-      meteor.vx = (meteor.vx + 1);
+      meteor.vx = (meteor.vx + 0.5);
       // Reset the enemy's position to the left at a random height
-      meteor.x = 0;
+      meteor.x = width;
       meteor.y = random(0,height);
-      //Reset the enemy's size so that it increases after each pass
-      meteor.radius = meteor.radius + 5;
     }
   }
 

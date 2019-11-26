@@ -117,7 +117,6 @@ if (levelOne = true){
 if (spaceship.dodges >= 5 && levelOne == true){
   levelTwo = true;
 }
-
 // meteor
 if (spaceship.dodges < 50){
   //lvl 2
@@ -136,6 +135,7 @@ if (spaceship.dodges < 50){
 if (spaceship.dodges >= 8 && levelTwo == true){
   levelThree = true;
 }
+//lvl 3
 if (levelThree == true){
   meteor = [];
       for (let i = 0; i < numMeteor; i++) {
@@ -146,7 +146,7 @@ if (levelThree == true){
       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
-}
+    }
 }
 
 // Handle the tiger and lion eating any of the star
@@ -171,6 +171,7 @@ meteor[i].move();
 meteor[i].display();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
+
 }
  }
    // Once the game is over, display a Game Over Message

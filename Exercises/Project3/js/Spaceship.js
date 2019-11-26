@@ -31,14 +31,22 @@ class Spaceship {
     this.starEaten = 0;
     //The Dodge Counter
     this.dodges = 0;
+    //Shooting and Bullets
+    this.shootkey = ENTER;
+    this.bullets = [];
     // Display properties
     this.image = image;
+    this.bulletImage = image;
     this.death = false;
     // Input properties
     this.upKey = UP_ARROW;
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+
+    this.maxBullets = 10;
+    this.bulletCoolDown = 0;
+    this.bulletCoolDownMax = 10;
 
     this.gameOver;
   }
@@ -75,7 +83,21 @@ class Spaceship {
     else {
       this.vy = 0;
     }
+
+//////////////////
+  this.bulletCoolDown -= 1;
+  this.bulletCoolDown = constrain(this.bulletCoolDown - 1, 0, this.bulletCoolDownMax)
+  if (keyIsDown(this.shootKey) && this.bulletCoolDown === 0) {
+  var newBullet = {
+    x: this.x,
+    y: this.y,
+    vx: this.normalSpeed,
+    vy: this.normalspeed
   }
+  this.bullets.push(newBullet);
+  this.bulletCoolDown = this.bulletCoolDownMax;
+  }
+}
 
 
   // move
@@ -148,6 +170,7 @@ class Spaceship {
     }
   }
 
+///////////////////////////
   handleDodging(meteor){
     // Check if the enemy has moved all the way across the screen
     if (meteor.x < 0) {
@@ -162,6 +185,9 @@ class Spaceship {
       meteor.y = random(0,height);
     }
   }
+
+/////////////////////////////////////////
+
 
 
 //handleDeath
@@ -188,5 +214,10 @@ class Spaceship {
     image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
   }
     pop();
+
+    for (var i = 0; i <this.bullets.length; i++){
+      push();
+      image(this.image, this.y, this.x, this.radius * 2, this.radius * 2);
+    }
   }
 }

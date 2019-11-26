@@ -28,6 +28,7 @@ let skyBackground
 
 //The Images of the characters
 let spaceshipImage;
+let bulletImage;
 let healthStarImage;
 let meteorBronzeImage;
 let meteorSilverImage;
@@ -36,7 +37,7 @@ let meteorGoldImage;
 
 //The array
 // One for the number of meteor meteors
-let numMeteor = 3;
+let numMeteor = 5;
 let meteor = [];
 
 //preload
@@ -44,9 +45,10 @@ let meteor = [];
 //Sets up the images that will serve as the background and characters to the game
 //Additionally, sets up the sounds that will play in the game
 function preload() {
-  skyBackground = loadImage("assets/images/nightsky.png");
+  skyBackground = loadImage("assets/images/Galaxy.png");
 
   spaceshipImage = loadImage("assets/images/Ufo.png");
+  bulletImage = loadImage("assets/images/laser2.png");
   healthStarImage = loadImage("assets/images/star.png");
   meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
   meteorSilverImage = loadImage("assets/images/MeteorSilver.png")
@@ -64,7 +66,7 @@ function setup() {
 
 
 //the Meteor Array
-// Run a for loop numstar times to generate each star and put it in the array
+// Run a for loop numMeteor times to generate each meteor and put it in the array
 // with random values for each star
 for (let i = 0; i < numMeteor; i++) {
   let meteorX = random(0, width);
@@ -93,11 +95,11 @@ function draw() {
   spaceship.move();
   healthStar.move();
 
+//DODGES
 
 
 // Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthStar);
-
 
 // Handle the tragic death of the tiger
   spaceship.handleDeath();

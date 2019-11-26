@@ -12,7 +12,7 @@ class Spaceship {
   //
   // Sets the initial values for the spaceship's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, image, radius) {
+  constructor(x, y, speed, image, imagebullet, radius) {
     // Position
     this.x = x;
     this.y = y;
@@ -32,11 +32,11 @@ class Spaceship {
     //The Dodge Counter
     this.dodges = 0;
     //Shooting and Bullets
-    this.shootkey = ENTER;
+    this.shootKey = ENTER;
     this.bullets = [];
     // Display properties
     this.image = image;
-    this.bulletImage = image;
+    this.bulletImage = imagebullet;
     this.death = false;
     // Input properties
     this.upKey = UP_ARROW;
@@ -46,7 +46,7 @@ class Spaceship {
 
     this.maxBullets = 10;
     this.bulletCoolDown = 0;
-    this.bulletCoolDownMax = 10;
+    this.bulletCoolDownMax = 20;
 
     this.gameOver;
   }
@@ -85,6 +85,7 @@ class Spaceship {
     }
 
 //////////////////
+
   this.bulletCoolDown -= 1;
   this.bulletCoolDown = constrain(this.bulletCoolDown - 1, 0, this.bulletCoolDownMax)
   if (keyIsDown(this.shootKey) && this.bulletCoolDown === 0) {
@@ -92,7 +93,7 @@ class Spaceship {
     x: this.x,
     y: this.y,
     vx: this.normalSpeed,
-    vy: this.normalspeed
+    radius: 20
   }
   this.bullets.push(newBullet);
   this.bulletCoolDown = this.bulletCoolDownMax;
@@ -186,8 +187,14 @@ class Spaceship {
     }
   }
 
-/////////////////////////////////////////
 
+
+/////////////////////////////////////////
+  handleBullets(){
+for (var i = 0; i <this.bullets.length; i++){
+  this.bullets[i].x += this.bullets[i].vx
+}
+}
 
 
 //handleDeath
@@ -216,8 +223,7 @@ class Spaceship {
     pop();
 
     for (var i = 0; i <this.bullets.length; i++){
-      push();
-      image(this.image, this.y, this.x, this.radius * 2, this.radius * 2);
+      image(this.bulletImage, this.bullets[i].x, this.bullets[i].y, this.bullets[i].radius * 2, this.bullets[i].radius * 2);
     }
   }
 }

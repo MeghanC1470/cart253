@@ -12,6 +12,10 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 
+let levelOne = false;
+let levelTwo = false;
+let levelThree = false;
+
 // Our Spaceship
 let spaceship;
 
@@ -61,7 +65,7 @@ function preload() {
 // Creates objects for the spaceship, stars, and meteors
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  spaceship = new Spaceship(100, 100, 5, spaceshipImage, 40);
+  spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
 
 
@@ -72,7 +76,7 @@ for (let i = 0; i < numMeteor; i++) {
   let meteorX = random(0, width);
   let meteorY = random(0, height);
   let meteorSpeed = random(2, 20);
-  let meteorRadius = random(3, 60);
+  let meteorRadius = random(10, 60);
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
@@ -96,10 +100,60 @@ function draw() {
   healthStar.move();
 
 //DODGES
+if (playing == true){
+  levelOne = true;
+}
 
+if (levelOne = true){
+  meteor = [];
+  for (let i = 0; i < numMeteor; i++) {
+    let meteorX = random(0, width);
+    let meteorY = random(0, height);
+    let meteorSpeed = random(2, 20);
+    let meteorRadius = random(10, 60);
+    meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
+}
+
+if (spaceship.dodges >= 5 && levelOne == true){
+  levelTwo = true;
+}
+
+// meteor
+if (spaceship.dodges < 50){
+  //lvl 2
+  if (levelTwo == true){
+    meteor = [];
+    for (let i = 0; i < numMeteor; i++) {
+      let meteorX = random(0, width);
+      let meteorY = random(0, height);
+      let meteorSpeed = random(2, 20);
+      let meteorRadius = random(10, 60);
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
+  }
+}
+
+if (spaceship.dodges >= 8 && levelTwo == true){
+  levelThree = true;
+}
+if (levelThree == true){
+  meteor = [];
+      for (let i = 0; i < numMeteor; i++) {
+      let meteorX = random(0, width);
+      let meteorY = random(0, height);
+      let meteorSpeed = random(2, 20);
+      let meteorRadius = random(10, 60);
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
+}
+}
 
 // Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthStar);
+
+  //
+  spaceship.handleBullets();
 
 // Handle the tragic death of the tiger
   spaceship.handleDeath();
@@ -119,8 +173,6 @@ spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 }
  }
-
- else {
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
@@ -128,8 +180,9 @@ spaceship.handleDodging(meteor[i]);
     // Otherwise we display the message to start the game
   else {
     displayStartMessage();
+      }
+    }
   }
- }
 }
 
 //displayStartMessage

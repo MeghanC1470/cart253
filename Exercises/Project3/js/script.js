@@ -43,7 +43,7 @@ let meteorGoldImage;
 
 //The array
 // One for the number of meteor meteors
-let numMeteor = 5;
+let numMeteor = 6;
 let meteor = [];
 
 //preload
@@ -61,7 +61,7 @@ function preload() {
   meteorGoldImage = loadImage("assets/images/MeteorGold.png")
 }
 
-function generateMeteors(meteorImage){
+function generateMeteors(meteorSpeed,meteorImage){
   let meteor = [];
 for (let i = 0; i < numMeteor; i++) {
   let meteorX = random(0, width);
@@ -82,11 +82,10 @@ function setup() {
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
 
-
 //the Meteor Arrays
 // Run a for loop numMeteor times to generate each meteor and put it in the array
 // with random values for each star
-meteor = generateMeteors(meteorBronzeImage);
+meteor = generateMeteors(5,meteorBronzeImage);
 }
 
 // draw()
@@ -97,7 +96,6 @@ function draw() {
   background(skyBackground);
 // Check if the game is in play
   if (playing == true) {
-    levelOne = true;
 
 // Handle input for the tiger
   spaceship.handleInput();
@@ -106,21 +104,21 @@ function draw() {
   spaceship.move();
   healthStar.move();
 
-if (spaceship.dodges >= 5){
+if (spaceship.dodges >= 10){
   levelTwo = true;
 }
   //lvl 2
   if (levelTwo == true && levelTwoInitialized == false){
-    meteor = meteor.concat(generateMeteors(meteorSilverImage));
+    meteor = meteor.concat(generateMeteors(10,meteorSilverImage));
     levelTwoInitialized = true;
   }
 
-if (spaceship.dodges >= 8){
+if (spaceship.dodges >= 30){
   levelThree = true;
 }
 //lvl 3
 if (levelThree == true && levelThreeInitialized == false){
-  meteor = meteor.concat(generateMeteors(meteorGoldImage));
+  meteor = meteor.concat(generateMeteors(15,meteorGoldImage));
   levelThreeInitialized = true;
 }
 
@@ -147,9 +145,8 @@ meteor[i].display();
 //meteor[i].handleDamage();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
-
 }
- }
+
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
@@ -158,6 +155,7 @@ spaceship.handleDodging(meteor[i]);
   else {
     displayStartMessage();
       }
+    }
 }
 
 

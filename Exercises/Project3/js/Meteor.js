@@ -64,6 +64,8 @@ class Meteor {
     }
   }
 
+
+
   // display
   //
   // Draw the meteor as a lion on the canvas

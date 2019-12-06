@@ -169,6 +169,7 @@ if (levelThree == true){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
+meteor[i].handleDamage();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 

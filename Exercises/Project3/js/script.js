@@ -12,7 +12,6 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 
-let levelOne = false;
 let levelTwo = false;
 let levelThree = false;
 
@@ -78,9 +77,7 @@ for (let i = 0; i < numMeteor; i++) {
   let meteorSpeed = random(2, 20);
   let meteorRadius = random(10, 60);
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
-  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
-  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
-}
+  }
 }
 
 // draw()
@@ -99,26 +96,9 @@ function draw() {
   spaceship.move();
   healthStar.move();
 
-//DODGES
-if (playing == true){
-  levelOne = true;
-}
-
-if (levelOne = true){
-  meteor = [];
-  for (let i = 0; i < numMeteor; i++) {
-    let meteorX = random(0, width);
-    let meteorY = random(0, height);
-    let meteorSpeed = random(2, 20);
-    let meteorRadius = random(10, 60);
-    meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
-}
-
-if (spaceship.dodges >= 5 && levelOne == true){
+if (spaceship.dodges >= 5){
   levelTwo = true;
 }
-// meteor
-if (spaceship.dodges < 50){
   //lvl 2
   if (levelTwo == true){
     meteor = [];
@@ -127,24 +107,22 @@ if (spaceship.dodges < 50){
       let meteorY = random(0, height);
       let meteorSpeed = random(2, 20);
       let meteorRadius = random(10, 60);
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
   }
 }
 
-if (spaceship.dodges >= 8 && levelTwo == true){
+if (spaceship.dodges >= 8){
   levelThree = true;
 }
 //lvl 3
 if (levelThree == true){
+  levelTwo = false;
   meteor = [];
       for (let i = 0; i < numMeteor; i++) {
       let meteorX = random(0, width);
       let meteorY = random(0, height);
       let meteorSpeed = random(2, 20);
       let meteorRadius = random(10, 60);
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
     }
 }
@@ -169,7 +147,7 @@ if (levelThree == true){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
-meteor[i].handleDamage();
+//meteor[i].handleDamage();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 
@@ -184,8 +162,6 @@ spaceship.handleDodging(meteor[i]);
     displayStartMessage();
       }
     }
-  }
-}
 
 //displayStartMessage
 //

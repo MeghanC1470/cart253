@@ -12,6 +12,7 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 
+let levelOne = false;
 let levelTwo = false;
 let levelThree = false;
 
@@ -68,15 +69,39 @@ function setup() {
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
 
 
-//the Meteor Array
+//the Meteor Arrays
 // Run a for loop numMeteor times to generate each meteor and put it in the array
 // with random values for each star
+if (levelOne == true){
+  meteor = [];
 for (let i = 0; i < numMeteor; i++) {
   let meteorX = random(0, width);
   let meteorY = random(0, height);
   let meteorSpeed = random(2, 20);
   let meteorRadius = random(10, 60);
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
+    }
+  }
+  if (levelTwo == true){
+    meteor = [];
+    for (let i = 0; i < numMeteor; i++) {
+      let meteorX = random(0, width);
+      let meteorY = random(0, height);
+      let meteorSpeed = random(2, 20);
+      let meteorRadius = random(10, 60);
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
+  }
+}
+//lvl 3
+if (levelThree == true){
+  meteor = [];
+      for (let i = 0; i < numMeteor; i++) {
+      let meteorX = random(0, width);
+      let meteorY = random(0, height);
+      let meteorSpeed = random(2, 20);
+      let meteorRadius = random(10, 60);
+      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
+    }
   }
 }
 
@@ -88,6 +113,7 @@ function draw() {
   background(skyBackground);
 // Check if the game is in play
   if (playing == true) {
+    levelOne = true;
 
 // Handle input for the tiger
   spaceship.handleInput();
@@ -99,33 +125,11 @@ function draw() {
 if (spaceship.dodges >= 5){
   levelTwo = true;
 }
-  //lvl 2
-  if (levelTwo == true){
-    meteor = [];
-    for (let i = 0; i < numMeteor; i++) {
-      let meteorX = random(0, width);
-      let meteorY = random(0, height);
-      let meteorSpeed = random(2, 20);
-      let meteorRadius = random(10, 60);
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
-  }
-}
 
 if (spaceship.dodges >= 8){
   levelThree = true;
 }
-//lvl 3
-if (levelThree == true){
-  levelTwo = false;
-  meteor = [];
-      for (let i = 0; i < numMeteor; i++) {
-      let meteorX = random(0, width);
-      let meteorY = random(0, height);
-      let meteorSpeed = random(2, 20);
-      let meteorRadius = random(10, 60);
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
-    }
-}
+
 
 // Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthStar);

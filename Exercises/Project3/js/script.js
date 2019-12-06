@@ -142,7 +142,7 @@ if (levelThree == true && levelThreeInitialized == false){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
-//meteor[i].handleDamage();
+// meteor[i].handleDamage(bullets[i]);
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 }

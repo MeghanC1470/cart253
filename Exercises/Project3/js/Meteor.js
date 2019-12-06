@@ -64,13 +64,13 @@ class Meteor {
     }
   }
 
-
-handleDamage(bullets){
-let d = dist(this.x, this.y, bullets.x, bullets.y);
-  if (d < this.radius + bullets.radius) {
-    this.health -= 1;
-  }
-}
+// 
+// handleDamage(bullets){
+// let d = dist(this.x, this.y, bullets.x, bullets.y);
+//   if (d < this.radius + bullets.radius) {
+//     this.health -= 100;
+//   }
+// }
 
   // display
   //

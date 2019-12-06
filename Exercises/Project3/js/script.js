@@ -14,7 +14,9 @@ let gameOver = false;
 
 let levelOne = false;
 let levelTwo = false;
+let levelTwoInitialized = false;
 let levelThree = false;
+let levelThreeInitialized = false;
 
 // Our Spaceship
 let spaceship;
@@ -59,6 +61,18 @@ function preload() {
   meteorGoldImage = loadImage("assets/images/MeteorGold.png")
 }
 
+function generateMeteors(meteorImage){
+  let meteor = [];
+for (let i = 0; i < numMeteor; i++) {
+  let meteorX = random(0, width);
+  let meteorY = random(0, height);
+  let meteorSpeed = random(2, 20);
+  let meteorRadius = random(10, 60);
+  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorImage, meteorRadius));
+    }
+  return meteor;
+  }
+
 // setup()
 //
 // Sets up a canvas
@@ -72,13 +86,7 @@ function setup() {
 //the Meteor Arrays
 // Run a for loop numMeteor times to generate each meteor and put it in the array
 // with random values for each star
-for (let i = 0; i < numMeteor; i++) {
-  let meteorX = random(0, width);
-  let meteorY = random(0, height);
-  let meteorSpeed = random(2, 20);
-  let meteorRadius = random(10, 60);
-  meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorBronzeImage, meteorRadius));
-  }
+meteor = generateMeteors(meteorBronzeImage);
 }
 
 // draw()
@@ -102,30 +110,19 @@ if (spaceship.dodges >= 5){
   levelTwo = true;
 }
   //lvl 2
-  if (levelTwo == true){
-    for (let i = 0; i < numMeteor; i++) {
-      let meteorX = random(0, width);
-      let meteorY = random(0, height);
-      let meteorSpeed = random(2, 20);
-      let meteorRadius = random(10, 30);
-      meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorSilverImage, meteorRadius));
+  if (levelTwo == true && levelTwoInitialized == false){
+    meteor = meteor.concat(generateMeteors(meteorSilverImage));
+    levelTwoInitialized = true;
   }
-}
 
 if (spaceship.dodges >= 8){
   levelThree = true;
 }
 //lvl 3
-// if (levelThree == true){
-//   levelTwo = false;
-//       for (let i = 0; i < numMeteor; i++) {
-//       let meteorX = random(0, width);
-//       let meteorY = random(0, height);
-//       let meteorSpeed = random(2, 20);
-//       let meteorRadius = random(10, 60);
-//       meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorGoldImage, meteorRadius));
-//     }
-// }
+if (levelThree == true && levelThreeInitialized == false){
+  meteor = meteor.concat(generateMeteors(meteorGoldImage));
+  levelThreeInitialized = true;
+}
 
 // Handle the tiger and lion eating any of the star
   spaceship.handleEating(healthStar);
@@ -161,7 +158,8 @@ spaceship.handleDodging(meteor[i]);
   else {
     displayStartMessage();
       }
-    }
+}
+
 
 //displayStartMessage
 //

@@ -146,6 +146,7 @@ meteor[i].display();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 }
+}
 
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
@@ -155,7 +156,6 @@ spaceship.handleDodging(meteor[i]);
   else {
     displayStartMessage();
       }
-    }
 }
 
 

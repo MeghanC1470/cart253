@@ -45,6 +45,7 @@ let meteorGoldImage;
 // One for the number of meteor meteors
 let numMeteor = 6;
 let meteor = [];
+let bullets = [];
 
 //preload
 //
@@ -71,7 +72,10 @@ for (let i = 0; i < numMeteor; i++) {
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorImage, meteorRadius));
     }
   return meteor;
+  for (var i = 0; i <spaceship.bullets.length; i++){
+    spaceship.bullets[i].x += spaceship.bullets[i].vx
   }
+}
 
 // setup()
 //
@@ -142,7 +146,7 @@ if (levelThree == true && levelThreeInitialized == false){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
-// meteor[i].handleDamage(bullets[i]);
+meteor[i].handleDamage(bullets[i]);
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 }

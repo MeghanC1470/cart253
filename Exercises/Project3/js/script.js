@@ -132,6 +132,7 @@ if (levelThree == true && levelThreeInitialized == false){
   //
   spaceship.handleBullets();
 
+
 // Handle the tragic death of the tiger
   spaceship.handleDeath();
 
@@ -146,20 +147,23 @@ if (levelThree == true && levelThreeInitialized == false){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
-meteor[i].handleDamage(bullets[i]);
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
-}
+spaceship.handleDamage(meteor[i]);
 }
 
+}
+else {
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
   }
+
     // Otherwise we display the message to start the game
-  else {
+else {
     displayStartMessage();
-      }
+    }
+  }
 }
 
 

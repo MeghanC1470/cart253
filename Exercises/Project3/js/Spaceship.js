@@ -193,9 +193,17 @@ class Spaceship {
   handleBullets(){
 for (var i = 0; i <this.bullets.length; i++){
   this.bullets[i].x += this.bullets[i].vx
-}
+  }
 }
 
+//////////////////////
+
+handleDamage(meteor){
+  let d = dist(this.bullets.x, this.bullets.y, meteor.x, meteor.y);
+    if (d < this.bullets.radius + meteor.radius) {
+      meteor.health -= 50;
+    }
+}
 
 //handleDeath
 //

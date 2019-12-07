@@ -65,13 +65,6 @@ class Meteor {
   }
 
 
-handleDamage(bullets){
-let d = dist(this.x, this.y, spaceship.bullets.x, spaceship.bullets.y);
-  if (d < this.radius + spaceship.bullets.radius) {
-    this.health -= 100;
-  }
-}
-
   // display
   //
   // Draw the meteor as a lion on the canvas

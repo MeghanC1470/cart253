@@ -31,6 +31,9 @@ let healthStar
 //The background
 let skyBackground
 
+//The music
+let spaceMusic
+
 //The Images of the objects
 let spaceshipImage;
 let bulletImage;
@@ -60,6 +63,8 @@ function preload() {
   meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
   meteorSilverImage = loadImage("assets/images/MeteorSilver.png")
   meteorGoldImage = loadImage("assets/images/MeteorGold.png")
+
+  spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3")
 }
 
 
@@ -166,14 +171,15 @@ for (let i = 0; i < meteor.length; i++) {
   }
 }
 else {
+
+  if (gameWin == true) {
+    displayWinMessage();
+  }
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
   }
 
-  if (gameWin == true) {
-    displayWinMessage();
-  }
     // Otherwise we display the message to start the game
 else {
     displayStartMessage();

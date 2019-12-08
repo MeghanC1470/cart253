@@ -60,11 +60,11 @@ function preload() {
   spaceshipImage = loadImage("assets/images/Ufo.png");
   bulletImage = loadImage("assets/images/laser2.png");
   healthStarImage = loadImage("assets/images/star.png");
-  meteorBronzeImage = loadImage("assets/images/MeteorBronze.png")
-  meteorSilverImage = loadImage("assets/images/MeteorSilver.png")
-  meteorGoldImage = loadImage("assets/images/MeteorGold.png")
+  meteorBronzeImage = loadImage("assets/images/MeteorBronze.png");
+  meteorSilverImage = loadImage("assets/images/MeteorSilver.png");
+  meteorGoldImage = loadImage("assets/images/MeteorGold.png");
 
-  spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3")
+  spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3");
 }
 
 

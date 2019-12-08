@@ -65,6 +65,8 @@ function preload() {
   meteorGoldImage = loadImage("assets/images/MeteorGold.png");
 
   spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3");
+  laserSound = loadSound("assets/sounds/Lasersound.wav");
+  destroySound = loadSound("assets/sounds/DestroyMeteorSound.wav");
 }
 
 
@@ -97,7 +99,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
-  spaceMusic.loop();
+  //spaceMusic.loop();
 // The generateMeteors function is called upon and put in with a Bronze Meteor Image
 meteor = generateMeteors(meteorBronzeImage);
 }
@@ -184,9 +186,9 @@ else {
     // Otherwise we display the message to start the game
 else {
     displayStartMessage();
+      }
     }
   }
-}
 }
 
 

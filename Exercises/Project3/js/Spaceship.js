@@ -90,6 +90,7 @@ class Spaceship {
   this.bulletCoolDown = constrain(this.bulletCoolDown - 1, 0, this.bulletCoolDownMax)
 // Check if the shoot key is pressed and the cooldown is back to zero so you can fire again
   if (keyIsDown(this.shootKey) && this.bulletCoolDown === 0) {
+    laserSound.play();
 // Create a bullet as an object with position and velocity
   var newBullet = {
 // Bullets must start at the location of the spaceship
@@ -215,6 +216,7 @@ handleDamage(meteor){
     // Check if the bullet and meteor overlap
   let d = dist(this.bullets[i].x, this.bullets[i].y, meteor.x, meteor.y);
     if (d < this.bullets[i].radius + meteor.radius) {
+      destroySound.play();
     // If they do, decrease the health of the meteor
     // Additionally, the laser has lost it's damaging power
       meteor.health -= 3;

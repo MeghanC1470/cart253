@@ -71,6 +71,8 @@ function preload() {
   spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3");
   laserSound = loadSound("assets/sounds/Lasersound.wav");
   destroySound = loadSound("assets/sounds/DestroyMeteorSound.wav");
+
+  spaceFont = loadFont("assets/font/SPACEMAN.TTF");
 }
 
 
@@ -201,11 +203,12 @@ else {
 //Display's the start message, including instructions, at the beginning of the game
 function displayStartMessage() {
   push();
+  textFont(spaceFont);
   background(gameStartImage);
   textAlign(CENTER, CENTER);
-  fill(0, 0, 255);
-  textSize(49);
-  text("WELCOME TO SPACE DODGERS! \n Use the WASD Keys to move! \n Press Shift to Speed Up and Enter to Shoot! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
+  fill(255);
+  textSize(35);
+  text(".:WELCOME TO SPACE DODGERS!:.\n Use the WASD Keys to move! \n Press Shift to Speed Up and Enter to Shoot! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
   pop();
   }
 
@@ -232,21 +235,23 @@ function checkWinGame(){
 //Display the Game Over message
   function displayGameOver() {
       push();
+      textFont(spaceFont);
       background(gameOverImage);
       textAlign(CENTER, CENTER);
-      fill(128, 17, 0);
+      fill(255, 0, 0);
       textSize(49);
-      text("GAME OVER \n You died! \n Reload to Try Again", width / 2, height / 2);
+      text(".:GAME OVER:. \n You died! \n Reload to Try Again", width / 2, height / 2);
       pop();
     }
 
     function displayWinMessage() {
       push();
+      textFont(spaceFont);
       background(gameWinImage);
       textAlign(CENTER, CENTER);
-      fill(128, 17, 0);
+      fill(255);
       textSize(49);
-      text("Congrats", width / 2, height / 2);
+      text(".:CONGRATULATIONS!:. \n .:| You Got Home Safe! |:. \n .:| Reload to Play Again! |:.", width / 2, height / 2);
       pop();
     }
 

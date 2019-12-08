@@ -1,10 +1,10 @@
-// Space DODGERS
+// SPACE DODGERS
 //
 // by Meghan Cullen
 //
 // Creates a spaceship, meteors and health-stars
 // The spaceship has to get through a field of meteors in order to get home
-// The meteors will hit and take down the spaceship, but can be destoryed by
+// The meteors will hit and take down the spaceship, but can be destroyed by
 // the Spaceship's laser
 // The Health-Stars are special stars that power and repair the spaceship's health
 
@@ -26,13 +26,21 @@ let levelThreeInitialized = false;
 let spaceship;
 
 // The Health-Star
-let healthStar
+let healthStar;
 
-//The background
-let skyBackground
+//The background images
+let skyBackground;
+let gameStartImage;
+let gameOverImage;
+let gameWinImage;
 
-//The music
-let spaceMusic
+//The music and sounds
+let spaceMusic;
+let laserSound;
+let destroySound;
+
+//The font
+let spaceFont;
 
 //The Images of the objects
 let spaceshipImage;
@@ -42,10 +50,9 @@ let meteorBronzeImage;
 let meteorSilverImage;
 let meteorGoldImage;
 
-
 //The arrays
 // One for the number of meteors
-let numMeteor = 6;
+let numMeteor = 8;
 //One for the Spaceship's lasers
 let bullets = [];
 
@@ -54,6 +61,7 @@ let bullets = [];
 //
 //Sets up the images that will serve as the background and characters to the game
 //Additionally, sets up the sounds that will play in the game
+//As well as font
 function preload() {
   skyBackground = loadImage("assets/images/Galaxy.png");
 
@@ -105,7 +113,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
-  //spaceMusic.loop();
+// Sets up the music
+  spaceMusic.loop();
 // The generateMeteors function is called upon and put in with a Bronze Meteor Image
 meteor = generateMeteors(meteorBronzeImage);
 }
@@ -165,6 +174,7 @@ if (levelThree == true && levelThreeInitialized == false){
   spaceship.display();
   healthStar.display();
 
+
 // Display the meteor arrays and any actions done to the meteors by the spaceship
 // in a for loop, displaying movement, damage by the meteor to the Spaceship,
 // checking if the Spaceship dodged the meteor, or if the Spaceship lasers damaged it
@@ -178,6 +188,11 @@ for (let i = 0; i < meteor.length; i++) {
   meteor[i].reset();
     }
   }
+  textAlign(RIGHT,TOP);
+  textSize(70);
+  textFont(spaceFont);
+  fill(255);
+  text(spaceship.dodges,width,0);
 }
 else {
    // Once the game is over, display a Game Over Message
@@ -205,10 +220,10 @@ function displayStartMessage() {
   push();
   textFont(spaceFont);
   background(gameStartImage);
-  textAlign(CENTER, CENTER);
+  textAlign(CENTER,CENTER);
   fill(255);
-  textSize(35);
-  text(".:WELCOME TO SPACE DODGERS!:.\n Use the WASD Keys to move! \n Press Shift to Speed Up and Enter to Shoot! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
+  textSize(27);
+  text(".:WELCOME TO SPACE DODGERS!:.\n \n You must clear 1000 Asteroids in order to get home! \n Use WASD to move the Ship! \n Press Enter to Shoot, Shift to Speed up! \n Catch the Star to gain Health! \n \n .:CLICK TO START:.", width / 2, height / 2);
   pop();
   }
 
@@ -240,7 +255,7 @@ function checkWinGame(){
       textAlign(CENTER, CENTER);
       fill(255, 0, 0);
       textSize(49);
-      text(".:GAME OVER:. \n You died! \n Reload to Try Again", width / 2, height / 2);
+      text(".:GAME OVER:. \n \n You died! \n Reload to Try Again", width / 2, height / 2);
       pop();
     }
 
@@ -251,7 +266,7 @@ function checkWinGame(){
       textAlign(CENTER, CENTER);
       fill(255);
       textSize(49);
-      text(".:CONGRATULATIONS!:. \n .:| You Got Home Safe! |:. \n .:| Reload to Play Again! |:.", width / 2, height / 2);
+      text(".:CONGRATULATIONS!:. \n \n .:| You Got Home Safe! |:. \n .:| Reload to Play Again! |:.", width / 2, height / 2);
       pop();
     }
 

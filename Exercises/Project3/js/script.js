@@ -8,11 +8,11 @@
 // the Spaceship's laser
 // The Health-Stars are special stars that power and repair the spaceship's health
 
-//Whether the game started
+// Whether the game started
 let playing = false;
-//Whether the game ended
+// Whether the game ended
 let gameOver = false;
-//Whether the player won the game
+// Whether the player won the game
 let win = false;
 
 // Whether our levels have been activated
@@ -28,21 +28,21 @@ let spaceship;
 // The Health-Star
 let healthStar;
 
-//The background images
+// The background images
 let skyBackground;
 let gameStartImage;
 let gameOverImage;
 let gameWinImage;
 
-//The music and sounds
+// The music and sounds
 let spaceMusic;
 let laserSound;
 let destroySound;
 
-//The font
+// The font
 let spaceFont;
 
-//The Images of the objects
+// The Images of the objects
 let spaceshipImage;
 let bulletImage;
 let healthStarImage;
@@ -50,18 +50,17 @@ let meteorBronzeImage;
 let meteorSilverImage;
 let meteorGoldImage;
 
-//The arrays
+// The arrays
 // One for the number of meteors
 let numMeteor = 9;
-//One for the Spaceship's lasers
+// One for the Spaceship's lasers
 let bullets = [];
 
-
-//preload
+// preload
 //
-//Sets up the images that will serve as the background and characters to the game
-//Additionally, sets up the sounds that will play in the game
-//As well as font
+// Sets up the images that will serve as the background and characters to the game
+// Additionally, sets up the sounds that will play in the game
+// As well as font
 function preload() {
   skyBackground = loadImage("assets/images/Galaxy.png");
 
@@ -83,7 +82,6 @@ function preload() {
   spaceFont = loadFont("assets/font/SPACEMAN.TTF");
 }
 
-
 // function generateMeteors
 //
 // Sets up the meteor array and runs a for loop numMeteor times to generate each
@@ -104,7 +102,6 @@ for (let i = 0; i < numMeteor; i++) {
   }
 }
 
-
 // setup()
 //
 // Sets up a canvas
@@ -116,9 +113,8 @@ function setup() {
 // Sets up the music
   spaceMusic.loop();
 // The generateMeteors function is called upon and put in with a Bronze Meteor Image
-meteor = generateMeteors(meteorBronzeImage);
+  meteor = generateMeteors(meteorBronzeImage);
 }
-
 
 // draw()
 //
@@ -174,7 +170,6 @@ if (levelThree == true && levelThreeInitialized == false){
   spaceship.display();
   healthStar.display();
 
-
 // Display the meteor arrays and any actions done to the meteors by the spaceship
 // in a for loop, displaying movement, damage by the meteor to the Spaceship,
 // checking if the Spaceship dodged the meteor, or if the Spaceship lasers damaged it
@@ -188,6 +183,7 @@ for (let i = 0; i < meteor.length; i++) {
   meteor[i].reset();
     }
   }
+  // Display the dodge counter on the screen
   textAlign(RIGHT,TOP);
   textSize(100);
   textFont(spaceFont);
@@ -195,16 +191,16 @@ for (let i = 0; i < meteor.length; i++) {
   text(spaceship.dodges,width,0);
 }
 else {
-   // Once the game is over, display a Game Over Message
+// Once the player wins the game, display a Win Message
    if (win == true) {
      displayWinMessage();
        }
 else {
+// Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
   }
-
-    // Otherwise we display the message to start the game
+// Otherwise we display the message to start the game
 else {
     displayStartMessage();
       }
@@ -212,10 +208,9 @@ else {
   }
 }
 
-
-//displayStartMessage
+// displayStartMessage
 //
-//Display's the start message, including instructions, at the beginning of the game
+// Display's the start message, including instructions, at the beginning of the game
 function displayStartMessage() {
   push();
   textFont(spaceFont);
@@ -227,9 +222,9 @@ function displayStartMessage() {
   pop();
   }
 
-//checkGameOver
+// checkGameOver
 //
-//See if the spaceship died and end the game
+// See if the spaceship died and end the game
 function checkGameOver() {
   if (spaceship.death === true) {
     gameOver = true;
@@ -237,17 +232,9 @@ function checkGameOver() {
   }
 }
 
-function checkWinGame(){
-  if (spaceship.dodges === 150){
-    console.log("win");
-    winGame = true;
-    playing = false;
-  }
-}
-
-//displayGameOver
+// displayGameOver
 //
-//Display the Game Over message
+// Display the Game Over message
   function displayGameOver() {
       push();
       textFont(spaceFont);
@@ -257,6 +244,17 @@ function checkWinGame(){
       textSize(49);
       text(".:GAME OVER:. \n \n You died! \n Reload to Try Again", width / 2, height / 2);
       pop();
+    }
+
+    // checkWinGame
+    //
+    // See if the player dodged a certain number of meteors and end the game
+    function checkWinGame(){
+      if (spaceship.dodges === 150){
+        console.log("win");
+        winGame = true;
+        playing = false;
+      }
     }
 
     function displayWinMessage() {

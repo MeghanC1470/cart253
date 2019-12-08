@@ -2,13 +2,13 @@
 //
 // A class that represents a simple star that moves
 // on screen based on a noise() function. It can move around
-// the screen and be consumed by spaceship objects.
+// the screen and be consumed by the spaceship.
 
 class Star {
 
   // constructor
   //
-  // Sets the initial values for the spaceship's properties
+  // Sets the initial values for the star's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, radius) {
     // Position
@@ -70,7 +70,7 @@ class Star {
 
   // display
   //
-  // Draw the star as either an antelope, a zebra or a bee on the canvas
+  // Draw the star as a four-pointed bright blue star
   // with a radius the same size as its current health.
   display() {
     push();

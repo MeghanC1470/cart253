@@ -13,7 +13,7 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 //Whether the player won the game
-let gameWin = false;
+let win = false;
 
 // Whether our levels have been activated
 let levelOne = false; // The first phase of Bronze Meteors
@@ -97,6 +97,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
+  spaceMusic.loop();
 // The generateMeteors function is called upon and put in with a Bronze Meteor Image
 meteor = generateMeteors(meteorBronzeImage);
 }
@@ -171,11 +172,11 @@ for (let i = 0; i < meteor.length; i++) {
   }
 }
 else {
-
-  if (gameWin == true) {
-    displayWinMessage();
-  }
    // Once the game is over, display a Game Over Message
+   if (win == true) {
+     displayWinMessage();
+       }
+else {
  if (gameOver == true) {
     displayGameOver();
   }
@@ -185,6 +186,7 @@ else {
     displayStartMessage();
     }
   }
+}
 }
 
 

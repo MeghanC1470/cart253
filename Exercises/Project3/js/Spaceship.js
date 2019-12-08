@@ -1,9 +1,9 @@
-// spaceship
+// Spaceship
 //
 // A class that represents a simple spaceship
-// controlled by the arrow keys. It can move around
+// controlled by the WASD keys. It can move around
 // the screen and consume star objects to maintain its health.
-// For simplicity, it will be known as a spaceship
+// It can also shoot lasers to destroy the meteors
 
 
 class Spaceship {
@@ -27,7 +27,7 @@ class Spaceship {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.radius = radius;
     this.healthGainPerEat = 1;
-    //The star Counter
+    //The Star Counter
     this.starEaten = 0;
     //The Dodge Counter
     this.dodges = 0;
@@ -39,15 +39,15 @@ class Spaceship {
     this.bulletImage = imagebullet;
     this.death = false;
     // Input properties
-    this.upKey = UP_ARROW;
-    this.downKey = DOWN_ARROW;
-    this.leftKey = LEFT_ARROW;
-    this.rightKey = RIGHT_ARROW;
-
+    this.upKey = 87;
+    this.downKey = 83;
+    this.leftKey = 65;
+    this.rightKey = 68;
+    // the Bullet properties
     this.maxBullets = 10;
     this.bulletCoolDown = 0;
     this.bulletCoolDownMax = 20;
-
+    // the Death
     this.gameOver;
   }
 
@@ -84,22 +84,26 @@ class Spaceship {
       this.vy = 0;
     }
 
-//////////////////
-
-  this.bulletCoolDown -= 1;
+// The bullet cooldown determines when the spaceship can fire again
+  this.bulletCoolDown -= 0;
+// Constrain the bullet cooldown to avoid weird numbers
   this.bulletCoolDown = constrain(this.bulletCoolDown - 1, 0, this.bulletCoolDownMax)
+// Check if the shoot key is pressed and the cooldown is back to zero so you can fire again
   if (keyIsDown(this.shootKey) && this.bulletCoolDown === 0) {
+// Create a bullet as an object with position and velocity
   var newBullet = {
+// Bullets must start at the location of the spaceship
     x: this.x,
     y: this.y,
     vx: this.normalSpeed,
     radius: 20
   }
+// Add the bullet to the bullets array of the spaceship
   this.bullets.push(newBullet);
+// Set the cooldown to max so it can start counting down
   this.bulletCoolDown = this.bulletCoolDownMax;
   }
 }
-
 
   // move
   //
@@ -161,7 +165,7 @@ class Spaceship {
 
 //handleHurting
 //
-// When the tiger comes too close to the lion, it gets attacked and takes damage!
+// When the Spaceship comes too close to the meteor, it takes damage!
 // Takes a meteor object as an argument and checks if the spaceship overlaps it
 // If it does, its health depletes
   handleHurting(meteor) {
@@ -171,7 +175,9 @@ class Spaceship {
     }
   }
 
-///////////////////////////
+//handleDodging
+//
+// Checks to see if the spaceship flew past the meteor and avoided
   handleDodging(meteor){
     // Check if the enemy has moved all the way across the screen
     if (meteor.x < 0) {
@@ -179,31 +185,38 @@ class Spaceship {
       this.dodges = this.dodges + 1;
       // Tell them how many dodges they have made
       console.log(this.dodges + " DODGES!");
-      //Reset the enemy's velocity so that it increases after each pass
-      meteor.vx = (meteor.vx + 0.5);
       // Reset the enemy's position to the left at a random height
       meteor.x = width;
       meteor.y = random(0,height);
     }
   }
 
-
-
-/////////////////////////////////////////
+// handleBullets
+//
+// Run a for loop to go through all the bullets in the spaceship and Update
+// the position based on velocity
   handleBullets(){
 for (var i = 0; i <this.bullets.length; i++){
   this.bullets[i].x += this.bullets[i].vx
   }
 }
 
-//////////////////////
-
+//handleDamage(meteor)
+//
+// Runs a for loop that goes through all the bullets, checks if they overlap
+// with the meteors, and thus destroy the meteors accordingly
 handleDamage(meteor){
   for (var i = 0; i <this.bullets.length; i++){
+    // Check if the bullet and meteor overlap
   let d = dist(this.bullets[i].x, this.bullets[i].y, meteor.x, meteor.y);
     if (d < this.bullets[i].radius + meteor.radius) {
-      meteor.health -= 10;
-      meteor.health = constrain(meteor.health - 20, 0, meteor.maxHealth);
+    // If they do, decrease the health of the meteor
+    // Additionally, the laser has lost it's damaging power
+      meteor.health -= 3;
+      this.bullets[i].radius -= 10;
+    // Constrain the meteor's health to avoid it becoming negative
+      meteor.health = constrain(meteor.health, 0, meteor.maxHealth);
+    // Reset the meteor once it's been destroyed
         if (meteor.health < 0) {
           meteor.reset();
       }
@@ -224,7 +237,7 @@ handleDamage(meteor){
 
   // display
   //
-  // Draw the spaceship as a tiger on the canvas
+  // Draw the spaceship on the canvas
   // with a radius the same size as its current health.
   display() {
     push();
@@ -235,7 +248,7 @@ handleDamage(meteor){
     image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
   }
     pop();
-
+    // draw the bullets all together in the array
     for (var i = 0; i <this.bullets.length; i++){
       image(this.bulletImage, this.bullets[i].x, this.bullets[i].y, this.bullets[i].radius * 2, this.bullets[i].radius * 2);
     }

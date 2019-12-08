@@ -74,7 +74,9 @@ class Meteor {
     noStroke();
     this.radius = this.health;
     imageMode(CENTER);
+    if (this.radius > 1) {
     image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
+  }
     pop();
   }
 

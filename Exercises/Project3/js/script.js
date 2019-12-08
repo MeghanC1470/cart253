@@ -97,8 +97,8 @@ for (let i = 0; i < numMeteor; i++) {
   meteor.push(new Meteor(meteorX, meteorY, meteorSpeed, meteorImage, meteorRadius));
     }
   return meteor;
-  for (var i = 0; i <spaceship.bullets.length; i++){
-    spaceship.bullets[i].x += spaceship.bullets[i].vx
+for (var i = 0; i <spaceship.bullets.length; i++){
+  spaceship.bullets[i].x += spaceship.bullets[i].vx
   }
 }
 
@@ -139,7 +139,7 @@ if (spaceship.dodges >= 30){
 // Run level Two with another array of Silver Meteors using .concat.
 // .concat is used to join two or more arrays, that way the Bronze Array can run
 // alongside the Silver Array. Special thanks to PartyLich on StockOverflow.com
-  if (levelTwo == true && levelTwoInitialized == false){
+if (levelTwo == true && levelTwoInitialized == false){
     meteor = meteor.concat(generateMeteors(meteorSilverImage));
     levelTwoInitialized = true;
   }
@@ -212,13 +212,13 @@ else {
 //
 // Display's the start message, including instructions, at the beginning of the game
 function displayStartMessage() {
-  push();
-  textFont(spaceFont);
-  background(gameStartImage);
-  textAlign(CENTER,CENTER);
-  fill(255);
-  textSize(27);
-  text(".:WELCOME TO SPACE DODGERS!:.\n \n You must clear 150 Asteroids in order to get home! \n Use WASD to move the Ship! \n Press Enter to Shoot, Shift to Speed up! \n Catch the Star to gain Health! \n \n .:CLICK TO START:.", width / 2, height / 2);
+    push();
+    textFont(spaceFont);
+    background(gameStartImage);
+    textAlign(CENTER,CENTER);
+    fill(255);
+    textSize(27);
+    text(".:WELCOME TO SPACE DODGERS!:.\n \n You must clear 150 Asteroids in order to get home! \n Use WASD to move the Ship! \n Press Enter to Shoot, Shift to Speed up! \n Catch the Star to gain Health! \n \n .:CLICK TO START:.", width / 2, height / 2);
   pop();
   }
 
@@ -226,52 +226,55 @@ function displayStartMessage() {
 //
 // See if the spaceship died and end the game
 function checkGameOver() {
-  if (spaceship.death === true) {
-    gameOver = true;
-    playing = false;
+    if (spaceship.death === true) {
+      gameOver = true;
+      playing = false;
   }
 }
 
 // displayGameOver
 //
 // Display the Game Over message
-  function displayGameOver() {
-      push();
-      textFont(spaceFont);
-      background(gameOverImage);
-      textAlign(CENTER, CENTER);
-      fill(255, 0, 0);
-      textSize(49);
-      text(".:GAME OVER:. \n \n You died! \n Reload to Try Again", width / 2, height / 2);
-      pop();
+function displayGameOver() {
+    push();
+    textFont(spaceFont);
+    background(gameOverImage);
+    textAlign(CENTER, CENTER);
+    fill(255, 0, 0);
+    textSize(49);
+    text(".:GAME OVER:. \n \n You died! \n Reload to Try Again", width / 2, height / 2);
+    pop();
     }
 
-    // checkWinGame
-    //
-    // See if the player dodged a certain number of meteors and end the game
-    function checkWinGame(){
-      if (spaceship.dodges === 150){
-        console.log("win");
-        winGame = true;
-        playing = false;
+// checkWinGame
+//
+// See if the player dodged a certain number of meteors and end the game
+function checkWinGame(){
+    if (spaceship.dodges === 150){
+      console.log("win");
+      winGame = true;
+      playing = false;
       }
     }
 
-    function displayWinMessage() {
-      push();
-      textFont(spaceFont);
-      background(gameWinImage);
-      textAlign(CENTER, CENTER);
-      fill(255);
-      textSize(49);
-      text(".:CONGRATULATIONS!:. \n \n .:| You Got Home Safe! |:. \n .:| Reload to Play Again! |:.", width / 2, height / 2);
-      pop();
+// displayWinMessage
+//
+// Display the Win Message
+function displayWinMessage() {
+    push();
+    textFont(spaceFont);
+    background(gameWinImage);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    textSize(49);
+    text(".:CONGRATULATIONS!:. \n \n .:| You Got Home Safe! |:. \n .:| Reload to Play Again! |:.", width / 2, height / 2);
+    pop();
     }
 
 //mousePressed
 //
 //Starts the game when the mouse is clicked
-  function mousePressed() {
+function mousePressed() {
     playing = true;
     gameOver = false;
   }

@@ -8,54 +8,54 @@
 
 class Spaceship {
 
-  // constructor
-  //
-  // Sets the initial values for the spaceship's properties
-  // Either sets default values or uses the arguments provided
+// constructor
+//
+// Sets the initial values for the spaceship's properties
+// Either sets default values or uses the arguments provided
   constructor(x, y, speed, image, imagebullet, radius) {
-    // Position
+// Position
     this.x = x;
     this.y = y;
-    // Velocity, speed and Sprint Speed
+// Velocity, speed and Sprint Speed
     this.vx = 0;
     this.vy = 0;
     this.normalSpeed = speed;
     this.sprintSpeed = speed + 5;
     this.currentSpeed = this.normalSpeed;
-    // Health properties
+// Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.radius = radius;
     this.healthGainPerEat = 1;
-    //The Star Counter
+//The Star Counter
     this.starEaten = 0;
-    //The Dodge Counter
+//The Dodge Counter
     this.dodges = 0;
-    //Shooting and Bullets
+//Shooting and Bullets
     this.shootKey = ENTER;
     this.bullets = [];
-    // Display properties
+// Display properties
     this.image = image;
     this.bulletImage = imagebullet;
     this.death = false;
-    // Input properties
+// Input properties
     this.upKey = 87;
     this.downKey = 83;
     this.leftKey = 65;
     this.rightKey = 68;
-    // the Bullet properties
+// the Bullet properties
     this.maxBullets = 10;
     this.bulletCoolDown = 0;
     this.bulletCoolDownMax = 20;
-    // the Death
+// the Death
     this.gameOver;
   }
 
-  // handleInput
-  //
-  // Checks if an arrow key is pressed and sets the spaceship's
-  // velocity appropriately.
-  // Additionally sets the shift key to make the spaceship sprint
+// handleInput
+//
+// Checks if an letter key is pressed and sets the spaceship's
+// velocity appropriately.
+// Additionally sets the shift key to make the spaceship sprint
   handleInput() {
     if (keyIsDown(SHIFT)) {
       this.currentSpeed = this.sprintSpeed;
@@ -63,7 +63,7 @@ class Spaceship {
     else {
       this.currentSpeed = this.normalSpeed;
   }
-    // Horizontal movement
+// Horizontal movement
     if (keyIsDown(this.leftKey)) {
       this.vx = -this.currentSpeed;
     }
@@ -73,7 +73,7 @@ class Spaceship {
     else {
       this.vx = 0;
     }
-    // Vertical movement
+// Vertical movement
     if (keyIsDown(this.upKey)) {
       this.vy = -this.currentSpeed;
     }
@@ -106,34 +106,33 @@ class Spaceship {
   }
 }
 
-  // move
-  //
-  // Updates the position according to velocity
-  // Lowers health (as a cost of living)
-  // Handles wrapping
+// move
+//
+// Updates the position according to velocity
+// Handles wrapping
   move() {
-    // Update position
+// Update position
     this.x += this.vx;
     this.y += this.vy;
-    // Update health
+// Update health
     this.health = constrain(this.health, 0, this.maxHealth);
-    // Handle wrapping
+// Handle wrapping
     this.handleWrapping();
   }
 
-  // handleWrapping
-  //
-  // Checks if the spaceship has gone off the canvas and
-  // wraps it to the other side if so
+// handleWrapping
+//
+// Checks if the spaceship has gone off the canvas and
+// wraps it to the other side if so
   handleWrapping() {
-    // Off the left or right
+// Off the left or right
     if (this.x < 0) {
       this.x += width;
     }
     else if (this.x > width) {
       this.x -= width;
     }
-    // Off the top or bottom
+// Off the top or bottom
     if (this.y < 0) {
       this.y += height;
     }
@@ -142,22 +141,22 @@ class Spaceship {
     }
   }
 
-  // handleEating
-  //
-  // Takes a star object as an argument and checks if the spaceship
-  // overlaps it. If so, reduces the star's health and increases
-  // the spaceship's. If the star dies, it gets reset.
+// handleEating
+//
+// Takes a star object as an argument and checks if the spaceship
+// overlaps it. If so, reduces the star's health and increases
+// the spaceship's. If the star dies, it gets reset.
   handleEating(star) {
-    // Calculate distance from this spaceship to the star
+// Calculate distance from this spaceship to the star
     let d = dist(this.x, this.y, star.x, star.y);
-    // Check if the distance is less than their two radii (an overlap)
+// Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + star.radius) {
-      // Increase spaceship health and constrain it to its possible range
+// Increase spaceship health and constrain it to its possible range
       this.health += this.healthGainPerEat;
       this.health = constrain(this.health, 0, this.maxHealth);
-      // Decrease star health by the same amount
+// Decrease star health by the same amount
       star.health -= this.healthGainPerEat;
-      // Check if the star died and reset it if so
+// Check if the star died and reset it if so
       if (star.health < 0) {
         star.reset();
       }
@@ -180,13 +179,13 @@ class Spaceship {
 //
 // Checks to see if the spaceship flew past the meteor and avoided
   handleDodging(meteor){
-    // Check if the enemy has moved all the way across the screen
+// Check if the enemy has moved all the way across the screen
     if (meteor.x < 0) {
-      // This means the player dodged so update its dodge statistic
+// This means the player dodged so update its dodge statistic
       this.dodges = this.dodges + 1;
-      // Tell them how many dodges they have made
+// Tell them how many dodges they have made
       console.log(this.dodges + " DODGES!");
-      // Reset the enemy's position to the left at a random height
+// Reset the enemy's position to the left at a random height
       meteor.x = width;
       meteor.y = random(0,height);
     if (this.dodges >= 150){
@@ -213,17 +212,17 @@ for (var i = 0; i <this.bullets.length; i++){
 // with the meteors, and thus destroy the meteors accordingly
 handleDamage(meteor){
   for (var i = 0; i <this.bullets.length; i++){
-    // Check if the bullet and meteor overlap
+// Check if the bullet and meteor overlap
   let d = dist(this.bullets[i].x, this.bullets[i].y, meteor.x, meteor.y);
     if (d < this.bullets[i].radius + meteor.radius) {
       destroySound.play();
-    // If they do, decrease the health of the meteor
-    // Additionally, the laser has lost it's damaging power
+// If they do, decrease the health of the meteor
+// Additionally, the laser has lost it's damaging power
       meteor.health -= 3;
       this.bullets[i].radius -= 10;
-    // Constrain the meteor's health to avoid it becoming negative
+// Constrain the meteor's health to avoid it becoming negative
       meteor.health = constrain(meteor.health, 0, meteor.maxHealth);
-    // Reset the meteor once it's been destroyed
+// Reset the meteor once it's been destroyed
         if (meteor.health < 0) {
           meteor.reset();
       }
@@ -243,10 +242,10 @@ handleDamage(meteor){
   }
 
 
-  // display
-  //
-  // Draw the spaceship on the canvas
-  // with a radius the same size as its current health.
+// display
+//
+// Draw the spaceship on the canvas
+// with a radius the same size as its current health.
   display() {
     push();
     noStroke();
@@ -256,7 +255,7 @@ handleDamage(meteor){
     image(this.image,this.x, this.y, this.radius * 2, this.radius * 2);
   }
     pop();
-    // draw the bullets all together in the array
+// draw the bullets all together in the array
     for (var i = 0; i <this.bullets.length; i++){
       image(this.bulletImage, this.bullets[i].x, this.bullets[i].y, this.bullets[i].radius * 2, this.bullets[i].radius * 2);
     }

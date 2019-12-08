@@ -145,12 +145,14 @@ if (levelThree == true && levelThreeInitialized == false){
 
 // Display and making sure the tiger can eat the copies of the star
 for (let i = 0; i < meteor.length; i++) {
-meteor[i].move();
-meteor[i].display();
-meteor[i].reset();
-spaceship.handleHurting(meteor[i]);
-spaceship.handleDodging(meteor[i]);
-spaceship.handleDamage(meteor[i]);
+  meteor[i].move();
+  spaceship.handleHurting(meteor[i]);
+  spaceship.handleDodging(meteor[i]);
+  spaceship.handleDamage(meteor[i]);
+  meteor[i].display();
+  if (meteor[i].health <= 0){
+  meteor[i].reset();
+  }
 }
 
 }

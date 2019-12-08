@@ -84,7 +84,7 @@ class Meteor {
   // and radius back to default
   reset() {
     // Random position
-    this.x = this.vx
+    this.x = width;
     this.y = random(0, height);
     // Default health
     this.health = this.maxHealth;

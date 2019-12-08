@@ -1,10 +1,11 @@
-
+// Space DODGERS
+//
 // by Meghan Cullen
 //
 // Creates a spaceship, meteors and health-stars
 // The spaceship has to get through a field of meteors in order to get home
-// The meteors will hit and take down the spaceship, with some being able to be
-// destoryed while others are invincible
+// The meteors will hit and take down the spaceship, but can be destoryed by
+// the Spaceship's laser
 // The Health-Stars are special stars that power and repair the spaceship's health
 
 //Whether the game started
@@ -12,10 +13,11 @@ let playing = false;
 //Whether the game ended
 let gameOver = false;
 
-let levelOne = false;
-let levelTwo = false;
+// Whether our levels have been activated
+let levelOne = false; // The first phase of Bronze Meteors
+let levelTwo = false; // The second phase of Silver Meteors
 let levelTwoInitialized = false;
-let levelThree = false;
+let levelThree = false; // The third and final phase of Gold Meteors
 let levelThreeInitialized = false;
 
 // Our Spaceship
@@ -24,15 +26,10 @@ let spaceship;
 // The Health-Star
 let healthStar
 
-// The three types of meteors
-let meteorBronze;
-let meteorSilver;
-let meteorGold;
-
 //The background
 let skyBackground
 
-//The Images of the characters
+//The Images of the objects
 let spaceshipImage;
 let bulletImage;
 let healthStarImage;
@@ -41,11 +38,12 @@ let meteorSilverImage;
 let meteorGoldImage;
 
 
-//The array
-// One for the number of meteor meteors
+//The arrays
+// One for the number of meteors
 let numMeteor = 6;
-let meteor = [];
+//One for the Spaceship's lasers
 let bullets = [];
+
 
 //preload
 //
@@ -62,7 +60,13 @@ function preload() {
   meteorGoldImage = loadImage("assets/images/MeteorGold.png")
 }
 
-function generateMeteors(meteorSpeed,meteorImage){
+
+// function generateMeteors
+//
+// Sets up the meteor array and runs a for loop numMeteor times to generate each
+// meteor with random values, all inside a function that can be called upon.
+// The spaceship's bullets will also be set up in a for loop here as well
+function generateMeteors(meteorImage){
   let meteor = [];
 for (let i = 0; i < numMeteor; i++) {
   let meteorX = random(0, width);
@@ -77,6 +81,7 @@ for (let i = 0; i < numMeteor; i++) {
   }
 }
 
+
 // setup()
 //
 // Sets up a canvas
@@ -85,65 +90,68 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spaceship = new Spaceship(100, 100, 5, spaceshipImage, bulletImage, 40);
   healthStar = new Star(1000, 100, 10, healthStarImage, 50);
-
-//the Meteor Arrays
-// Run a for loop numMeteor times to generate each meteor and put it in the array
-// with random values for each star
-meteor = generateMeteors(5,meteorBronzeImage);
+// The generateMeteors function is called upon and put in with a Bronze Meteor Image
+meteor = generateMeteors(meteorBronzeImage);
 }
+
 
 // draw()
 //
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
-// Set the background to a safari scene
+// Set the background to a galaxy scene
   background(skyBackground);
 // Check if the game is in play
   if (playing == true) {
 
-// Handle input for the tiger
+// Handle input for the spaceship
   spaceship.handleInput();
 
-// Move all the "animals"
+// Move all the spaceship and star
   spaceship.move();
   healthStar.move();
 
+// Check if the dodging goal to unlock level two is passed
 if (spaceship.dodges >= 10){
   levelTwo = true;
 }
-  //lvl 2
+// Run level Two with another array of Silver Meteors using .concat.
+// .concat is used to join two or more arrays, that way the Bronze Array can run
+// alongside the Silver Array. Special thanks to PartyLich on StockOverflow.com
   if (levelTwo == true && levelTwoInitialized == false){
-    meteor = meteor.concat(generateMeteors(10,meteorSilverImage));
+    meteor = meteor.concat(generateMeteors(meteorSilverImage));
     levelTwoInitialized = true;
   }
 
+// Check if the second dodging goal to unlock level three is passed
 if (spaceship.dodges >= 30){
   levelThree = true;
 }
-//lvl 3
+// Run Level Three with third array of Gold Meteors using .concat.
 if (levelThree == true && levelThreeInitialized == false){
-  meteor = meteor.concat(generateMeteors(15,meteorGoldImage));
+  meteor = meteor.concat(generateMeteors(meteorGoldImage));
   levelThreeInitialized = true;
 }
 
-// Handle the tiger and lion eating any of the star
+// Handle the Spaceship consuming the star for health
   spaceship.handleEating(healthStar);
 
-  //
+// Handle the Spaceship's lasers
   spaceship.handleBullets();
 
-
-// Handle the tragic death of the tiger
+// Handle the death of the Spaceship
   spaceship.handleDeath();
 
 // Check to see when the game is over
   checkGameOver();
 
-// Display all the "animals"
+// Display all the objects
   spaceship.display();
   healthStar.display();
 
-// Display and making sure the tiger can eat the copies of the star
+// Display the meteor arrays and any actions done to the meteors by the spaceship
+// in a for loop, displaying movement, damage by the meteor to the Spaceship,
+// checking if the Spaceship dodged the meteor, or if the Spaceship lasers damaged it
 for (let i = 0; i < meteor.length; i++) {
   meteor[i].move();
   spaceship.handleHurting(meteor[i]);
@@ -152,16 +160,14 @@ for (let i = 0; i < meteor.length; i++) {
   meteor[i].display();
   if (meteor[i].health <= 0){
   meteor[i].reset();
+    }
   }
-}
-
 }
 else {
    // Once the game is over, display a Game Over Message
  if (gameOver == true) {
     displayGameOver();
   }
-
     // Otherwise we display the message to start the game
 else {
     displayStartMessage();
@@ -178,13 +184,13 @@ function displayStartMessage() {
   textAlign(CENTER, CENTER);
   fill(0, 0, 255);
   textSize(49);
-  text("WELCOME TO SPACE DODGERS! \n Use the arrow keys to move! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
+  text("WELCOME TO SPACE DODGERS! \n Use the WASD Keys to move! \n Press Shift to Speed Up and Enter to Shoot! \n Grab the Star for Health and Stay Alive!\n Avoid the Asteroids! \n CLICK TO START", width / 2, height / 2);
   pop();
   }
 
 //checkGameOver
 //
-//See if the tiger died and end the game
+//See if the spaceship died and end the game
 function checkGameOver() {
   if (spaceship.death === true) {
     gameOver = true;

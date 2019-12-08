@@ -204,10 +204,9 @@ handleDamage(meteor){
     if (d < this.bullets[i].radius + meteor.radius) {
       meteor.health -= 10;
       meteor.health = constrain(meteor.health - 20, 0, meteor.maxHealth);
-      if (meteor.health < 0) {
-        meteor.reset();
-      console.log("hit");
-    }
+        if (meteor.health < 0) {
+          meteor.reset();
+      }
     }
   }
 }

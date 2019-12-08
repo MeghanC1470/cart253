@@ -12,6 +12,8 @@
 let playing = false;
 //Whether the game ended
 let gameOver = false;
+//Whether the player won the game
+let gameWin = false;
 
 // Whether our levels have been activated
 let levelOne = false; // The first phase of Bronze Meteors
@@ -168,6 +170,10 @@ else {
  if (gameOver == true) {
     displayGameOver();
   }
+
+  if (gameWin == true) {
+    displayWinMessage();
+  }
     // Otherwise we display the message to start the game
 else {
     displayStartMessage();
@@ -198,6 +204,14 @@ function checkGameOver() {
   }
 }
 
+function checkWinGame(){
+  if (spaceship.dodges === 20){
+    console.log("win");
+    winGame = true;
+    playing = false;
+  }
+}
+
 //displayGameOver
 //
 //Display the Game Over message
@@ -207,6 +221,15 @@ function checkGameOver() {
       fill(128, 17, 0);
       textSize(49);
       text("GAME OVER \n You died! \n Reload to Try Again", width / 2, height / 2);
+      pop();
+    }
+
+    function displayWinMessage() {
+      push();
+      textAlign(CENTER, CENTER);
+      fill(128, 17, 0);
+      textSize(49);
+      text("Congrats", width / 2, height / 2);
       pop();
     }
 

@@ -64,6 +64,10 @@ function preload() {
   meteorSilverImage = loadImage("assets/images/MeteorSilver.png");
   meteorGoldImage = loadImage("assets/images/MeteorGold.png");
 
+  gameStartImage = loadImage("assets/images/GameBeginScreen.png");
+  gameOverImage = loadImage("assets/images/GameOverScreen.png");
+  gameWinImage = loadImage("assets/images/GameWinScreen.png");
+
   spaceMusic = loadSound("assets/sounds/SpaceshipMusic.mp3");
   laserSound = loadSound("assets/sounds/Lasersound.wav");
   destroySound = loadSound("assets/sounds/DestroyMeteorSound.wav");
@@ -197,6 +201,7 @@ else {
 //Display's the start message, including instructions, at the beginning of the game
 function displayStartMessage() {
   push();
+  background(gameStartImage);
   textAlign(CENTER, CENTER);
   fill(0, 0, 255);
   textSize(49);
@@ -227,6 +232,7 @@ function checkWinGame(){
 //Display the Game Over message
   function displayGameOver() {
       push();
+      background(gameOverImage);
       textAlign(CENTER, CENTER);
       fill(128, 17, 0);
       textSize(49);
@@ -236,6 +242,7 @@ function checkWinGame(){
 
     function displayWinMessage() {
       push();
+      background(gameWinImage);
       textAlign(CENTER, CENTER);
       fill(128, 17, 0);
       textSize(49);

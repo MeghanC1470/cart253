@@ -139,6 +139,7 @@ if (spaceship.dodges >= 30){
 // Run level Two with another array of Silver Meteors using .concat.
 // .concat is used to join two or more arrays, that way the Bronze Array can run
 // alongside the Silver Array. Special thanks to PartyLich on StockOverflow.com
+// (https://stackoverflow.com/questions/59217800/javascript-atom-array-problems)
 if (levelTwo == true && levelTwoInitialized == false){
     meteor = meteor.concat(generateMeteors(meteorSilverImage));
     levelTwoInitialized = true;
@@ -183,7 +184,7 @@ for (let i = 0; i < meteor.length; i++) {
   meteor[i].reset();
     }
   }
-  // Display the dodge counter on the screen
+  // Display the dodge counter on the screen (adapted from Exercise 2)
   textAlign(RIGHT,TOP);
   textSize(100);
   textFont(spaceFont);

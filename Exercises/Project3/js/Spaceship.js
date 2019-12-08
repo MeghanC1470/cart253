@@ -4,6 +4,7 @@
 // controlled by the WASD keys. It can move around
 // the screen and consume star objects to maintain its health.
 // It can also shoot lasers to destroy the meteors
+// (Adapted from Project 2 - Predator)
 
 
 class Spaceship {
@@ -84,6 +85,8 @@ class Spaceship {
       this.vy = 0;
     }
 
+// Bullets (adapted from Pippin Barr's Love Game)
+//
 // The bullet cooldown determines when the spaceship can fire again
   this.bulletCoolDown -= 0;
 // Constrain the bullet cooldown to avoid weird numbers
@@ -210,6 +213,7 @@ for (var i = 0; i <this.bullets.length; i++){
 //
 // Runs a for loop that goes through all the bullets, checks if they overlap
 // with the meteors, and thus destroy the meteors accordingly
+// (Special thanks to Hazel Thexton for her aid)
 handleDamage(meteor){
   for (var i = 0; i <this.bullets.length; i++){
 // Check if the bullet and meteor overlap

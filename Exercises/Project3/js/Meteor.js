@@ -2,6 +2,7 @@
 //
 // A class that represents an meteor that moves from left to right.
 // It can also deplete the spaceship's health if they get too close.
+// (Adapted from Project 2 - Enemy)
 
 class Meteor {
 

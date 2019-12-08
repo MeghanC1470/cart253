@@ -52,7 +52,7 @@ let meteorGoldImage;
 
 //The arrays
 // One for the number of meteors
-let numMeteor = 8;
+let numMeteor = 9;
 //One for the Spaceship's lasers
 let bullets = [];
 
@@ -137,7 +137,7 @@ function draw() {
   healthStar.move();
 
 // Check if the dodging goal to unlock level two is passed
-if (spaceship.dodges >= 10){
+if (spaceship.dodges >= 30){
   levelTwo = true;
 }
 // Run level Two with another array of Silver Meteors using .concat.
@@ -149,7 +149,7 @@ if (spaceship.dodges >= 10){
   }
 
 // Check if the second dodging goal to unlock level three is passed
-if (spaceship.dodges >= 30){
+if (spaceship.dodges >= 70){
   levelThree = true;
 }
 // Run Level Three with third array of Gold Meteors using .concat.
@@ -189,7 +189,7 @@ for (let i = 0; i < meteor.length; i++) {
     }
   }
   textAlign(RIGHT,TOP);
-  textSize(70);
+  textSize(100);
   textFont(spaceFont);
   fill(255);
   text(spaceship.dodges,width,0);
@@ -223,7 +223,7 @@ function displayStartMessage() {
   textAlign(CENTER,CENTER);
   fill(255);
   textSize(27);
-  text(".:WELCOME TO SPACE DODGERS!:.\n \n You must clear 1000 Asteroids in order to get home! \n Use WASD to move the Ship! \n Press Enter to Shoot, Shift to Speed up! \n Catch the Star to gain Health! \n \n .:CLICK TO START:.", width / 2, height / 2);
+  text(".:WELCOME TO SPACE DODGERS!:.\n \n You must clear 150 Asteroids in order to get home! \n Use WASD to move the Ship! \n Press Enter to Shoot, Shift to Speed up! \n Catch the Star to gain Health! \n \n .:CLICK TO START:.", width / 2, height / 2);
   pop();
   }
 
@@ -238,7 +238,7 @@ function checkGameOver() {
 }
 
 function checkWinGame(){
-  if (spaceship.dodges === 20){
+  if (spaceship.dodges === 150){
     console.log("win");
     winGame = true;
     playing = false;

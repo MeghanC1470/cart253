@@ -189,7 +189,7 @@ class Spaceship {
       // Reset the enemy's position to the left at a random height
       meteor.x = width;
       meteor.y = random(0,height);
-    if (this.dodges >= 20){
+    if (this.dodges >= 150){
       win = true;
       playing = false;
       displayWinMessage();

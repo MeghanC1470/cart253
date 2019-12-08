@@ -250,7 +250,7 @@ function displayGameOver() {
 //
 // See if the player dodged a certain number of meteors and end the game
 function checkWinGame(){
-    if (spaceship.dodges === 150){
+    if (spaceship.dodges === 200){
       console.log("win");
       winGame = true;
       playing = false;

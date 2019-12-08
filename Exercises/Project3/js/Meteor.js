@@ -77,4 +77,18 @@ class Meteor {
     image(this.image,this.x, this.y, this.radius * 3, this.radius * 3);
     pop();
   }
+
+  // reset
+  //
+  // Set the position to a random location and reset health
+  // and radius back to default
+  reset() {
+    // Random position
+    this.x = this.vx
+    this.y = random(0, height);
+    // Default health
+    this.health = this.maxHealth;
+    // Default radius
+    this.radius = this.health;
+  }
 }

@@ -199,10 +199,17 @@ for (var i = 0; i <this.bullets.length; i++){
 //////////////////////
 
 handleDamage(meteor){
-  let d = dist(this.bullets.x, this.bullets.y, meteor.x, meteor.y);
-    if (d < this.bullets.radius + meteor.radius) {
-      meteor.health -= 50;
+  for (var i = 0; i <this.bullets.length; i++){
+  let d = dist(this.bullets[i].x, this.bullets[i].y, meteor.x, meteor.y);
+    if (d < this.bullets[i].radius + meteor.radius) {
+      meteor.health -= 10;
+      meteor.health = constrain(meteor.health - 20, 0, meteor.maxHealth);
+      if (meteor.health < 0) {
+        meteor.reset();
+      console.log("hit");
     }
+    }
+  }
 }
 
 //handleDeath

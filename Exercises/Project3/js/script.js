@@ -147,6 +147,7 @@ if (levelThree == true && levelThreeInitialized == false){
 for (let i = 0; i < meteor.length; i++) {
 meteor[i].move();
 meteor[i].display();
+meteor[i].reset();
 spaceship.handleHurting(meteor[i]);
 spaceship.handleDodging(meteor[i]);
 spaceship.handleDamage(meteor[i]);
